@@ -237,14 +237,3 @@ function PF() {
     document.getElementById('input-pablo').value = '';
     document.getElementById('input-laura').value = '';
 }
-
-
-
-
-//COSAS POR HACER:
-//GENERAR UN HISTORIAL DE TRANSFERENCIAS USANDO ARRAY
-//HACER PLAZO FIJO
-//LA PLATA SE ENVIA A PF ACCOUNT PERO NO GENERA RESUMEN
-//
-//
-//
