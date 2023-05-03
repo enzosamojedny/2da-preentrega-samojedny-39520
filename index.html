@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="whole-container">
+        <div class="div-pablo">
+            <h6>CUENTA DE PABLO</h6>
+            <input type="text" id="input-pablo">
+            <button type="submit" id="transferir-btn" onclick="transfPablo()">Transferir</button>
+            <button type="submit" class="mi-saldo" onclick="ejecutarPablo()">Click para ver saldo</button>
+            <button type="submit" id="pf-pablo" onclick="PF()">Cotizar Plazo Fijo</button>
+            <p id="saldo-pablo"></p>
+        </div>
+        <div class="div-laura">
+            <h6>CUENTA DE LAURA</h6>
+            <input type="text" id="input-laura">
+            <button type="submit" id="transferir-btn" onclick="transfLaura()">Transferir</button>
+            <button type="submit" onclick="ejecutarLaura()">Click para ver saldo</button>
+            <button type="submit" id="pf-laura" onclick="PF()">Cotizar Plazo Fijo</button>
+            <p id="saldo-laura"></p>
+        </div>
+    </div>
+
+    <script src="./bank-main.js"></script>
+</body>
+
+</html>
