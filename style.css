@@ -2,10 +2,9 @@ body {
   background-color: #f8f9fa;
 }
 nav {
-  border-bottom: solid;
-  border-bottom-color: grey;
-  border-width: 1px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.4);
 }
+
 .whole-container {
   margin-top: 100px;
   margin-left: 100px;
