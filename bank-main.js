@@ -44,19 +44,25 @@ class Plazo_Fijo {
         return this.monto;
     }
 }
+class CompraDolar {
+    constructor(monto, cotizacion, conversion) {
+        this.monto = monto || 0;
+        this.contizacion = cotizacion;//precio del TC
+        this.conversion = conversion;//trade de pesos a usd
+    }
+}
 const cliente1 = new Cliente("Pablo Lescano", "38.112.194");
 const cliente2 = new Cliente("Laura Gomez", "23.456.321");
 const cuentaDePablo = new CuentaCorriente(cliente1, "Santander", 0, "001");
-const cuentaDeLaura = new CuentaCorriente(cliente2, "Brubank", 0, "002")
-
+const cuentaDeLaura = new CuentaCorriente(cliente2, "Brubank", 0, "002");
+const compraDivisa = new CompraDolar(0, 0, 0);
 //PLAZO FIJO
-const pf_account = new Cliente("Plazo Fijo", "#001");
-const cuentaDePlazoFijo = new CuentaCorriente(pf_account, "Banco Santander", 0, "#0001");
-const plazoFijo = new Plazo_Fijo(0, 0, 0.85);
+const pfCuentaCliente = new Cliente("Plazo Fijo", "#001");
+const cuentaDePlazoFijo = new CuentaCorriente(pfCuentaCliente, "Banco Santander", 0, "#0001");
+const plazoFijoClassCall = new Plazo_Fijo(0, 0, 0.85);
 let saldoPablo = cuentaDePablo.verSaldo()
 let saldoLaura = cuentaDeLaura.verSaldo()
-let saldoPF = cuentaDePlazoFijo.verSaldo()
-let transfer = document.getElementById('transferir-btn');
+let transfer = document.getElementById('transferir-btn');//USAR LOS ONCLICK ACA
 
 //TRANSFERENCIAS
 function transfPablo() {
@@ -86,7 +92,7 @@ function transfLaura() {
         let resumeContainerLaura = document.getElementById('resumeLaura');
         resumeContainerLaura.style.display = 'block';
 
-        // Plazo Fijo transfer resume
+        // Plazo Fijo resume
         let pLauraPF = document.querySelector('#resumeLaura-pf p:last-child');
         pLauraPF.textContent = "Monto: $" + transferirCantidad;
         let resumeContainerLauraPF = document.getElementById('resumeLaura-pf');
@@ -129,23 +135,7 @@ const generatedPassword = randomize();
 
 //RESUMEN DE TRANSFERENCIA
 
-//PABLO
-let div = document.createElement('div')
-div.id = 'resume';
-div.className = 'resume-container';
-let h2 = document.createElement('h2')
-h2.textContent = "Resumen de Transferencia"
-div.appendChild(h2)
-let pnumerotransaccion = document.createElement('p')
-pnumerotransaccion.textContent = "Destinatario: " + cliente2.nombreCliente
-div.appendChild(pnumerotransaccion)
-let p = document.createElement('p')
-p.className = 'p-js'
-p.textContent = "Origen: " + cliente1.nombreCliente
-div.appendChild(p)
-let pdestiny = document.createElement('p')
-
-// LAURA
+// LAURA resumen de transferencia
 let divLaura = document.createElement('div');
 divLaura.id = 'resumeLaura';
 divLaura.className = 'resume-container';
@@ -176,7 +166,21 @@ divLaura.appendChild(p6Laura);
 document.body.appendChild(divLaura);
 
 
-//COTIZACION PLAZOFIJO
+// PABLO resumen de transferencia
+let div = document.createElement('div')
+div.id = 'resume';
+div.className = 'resume-container';
+let h2 = document.createElement('h2')
+h2.textContent = "Resumen de Transferencia"
+div.appendChild(h2)
+let pnumerotransaccion = document.createElement('p')
+pnumerotransaccion.textContent = "Destinatario: " + cliente2.nombreCliente
+div.appendChild(pnumerotransaccion)
+let p = document.createElement('p')
+p.className = 'p-js'
+p.textContent = "Origen: " + cliente1.nombreCliente
+div.appendChild(p)
+let pdestiny = document.createElement('p')
 pdestiny.textContent = "Número de operación: " + generatedPassword
 div.appendChild(pdestiny)
 let p3 = document.createElement('p')
@@ -191,15 +195,31 @@ p5.textContent = "DNI " + cliente2.dniCliente
 let p6 = document.createElement('p')
 div.appendChild(p6)
 document.body.appendChild(div)
-// PLAZO FIJO
-function PF() {
-    let transferirCantidad = parseFloat(document.getElementById('input-pablo').value);
 
+// Esconde el resumen de transferencia despues de 15 segundos
+window.onload = function () {
+    window.setTimeout(function () {
+        let resumeLaura = document.getElementById('resumeLaura');
+        let resumePablo = document.getElementById('resume');
+
+        if (resumeLaura) {
+            resumeLaura.remove();
+        }
+
+        if (resumePablo) {
+            resumePablo.remove();
+        }
+    }, 15000);
+}
+
+
+// PLAZO FIJO
+
+function PF_P() {
+    let transferirCantidad = parseFloat(document.getElementById('input-pablo').value);
     if (transferirCantidad <= cuentaDePablo.verSaldo()) {
         cuentaDePablo.transferencia(transferirCantidad, cuentaDePlazoFijo);
-
-        let montoAObtener = transferirCantidad + (transferirCantidad * plazoFijo.interes);
-
+        let montoAObtener = transferirCantidad + (transferirCantidad * plazoFijoClassCall.interes);
         const divPF = document.createElement("div");
         divPF.id = "resume-pf";
         divPF.className = "resume-pf";
@@ -208,7 +228,7 @@ function PF() {
         divPF.appendChild(h2PF);
         // 0
         const pf = document.createElement("p");
-        pf.textContent = "Cuenta " + pf_account.nombreCliente;
+        pf.textContent = "Cuenta " + pfCuentaCliente.nombreCliente;
         divPF.appendChild(pf);
         // 1
         const pf1 = document.createElement("p");
@@ -221,18 +241,74 @@ function PF() {
         // 3
         const pf3 = document.createElement("p");
         divPF.appendChild(pf3);
-        pf3.textContent = "Interés: " + plazoFijo.interes;
+        pf3.textContent = "Interés: " + plazoFijoClassCall.interes;
         // 4
         const pf3_5 = document.createElement("p");
         pf3_5.textContent = "Monto a obtener: $" + montoAObtener;
         cuentaDePablo.depositoEnCuenta(montoAObtener);
         divPF.appendChild(pf3_5);
-
         document.body.appendChild(divPF);
         divPF.style.display = 'block';
     } else {
         alert("Fondos insuficientes.");
     }
+
+    document.getElementById('input-pablo').value = '';
+    document.getElementById('input-laura').value = '';
+
+    window.setTimeout(function () {
+        let resumePablo = document.getElementById('resume-pf');
+        if (resumePablo) {
+            resumePablo.remove();
+        }
+    }, 15000);
+}
+
+function PF_L() {
+    let transferirCantidad = parseFloat(document.getElementById('input-laura').value);
+    if (transferirCantidad <= cuentaDeLaura.verSaldo()) {
+        cuentaDeLaura.transferencia(transferirCantidad, cuentaDePlazoFijo);
+        let montoAObtener = transferirCantidad + (transferirCantidad * plazoFijoClassCall.interes);
+        const divPF = document.createElement("div");
+        divPF.id = "resume-pf-l";
+        divPF.className = "resume-pf-l";
+        const h2PF = document.createElement("h2");
+        h2PF.textContent = "Resumen de Cotización";
+        divPF.appendChild(h2PF);
+        // 0
+        const pf = document.createElement("p");
+        pf.textContent = "Cuenta " + pfCuentaCliente.nombreCliente;
+        divPF.appendChild(pf);
+        // 1
+        const pf1 = document.createElement("p");
+        divPF.appendChild(pf1);
+        pf1.textContent = cuentaDePlazoFijo.banco;
+        // 2
+        const pf2 = document.createElement("p");
+        divPF.appendChild(pf2);
+        pf2.textContent = "Cuenta número " + cuentaDePlazoFijo.numeroCuenta;
+        // 3
+        const pf3 = document.createElement("p");
+        divPF.appendChild(pf3);
+        pf3.textContent = "Interés: " + plazoFijoClassCall.interes;
+        // 4
+        const pf3_5 = document.createElement("p");
+        pf3_5.textContent = "Monto a obtener: $" + montoAObtener;
+        cuentaDeLaura.depositoEnCuenta(montoAObtener);
+        divPF.appendChild(pf3_5);
+        document.body.appendChild(divPF);
+        divPF.style.display = 'block';
+    } else {
+        alert("Fondos insuficientes.");
+    }
+
+
+    window.setTimeout(function () {
+        let resumeLaura = document.getElementById('resume-pf-l');
+        if (resumeLaura) {
+            resumeLaura.remove();
+        }
+    }, 15000);
 
     document.getElementById('input-pablo').value = '';
     document.getElementById('input-laura').value = '';

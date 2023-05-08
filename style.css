@@ -1,63 +1,65 @@
-body{
-display: flex;
-justify-content: center;
-gap: 20px;
+body {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
 }
-.div-pablo{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 250px;
-    border: 1px;
-    border-color: black;
-    border-style: solid;
-    align-items: center;
+.div-pablo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 250px;
+  border: 1px;
+  border-color: black;
+  border-style: solid;
+  align-items: center;
 }
-.div-laura{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 250px;
-    border: 1px;
-    border-color: black;
-    border-style: solid;
-    align-items: center;
+.div-laura {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 250px;
+  border: 1px;
+  border-color: black;
+  border-style: solid;
+  align-items: center;
 }
-.resume-container{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    line-height: 1;
-    border: 2px;
-    border-color: black;
-    border-style:dotted;
-    align-items: center;
-    width: fit-content;
+.resume-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  line-height: 1;
+  border: 2px;
+  border-color: black;
+  border-style: dotted;
+  align-items: center;
+  width: fit-content;
 }
-h6{
-    font-size: 17px;
+h6 {
+  font-size: 17px;
 }
-.gaspar{
-    width: 300px;
-    border-radius: 10px;
+.gaspar {
+  width: 300px;
+  border-radius: 10px;
 }
-.pf-container{
-    display: flex;
-    flex-direction: column;
-    border: 2px;
-    border-color: rgb(0, 0, 0);
-    border-style:ridge;
-    align-items: center;
+.pf-container {
+  display: flex;
+  flex-direction: column;
+  border: 2px;
+  border-color: rgb(0, 0, 0);
+  border-style: ridge;
+  align-items: center;
 }
-.pf-inside{
-    display: flex;
-    flex-direction: column;
-    margin: 10px;
-    border: 2px;
-    border-color: rgb(0, 0, 0);
-    border-style:ridge;
-    align-items: center;
+.pf-inside {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  border: 2px;
+  border-color: rgb(0, 0, 0);
+  border-style: ridge;
+  align-items: center;
 }
-#resume, #resume-pf, #resumeLaura {
-    display: none;
-  }
+#resume,
+#resume-pf,
+#resumeLaura {
+  display: none;
+}
