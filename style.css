@@ -2,6 +2,15 @@ body {
   display: flex;
   justify-content: center;
   gap: 20px;
+  background-color: #f8f9fa;
+}
+nav {
+  border-color: black;
+  border-bottom: solid;
+  border-width: 1px;
+}
+.whole-container {
+  margin-top: 100px;
 }
 .div-pablo {
   display: flex;

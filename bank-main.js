@@ -64,6 +64,7 @@ let saldoPablo = cuentaDePablo.verSaldo()
 let saldoLaura = cuentaDeLaura.verSaldo()
 let transfer = document.getElementById('transferir-btn');//USAR LOS ONCLICK ACA
 
+
 //TRANSFERENCIAS
 function transfPablo() {
     let inputPablo = document.getElementById('input-pablo').value;
@@ -79,6 +80,7 @@ function transfPablo() {
     } else {
         alert("Fondos insuficientes.");
     }
+    eliminarResumenTransferLaura()
     document.getElementById('input-pablo').value = '';
     document.getElementById('input-laura').value = '';
 }
@@ -100,7 +102,9 @@ function transfLaura() {
     } else {
         alert("Fondos insuficientes.");
     }
-    inputLaura.value = '';
+    eliminarResumenTransferLaura()
+    document.getElementById('input-pablo').value = '';
+    document.getElementById('input-laura').value = '';
 }
 
 //VER SALDO
@@ -197,8 +201,8 @@ div.appendChild(p6)
 document.body.appendChild(div)
 
 // Esconde el resumen de transferencia despues de 15 segundos
-window.onload = function () {
-    window.setTimeout(function () {
+function eliminarResumenTransferLaura() {
+    setTimeout(function () {
         let resumeLaura = document.getElementById('resumeLaura');
         let resumePablo = document.getElementById('resume');
 
@@ -211,8 +215,6 @@ window.onload = function () {
         }
     }, 15000);
 }
-
-
 // PLAZO FIJO
 
 function PF_P() {
