@@ -14,18 +14,23 @@
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
         crossorigin="anonymous"></script>
 </head>
-<header>
+<header class="header-nav">
     <nav class="navbar bg-body-tertiary fixed-top">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
                 aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <a class="navbar-brand" href="#"><img src="./Starlight Financial-test-2.png" class="img-logo"></a>
+            <a class="navbar-brand" href="#">
+                <h5 class="offcanvas-title" id="offcanvasNavbarLabel"><img src="./starlight-yellow.png"
+                        class="img-logo-small">Starlight Financial</h5>
+            </a>
             <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar"
                 aria-labelledby="offcanvasNavbarLabel">
                 <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Main menu</h5>
+
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel"><img src="./starlight-yellow.png"
+                            class="img-logo-small">Starlight Financial</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 
                 </div>
@@ -33,23 +38,23 @@
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            <a class="nav-link active" aria-current="page" href="#" class="navbar-titles">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Foreign Currency</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
+                                aria-expanded="false" class="navbar-titles">
                                 My Account
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Transfers</a></li>
-                                <li><a class="dropdown-item" href="#">Investments</a></li>
+                                <li><a class="dropdown-item" href="#" class="navbar-titles">Transfers</a></li>
+                                <li><a class="dropdown-item" href="#" class="navbar-titles">Investments</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="dropdown-item" href="#">My Loans</a></li>
+                                <li><a class="dropdown-item" href="#" class="navbar-titles">My Loans</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -63,26 +68,32 @@
     </nav>
 </header>
 
-<body>
+<body class="body-css">
     <div class="whole-container">
         <div class="div-pablo">
             <h6>CUENTA DE PABLO</h6>
-            <input type="text" id="input-pablo" class="form-control">
-            <button type="submit" id="transferir-btn" onclick="transfPablo()">Transferir</button>
-            <button type="submit" class="mi-saldo" onclick="ejecutarPablo()">Click para ver saldo</button>
-            <button type="submit" id="pf-pablo" onclick="PF_P()">Cotizar Plazo Fijo</button>
+            <input type="text" id="input-pablo">
+            <button class="form-control btn-fields" type="submit" id="transferir-btn"
+                onclick="transfPablo()">Transferir</button>
+            <button class="form-control btn-fields" type="submit" class="mi-saldo" onclick="ejecutarPablo()">Click para
+                ver
+                saldo</button>
+            <button class="form-control btn-fields" type="submit" id="pf-pablo" onclick="PF_P()">Cotizar Plazo
+                Fijo</button>
             <p id="saldo-pablo"></p>
         </div>
         <div class="div-laura">
             <h6>CUENTA DE LAURA</h6>
-            <input type="text" id="input-laura" class="form-control">
-            <button type="submit" id="transferir-btn" onclick="transfLaura()">Transferir</button>
-            <button type="submit" onclick="ejecutarLaura()">Click para ver saldo</button>
-            <button type="submit" id="pf-laura" onclick="PF_L()">Cotizar Plazo Fijo</button>
+            <input type="text" id="input-laura">
+            <button class="form-control btn-fields" type="submit" id="transferir-btn"
+                onclick="transfLaura()">Transferir</button>
+            <button class="form-control btn-fields" type="submit" onclick="ejecutarLaura()">Click para ver
+                saldo</button>
+            <button class="form-control btn-fields" type="submit" id="pf-laura" onclick="PF_L()">Cotizar Plazo
+                Fijo</button>
             <p id="saldo-laura"></p>
         </div>
     </div>
-
     <script src="./bank-main.js"></script>
 </body>
 <footer>
