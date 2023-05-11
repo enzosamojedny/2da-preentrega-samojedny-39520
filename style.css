@@ -6,7 +6,7 @@ html {
   background-color: #feffe0; /*yellow-ish*/
 }
 .header-nav nav {
-  background-color: #e8e2e2b2;
+  background-color: #e8e2e2b2; /*grey-ish*/
 }
 nav {
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.4);
@@ -81,13 +81,6 @@ h6 {
   border-style: ridge;
   align-items: center;
 }
-/*.offcanvas-body,
-.dropdown {
-  background-color: #feffe0;
-}
-.btn-outline-success:a {
-  background-color: #000000;
-}*/
 #resume,
 #resume-pf,
 #resumeLaura {
@@ -99,10 +92,21 @@ h6 {
 .offcanvas-title {
   font-family: "Libre Baskerville";
 }
-#heading {
+
+.h2-register {
   text-transform: uppercase;
-  color: #673ab7;
-  font-weight: normal;
+  font-weight: 600;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.p-register {
+  font-family: Arial, Helvetica, sans-serif;
+  margin-top: 10px;
+}
+.whole-container-register {
+  border: #999595;
+  border-style: solid;
+  border-width: 0.5px;
+  border-radius: 20px;
 }
 
 #msform {
@@ -119,7 +123,6 @@ h6 {
   width: 100%;
   margin: 0;
   padding-bottom: 20px;
-
   /*stacking fieldsets above each other*/
   position: relative;
 }
@@ -216,7 +219,7 @@ h6 {
 
 /*Field names*/
 .fieldlabels {
-  color: gray;
+  color: rgb(0, 0, 0);
   text-align: left;
 }
 

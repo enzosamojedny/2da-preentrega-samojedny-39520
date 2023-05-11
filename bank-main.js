@@ -29,11 +29,15 @@ class CuentaCorriente {
     }
 }
 class Cliente {
-    constructor(nombreCliente, dniCliente,) {
+    constructor(nombreCliente, dniCliente, emailCliente, telefonoCliente, passwordCliente, incomeCliente) {
         this.nombreCliente = nombreCliente;
         this.dniCliente = dniCliente;
+        this.emailCliente = emailCliente;
+        this.passwordCliente = passwordCliente;
+        this.telefonoCliente = telefonoCliente;
+        this.incomeCliente = incomeCliente;
     }
-}
+};
 class Plazo_Fijo {
     constructor(monto, plazo, interes) {
         this.monto = monto || 0;
@@ -51,6 +55,32 @@ class CompraDolar {
         this.conversion = conversion;//trade de pesos a usd
     }
 }
+let nombreClienteVariable = document.getElementById('nombre-cliente')
+let inputEmail = document.getElementById('email')
+let inputDNI = document.getElementById('dni')
+let passWord = document.getElementById('password')
+let phoneNumber = document.getElementById('phone-number')
+let grossIncome = document.getElementById('gross-income')
+
+
+document.getElementById('submit').addEventListener('click', function () {
+    const clienteTest = new Cliente(
+        nombreClienteVariable.value,
+        inputDNI.value,
+        inputEmail.value,
+        phoneNumber.value,
+        passWord.value,
+        grossIncome.value
+    );
+    //CONVIERTO EL OBJECT A UN JSON STRING
+    const clienteTestJSON = JSON.stringify(clienteTest)
+    //guardo el JSON string en sessionStorage
+    sessionStorage.setItem('clienteTest', clienteTestJSON)
+    alert("Client data saved in sessionStorage.");
+});
+
+//hacer un nuevo formulario sobre el destino de las transferencias
+
 const cliente1 = new Cliente("Pablo Lescano", "38.112.194");
 const cliente2 = new Cliente("Laura Gomez", "23.456.321");
 const cuentaDePablo = new CuentaCorriente(cliente1, "Santander", 0, "001");
@@ -66,9 +96,9 @@ let transfer = document.getElementById('transferir-btn');//USAR LOS ONCLICK ACA
 
 
 //TRANSFERENCIAS
-function transfPablo() {
-    let inputPablo = document.getElementById('input-pablo').value;
-    let transferirCantidad = parseFloat(inputPablo)
+function transferCustomer() {
+    let inputCustomer = document.getElementById('input-customer').value;
+    let transferirCantidad = parseFloat(inputCustomer)
 
     if (transferirCantidad <= cuentaDePablo.verSaldo()) {
         cuentaDePablo.transferencia(transferirCantidad, cuentaDeLaura);
@@ -320,10 +350,10 @@ function PF_L() {
 
 $(document).ready(function () {
 
-    var current_fs, next_fs, previous_fs; //fieldsets
-    var opacity;
-    var current = 1;
-    var steps = $("fieldset").length;
+    let current_fs, next_fs, previous_fs; //fieldsets
+    let opacity;
+    let current = 1;
+    let steps = $("fieldset").length;
 
     setProgressBar(current);
 
@@ -383,7 +413,7 @@ $(document).ready(function () {
     });
 
     function setProgressBar(curStep) {
-        var percent = parseFloat(100 / steps) * curStep;
+        let percent = parseFloat(100 / steps) * curStep;
         percent = percent.toFixed();
         $(".progress-bar")
             .css("width", percent + "%")
