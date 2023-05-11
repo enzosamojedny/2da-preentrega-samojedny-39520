@@ -41,7 +41,7 @@
                             <a class="nav-link active" aria-current="page" href="#" class="navbar-titles">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Foreign Currency</a>
+                            <a class="nav-link" href="./pages/foreignCurrency.html">Foreign Currency</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Investments</a>
@@ -52,12 +52,15 @@
                                 My Account
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#" class="navbar-titles">Transfers</a></li>
-                                <li><a class="dropdown-item" href="#" class="navbar-titles">Loans</a></li>
+                                <li><a class="dropdown-item" href="./pages/transfers.html"
+                                        class="navbar-titles">Transfers</a></li>
+                                <li><a class="dropdown-item" href="./pages/loans.html" class="navbar-titles">Loans</a>
+                                </li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="dropdown-item" href="#" class="navbar-titles">My Profile</a></li>
+                                <li><a class="dropdown-item" href="./pages/myProfile.html" class="navbar-titles">My
+                                        Profile</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -71,32 +74,8 @@
     </nav>
 </header>
 
-<body class="body-css">
-    <div class="whole-container">
-        <div class="div-pablo">
-            <h6>CUENTA DE PABLO</h6>
-            <input type="text" id="input-customer">
-            <button class="form-control btn-fields" type="submit" id="transferir-btn"
-                onclick="transferCustomer()">Transferir</button>
-            <button class="form-control btn-fields" type="submit" class="mi-saldo" onclick="ejecutarPablo()">Click para
-                ver
-                saldo</button>
-            <button class="form-control btn-fields" type="submit" id="pf-pablo" onclick="PF_P()">Cotizar Plazo
-                Fijo</button>
-            <p id="saldo-pablo"></p>
-        </div>
-        <div class="div-laura">
-            <h6>CUENTA DE LAURA</h6>
-            <input type="text" id="input-laura">
-            <button class="form-control btn-fields" type="submit" id="transferir-btn"
-                onclick="transfLaura()">Transferir</button>
-            <button class="form-control btn-fields" type="submit" onclick="ejecutarLaura()">Click para ver
-                saldo</button>
-            <button class="form-control btn-fields" type="submit" id="pf-laura" onclick="PF_L()">Cotizar Plazo
-                Fijo</button>
-            <p id="saldo-laura"></p>
-        </div>
-    </div>
+<body>
+
     <script src="./bank-main.js"></script>
 </body>
 <footer>
