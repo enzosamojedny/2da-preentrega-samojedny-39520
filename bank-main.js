@@ -63,7 +63,7 @@ let phoneNumber = document.getElementById('phone-number')
 let grossIncome = document.getElementById('gross-income')
 
 
-document.getElementById('submit').addEventListener('click', function () {
+document.getElementById('submit')?.addEventListener('click', function () {//the ?. is if the code returns null
     const clienteTest = new Cliente(
         nombreClienteVariable.value,
         inputDNI.value,
@@ -76,7 +76,6 @@ document.getElementById('submit').addEventListener('click', function () {
     const clienteTestJSON = JSON.stringify(clienteTest)
     //guardo el JSON string en sessionStorage
     sessionStorage.setItem('clienteTest', clienteTestJSON)
-    alert("Client data saved in sessionStorage.");
 });
 
 //hacer un nuevo formulario sobre el destino de las transferencias
@@ -333,8 +332,6 @@ function PF_L() {
     } else {
         alert("Fondos insuficientes.");
     }
-
-
     window.setTimeout(function () {
         let resumeLaura = document.getElementById('resume-pf-l');
         if (resumeLaura) {
@@ -433,3 +430,17 @@ $(window).scroll(function () {
         navbar.removeClass('transparent');
     }
 });
+window.onload = function () {
+
+
+    let welcomeDiv = document.createElement('div');
+    welcomeDiv.id = 'welcomeIndex';
+    welcomeDiv.className = 'welcomeIndex';
+    let h1Welcome = document.createElement('h1');
+    h1Welcome.textContent = "Bienvenido, ";
+    welcomeDiv.appendChild(h1Welcome);
+    let bodyIndex = document.querySelector('#body-index');
+    bodyIndex.appendChild(welcomeDiv);
+}
+
+

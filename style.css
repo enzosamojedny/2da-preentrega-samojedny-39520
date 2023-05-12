@@ -11,7 +11,12 @@ html {
 nav {
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.4);
 }
-
+.welcomeIndex {
+  color: #000000;
+  font-size: xx-large;
+  margin-top: 100px;
+  margin-left: 550px;
+}
 .whole-container {
   margin-top: 100px;
   margin-left: 100px;
