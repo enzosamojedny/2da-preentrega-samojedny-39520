@@ -1,9 +1,4 @@
-import { CuentaCorriente } from './classes.js';
-import { Cliente } from './classes.js';
-import { Plazo_Fijo } from './classes.js';
-
-
-//hacer un nuevo formulario sobre el destino de las transferencias
+import { CuentaCorriente, Cliente, Plazo_Fijo, CompraDolar } from './classes.js';
 
 const cliente1 = new Cliente("Pablo Lescano", "38.112.194");
 const cliente2 = new Cliente("Laura Gomez", "23.456.321");
