@@ -11,8 +11,25 @@ const cuentaDePlazoFijo = new CuentaCorriente(pfCuentaCliente, "Banco Santander"
 const plazoFijoClassCall = new Plazo_Fijo(0, 0, 0.85);
 let saldoPablo = cuentaDePablo.verSaldo()
 let saldoLaura = cuentaDeLaura.verSaldo()
-let transfer = document.getElementById('transferir-btn');//USAR LOS ONCLICK ACA
 
+
+// BUTTON ids
+var transferirPabloBtn = document.getElementById("transferir-pablo-btn");
+var saldoPabloBtn = document.getElementById("saldoPabloBtn");
+var pfPabloBtn = document.getElementById("pf-pablo");
+
+var transferirLauraBtn = document.getElementById("transferir-laura-btn");
+var saldoLauraBtn = document.getElementById("saldoLauraBtn");
+var pfLauraBtn = document.getElementById("pf-laura");
+
+// Event listeners
+transferirPabloBtn.addEventListener("click", transferCustomer);
+saldoPabloBtn.addEventListener("click", ejecutarPablo);
+pfPabloBtn.addEventListener("click", PF_P);
+
+transferirLauraBtn.addEventListener("click", transfLaura);
+saldoLauraBtn.addEventListener("click", ejecutarLaura);
+pfLauraBtn.addEventListener("click", PF_L);
 
 //TRANSFERENCIAS
 function transferCustomer() {
@@ -262,3 +279,14 @@ function PF_L() {
     document.getElementById('input-pablo').value = '';
     document.getElementById('input-laura').value = '';
 }
+
+export {
+    transferCustomer,
+    transfLaura,
+    ejecutarPablo,
+    ejecutarLaura,
+    randomize,
+    eliminarResumenTransferLaura,
+    PF_P,
+    PF_L
+};
