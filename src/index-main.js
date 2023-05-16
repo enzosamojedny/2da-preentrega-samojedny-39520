@@ -1,25 +1,20 @@
 import { Cliente } from './register-form.js';
 
 $(document).ready(function () {
-    if (window.location.pathname === './index.html') {
-        let welcomeDiv = document.createElement('div');
-        alert('divLoaded')
-        welcomeDiv.id = 'welcomeIndex';
-        welcomeDiv.className = 'welcomeIndex';
-        let h1Welcome = document.createElement('h1');
+    let welcomeDiv = document.createElement('div');
+    welcomeDiv.id = 'welcomeIndex';
+    welcomeDiv.className = 'welcomeIndex';
+    let h1Welcome = document.createElement('h1');
 
-        // Retrieve the client data from sessionStorage
-        const clienteTestJSON = sessionStorage.getItem('clienteTest');
-        if (clienteTestJSON) {
-            const clienteTest = JSON.parse(clienteTestJSON);
-            h1Welcome.textContent = "Bienvenido, " + clienteTest;
-        } else {
-            h1Welcome.textContent = "Bienvenido";
-        }
-        welcomeDiv.appendChild(h1Welcome);
-        let bodyIndex = document.querySelector('#body-index');
-        bodyIndex.appendChild(welcomeDiv);
-    }
+    //Traer datos desde sessionStorage
+    const clienteTestJSON = sessionStorage.getItem('clienteTest');
+    const clienteTest = JSON.parse(clienteTestJSON);
+    const nombreCliente = clienteTest.nombreCliente;
+    h1Welcome.textContent = "Bienvenido, " + nombreCliente;
+
+    welcomeDiv.appendChild(h1Welcome);
+    let bodyIndex = document.querySelector('#body-index');
+    bodyIndex.appendChild(welcomeDiv);
 })
 
 

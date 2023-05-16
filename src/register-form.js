@@ -8,10 +8,8 @@ let phoneNumber = document.getElementById('phone-number')
 let grossIncome = document.getElementById('gross-income')
 
 document.addEventListener('DOMContentLoaded', function () {
-    alert('outside function listener')
     document.getElementById('submit-btn').addEventListener('click', function (event) {
         event.preventDefault(); // Prevent the form from submitting normally
-        alert('inside function listener')
         const clienteTest = new Cliente(
             nombreClienteVariable.value,
             inputDNI.value,
@@ -25,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Save the JSON string in sessionStorage
         sessionStorage.setItem('clienteTest', clienteTestJSON);
         // Redirect to index.html
-        window.location.href = './index.html';
+        window.location.href = '../index.html';
     });
 });
 export { Cliente };

@@ -15,7 +15,6 @@ nav {
   color: #000000;
   font-size: xx-large;
   margin-top: 100px;
-  margin-left: 550px;
 }
 .whole-container {
   margin-top: 100px;
@@ -65,9 +64,27 @@ nav {
 h6 {
   font-size: 17px;
 }
-.gaspar {
-  width: 300px;
-  border-radius: 10px;
+.body-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.row-col {
+  width: 200px;
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.col1 {
+  border: #000000;
+  border-style: solid;
+  border-width: 1px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .pf-container {
   display: flex;
