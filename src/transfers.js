@@ -9,6 +9,8 @@ const compraDivisa = new CompraDolar(0, 0, 0);
 const pfCuentaCliente = new Cliente("Plazo Fijo", "#001");
 const cuentaDePlazoFijo = new CuentaCorriente(pfCuentaCliente, "Banco Santander", 0, "#0001");
 const plazoFijoClassCall = new Plazo_Fijo(0, 0, 0.85);
+
+//VER SALDO
 let saldoPablo = cuentaDePablo.verSaldo()
 let saldoLaura = cuentaDeLaura.verSaldo()
 

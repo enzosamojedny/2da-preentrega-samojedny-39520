@@ -11,11 +11,17 @@ html {
 nav {
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.4);
 }
+.form-control:hover {
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.9);
+  background-color: rgba(188, 206, 251, 0.5);
+}
+/*WELCOME MESSAGE CONTAINER*/
 .welcomeIndex {
   color: #000000;
   font-size: xx-large;
   margin-top: 100px;
 }
+/*TRANSFERS*/
 .whole-container {
   margin-top: 100px;
   margin-left: 100px;
@@ -43,13 +49,6 @@ nav {
   align-items: center;
   background-color: #dfdadab2;
 }
-.form-control {
-  margin-top: 5px;
-  width: 1px;
-}
-.form-control:hover {
-  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.9);
-}
 .resume-container {
   display: flex;
   justify-content: center;
@@ -64,28 +63,23 @@ nav {
 h6 {
   font-size: 17px;
 }
+/*REGISTER FORM*/
 .body-wrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
+.body-index {
+  margin-bottom: 80px;
+}
 .row-col {
   width: 200px;
-  margin-top: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.col1 {
-  border: #000000;
-  border-style: solid;
-  border-width: 1px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+
 .pf-container {
   display: flex;
   flex-direction: column;
