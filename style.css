@@ -76,6 +76,14 @@ h6 {
 .saldo-container {
   width: fit-content;
 }
+.quick-access-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
 .row-col {
   width: 200px;
   display: flex;
@@ -91,6 +99,11 @@ h6 {
 }
 .btn-transfer {
   width: 100%;
+  padding: 0;
+  border: none;
+  background: none;
+}
+.btn-transfer:active {
 }
 .transfer-img {
   margin-left: 0%;
