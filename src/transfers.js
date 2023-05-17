@@ -16,13 +16,13 @@ let saldoLaura = cuentaDeLaura.verSaldo()
 
 
 // BUTTON ids
-var transferirPabloBtn = document.getElementById("transferir-pablo-btn");
-var saldoPabloBtn = document.getElementById("saldoPabloBtn");
-var pfPabloBtn = document.getElementById("pf-pablo");
+const transferirPabloBtn = document.getElementById("transferir-pablo-btn");
+const saldoPabloBtn = document.getElementById("saldoPabloBtn");
+const pfPabloBtn = document.getElementById("pf-pablo");
 
-var transferirLauraBtn = document.getElementById("transferir-laura-btn");
-var saldoLauraBtn = document.getElementById("saldoLauraBtn");
-var pfLauraBtn = document.getElementById("pf-laura");
+const transferirLauraBtn = document.getElementById("transferir-laura-btn");
+const saldoLauraBtn = document.getElementById("saldoLauraBtn");
+const pfLauraBtn = document.getElementById("pf-laura");
 
 // Event listeners
 transferirPabloBtn.addEventListener("click", transferCustomer);

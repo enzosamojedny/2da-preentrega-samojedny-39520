@@ -103,28 +103,9 @@ h6 {
   border: none;
   background: none;
 }
-.btn-transfer:active {
-}
 .transfer-img {
   margin-left: 0%;
   width: 30px;
-}
-.pf-container {
-  display: flex;
-  flex-direction: column;
-  border: 2px;
-  border-color: rgb(0, 0, 0);
-  border-style: ridge;
-  align-items: center;
-}
-.pf-inside {
-  display: flex;
-  flex-direction: column;
-  margin: 10px;
-  border: 2px;
-  border-color: rgb(0, 0, 0);
-  border-style: ridge;
-  align-items: center;
 }
 #resume,
 #resume-pf,
