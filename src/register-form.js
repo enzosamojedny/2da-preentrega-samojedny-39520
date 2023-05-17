@@ -22,6 +22,8 @@ document.addEventListener('DOMContentLoaded', function () {
         const clienteTestJSON = JSON.stringify(clienteTest);
         // Save the JSON string in sessionStorage
         sessionStorage.setItem('clienteTest', clienteTestJSON);
+        // Redirect to index.html
+        window.location.href = '../frontend.html';
     });
 });
 export { Cliente };
