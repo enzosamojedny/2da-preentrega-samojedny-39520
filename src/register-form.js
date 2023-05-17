@@ -9,7 +9,7 @@ let grossIncome = document.getElementById('gross-income')
 
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('submit-btn').addEventListener('click', function (event) {
-        event.preventDefault(); // Prevent the form from submitting normally
+        event.preventDefault();
         const clienteTest = new Cliente(
             nombreClienteVariable.value,
             inputDNI.value,
@@ -18,11 +18,8 @@ document.addEventListener('DOMContentLoaded', function () {
             passWord.value,
             grossIncome.value
         );
-        // Convert the object to a JSON string
         const clienteTestJSON = JSON.stringify(clienteTest);
-        // Save the JSON string in sessionStorage
         sessionStorage.setItem('clienteTest', clienteTestJSON);
-        // Redirect to index.html
         window.location.href = '../frontend.html';
     });
 });
@@ -31,30 +28,19 @@ export { Cliente };
 //PROGRESS BAR
 
 $(document).ready(function () {
-
-    let current_fs, next_fs, previous_fs; //fieldsets
+    let current_fs, next_fs, previous_fs;
     let opacity;
     let current = 1;
     let steps = $("fieldset").length;
-
     setProgressBar(current);
-
     $(".next").click(function () {
-
         current_fs = $(this).parent();
         next_fs = $(this).parent().next();
-
-        //Add Class Active
         $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
-
-        //show the next fieldset
         next_fs.show();
-        //hide the current fieldset with style
         current_fs.animate({ opacity: 0 }, {
             step: function (now) {
-                // for making fielset appear animation
                 opacity = 1 - now;
-
                 current_fs.css({
                     'display': 'none',
                     'position': 'relative'
@@ -65,24 +51,14 @@ $(document).ready(function () {
         });
         setProgressBar(++current);
     });
-
     $(".previous").click(function () {
-
         current_fs = $(this).parent();
         previous_fs = $(this).parent().prev();
-
-        //Remove class active
         $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
-
-        //show the previous fieldset
         previous_fs.show();
-
-        //hide the current fieldset with style
         current_fs.animate({ opacity: 0 }, {
             step: function (now) {
-                // for making fielset appear animation
                 opacity = 1 - now;
-
                 current_fs.css({
                     'display': 'none',
                     'position': 'relative'

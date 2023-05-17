@@ -51,7 +51,7 @@ export class Plazo_Fijo {
 export class CompraDolar {
     constructor(monto, cotizacion, conversion) {
         this.monto = monto || 0;
-        this.contizacion = cotizacion;//precio del TC
-        this.conversion = conversion;//trade de pesos a usd
+        this.contizacion = cotizacion;
+        this.conversion = conversion;
     }
 }

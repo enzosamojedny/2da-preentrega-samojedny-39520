@@ -1,15 +1,12 @@
 import { CuentaCorriente } from './classes.js';
 import { Cliente } from './register-form.js';
 
-
-
 $(document).ready(function () {
     let welcomeDiv = document.createElement('div');
     welcomeDiv.id = 'welcomeIndex';
     welcomeDiv.className = 'welcomeIndex';
     let h1Welcome = document.createElement('h1');
 
-    //Traer datos desde sessionStorage
     //NOMBRE USUARIO
     const clienteTestJSON = sessionStorage.getItem('clienteTest');
     const clienteTest = JSON.parse(clienteTestJSON);
@@ -30,7 +27,6 @@ $(document).ready(function () {
     psaldo.textContent = "$ " + cuentaDeCliente.numeroCuenta
     saldoFrontend.appendChild(psaldo)
 })
-
 
 //NAVBAR ANIMATION
 $(window).scroll(function () {
