@@ -64,22 +64,38 @@ h6 {
   font-size: 17px;
 }
 /*REGISTER FORM*/
-.body-wrapper {
+.body-wrapper,
+.welcome-index-title {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-.body-index {
   margin-bottom: 80px;
+}
+/*FRONTEND*/
+
+.saldo-container {
+  width: fit-content;
 }
 .row-col {
   width: 200px;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: row;
 }
-
+.field {
+  margin-bottom: 5px;
+}
+.field-button {
+  border-radius: 0;
+}
+.btn-transfer {
+  width: 100%;
+}
+.transfer-img {
+  margin-left: 0%;
+  width: 30px;
+}
 .pf-container {
   display: flex;
   flex-direction: column;

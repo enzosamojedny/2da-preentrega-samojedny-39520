@@ -28,11 +28,9 @@
             <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar"
                 aria-labelledby="offcanvasNavbarLabel">
                 <div class="offcanvas-header">
-
                     <h5 class="offcanvas-title" id="offcanvasNavbarLabel"><img src="./images/starlight-yellow.png"
                             class="img-logo-small">Starlight Financial</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-
                 </div>
                 <hr>
                 <div class="offcanvas-body">
@@ -73,36 +71,44 @@
         </div>
     </nav>
 </header>
-<div class="body-wrapper">
 
-    <body>
+
+<body>
+    <div class="welcome-index-title">
         <div id="body-index" class="body-index">
         </div>
+    </div>
+    <div class="body-wrapper">
+        <div class="saldo-container">
+            <div class="form-control field" id="saldo-frontend">
+            </div>
+        </div>
         <div class="row row-col">
-            <div class="saldo-container">
-                <div class="form-control" id="saldo-frontend">
-
+            <div>
+                <div class="col form-control field-button" id="quick-transfer-btn"><a
+                        href="./pages/transfers.html"><button class="btn-transfer"><img
+                                src="./images/money-bill-transfer-solid.svg" alt=""
+                                class="transfer-img">Transfers</button></a>
                 </div>
             </div>
             <div>
-                <div class="form-control">col</div>
+                <div class="col form-control field">col</div>
             </div>
             <div>
-                <div class="form-control">col</div>
+                <div class="col form-control field">col</div>
             </div>
-            <div>
-                <div class="form-control">col</div>
-            </div>
-
-
-
         </div>
-    </body>
+</body>
 </div>
 <script type="module" src="./src/frontend.js"></script>
 </body>
-<footer>
-
+<footer class="bg-light text-center text-lg-start">
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2020 Copyright:
+        <a class="text-dark" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+    </div>
+    <!-- Copyright -->
 </footer>
 
 </html>
