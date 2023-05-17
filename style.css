@@ -64,16 +64,24 @@ h6 {
   font-size: 17px;
 }
 /*REGISTER FORM*/
-.body-wrapper,
 .welcome-index-title {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 80px;
+  margin-bottom: 30px;
+}
+.body-wrapper {
+  display: flex;
+  justify-content: center;
 }
 /*FRONTEND*/
 .saldo-container {
+  display: flex;
   width: fit-content;
+  margin-top: 35px;
+  margin-right: 10px;
+  align-items: center;
+  justify-content: center;
 }
 .quick-access-container {
   display: flex;
@@ -85,10 +93,6 @@ h6 {
 }
 .row-col {
   width: 200px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
 }
 .field {
   margin-bottom: 5px;

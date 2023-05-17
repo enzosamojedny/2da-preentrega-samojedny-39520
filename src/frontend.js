@@ -20,6 +20,7 @@ $(document).ready(function () {
     const clienteUsuario = new Cliente(nombreCliente, dniUsuario)
     const cuentaDeCliente = new CuentaCorriente(clienteUsuario, "Starlight Financial", "Cuenta Única 212-23232/9", 10000)
     const saldoFrontend = document.getElementById('saldo-frontend');
+    saldoFrontend.className = 'row form-control'
     let pCuenta = document.createElement('p')
     pCuenta.textContent = cuentaDeCliente.saldo
     saldoFrontend.appendChild(pCuenta)
