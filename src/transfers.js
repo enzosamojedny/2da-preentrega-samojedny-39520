@@ -1,5 +1,5 @@
 import { CuentaCorriente, Cliente, Plazo_Fijo, CompraDolar } from './classes.js';
-
+const date = moment().format('LLL');
 const cliente1 = new Cliente("Pablo Lescano", "38.112.194");
 const cliente2 = new Cliente("Laura Gomez", "23.456.321");
 const cuentaDePablo = new CuentaCorriente(cliente1, "Santander", 0, "001");
@@ -64,6 +64,9 @@ function transferCustomer() {
                 p.className = 'p-js'
                 p.textContent = "Origen: " + cliente1.nombreCliente
                 div.appendChild(p)
+                let ptimePablo = document.createElement('p')
+                ptimePablo.textContent = "Fecha de transferencia: " + date;
+                div.appendChild(ptimePablo)
                 let pdestiny = document.createElement('p')
                 pdestiny.textContent = "Número de operación: " + generatedPassword
                 div.appendChild(pdestiny)
@@ -79,13 +82,12 @@ function transferCustomer() {
                 let p6 = document.createElement('p')
                 div.appendChild(p6)
                 document.body.appendChild(div)
-
+                let p7 = document.querySelector('#resume p:last-child')
+                p5.textContent = "Monto: $" + transferirCantidad;
+                let resumeContainer = document.getElementById('resume');
+                resumeContainer.style.display = 'block';
             }
         })
-        let p5 = document.querySelector('#resume p:last-child')
-        p5.textContent = "Monto: $" + transferirCantidad;
-        let resumeContainer = document.getElementById('resume');
-        resumeContainer.style.display = 'block';
     } else {
         Swal.fire({
             icon: 'error',
@@ -140,6 +142,9 @@ function transfLaura() {
                 pLaura.className = 'p-js-laura';
                 pLaura.textContent = "Origen: " + cliente2.nombreCliente;
                 divLaura.appendChild(pLaura);
+                let ptime = document.createElement('p')
+                ptime.textContent = "Fecha de transferencia: " + date;
+                divLaura.appendChild(ptime)
                 let pdestino = document.createElement('p');
                 pdestino.textContent = "Número de operación: " + generatedPassword;
                 divLaura.appendChild(pdestino);
@@ -186,6 +191,7 @@ function eliminarResumenTransferLaura() {
     }, 15000);
 }
 eliminarResumenTransferLaura()
+
 
 
 //VER SALDO
