@@ -17,26 +17,4 @@ request.get({
         console.log(data);
     }
 });
-const scrollableTable = new scrollableTable('scrollableTable', 'wrapper')
-scrollableTable.setTableHeader(["Name", "Id", "Value"])
-scrollableTable.setTableHeight(() => { return $(window).height() - 118 })
-
-var testData = [
-    {
-        "id": 1,
-        "name": "name1",
-        "value": "value 1",
-    },
-    {
-        "id": 2,
-        "name": "name2",
-        "value": "value 2",
-    },
-    {
-        "id": 3,
-        "name": "name3",
-        "value": "value 3",
-    },
-    // more data here
-]
-scrollableTable.setTreeTableContent(testData, "testDataEventType", ["name", "id", "value"])
+alpha.data.weekly(IBM, outputsize, datatype, interval);
