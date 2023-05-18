@@ -26,7 +26,6 @@ document.addEventListener('DOMContentLoaded', function () {
 export { Cliente };
 
 //PROGRESS BAR
-
 $(document).ready(function () {
     let current_fs, next_fs, previous_fs;
     let opacity;

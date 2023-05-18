@@ -14,12 +14,10 @@ const plazoFijoClassCall = new Plazo_Fijo(0, 0, 0.85);
 let saldoPablo = cuentaDePablo.verSaldo()
 let saldoLaura = cuentaDeLaura.verSaldo()
 
-
 // BUTTON ids
 const transferirPabloBtn = document.getElementById("transferir-pablo-btn");
 const saldoPabloBtn = document.getElementById("saldoPabloBtn");
 const pfPabloBtn = document.getElementById("pf-pablo");
-
 const transferirLauraBtn = document.getElementById("transferir-laura-btn");
 const saldoLauraBtn = document.getElementById("saldoLauraBtn");
 const pfLauraBtn = document.getElementById("pf-laura");
@@ -28,7 +26,6 @@ const pfLauraBtn = document.getElementById("pf-laura");
 transferirPabloBtn.addEventListener("click", transferCustomer);
 saldoPabloBtn.addEventListener("click", ejecutarPablo);
 pfPabloBtn.addEventListener("click", PF_P);
-
 transferirLauraBtn.addEventListener("click", transfLaura);
 saldoLauraBtn.addEventListener("click", ejecutarLaura);
 pfLauraBtn.addEventListener("click", PF_L);
@@ -37,10 +34,25 @@ pfLauraBtn.addEventListener("click", PF_L);
 function transferCustomer() {
     let inputCustomer = document.getElementById('input-customer').value;
     let transferirCantidad = parseFloat(inputCustomer)
-
     if (transferirCantidad <= cuentaDePablo.verSaldo()) {
         cuentaDePablo.transferencia(transferirCantidad, cuentaDeLaura);
-
+        Swal.fire({
+            title: 'You will send $' + inputCustomer + ' to ' + cliente2.nombreCliente,
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Proceed with transfer'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire(
+                    'Transfer sent to recipient',
+                    '',
+                    'success'
+                )
+            }
+        })
         let p5 = document.querySelector('#resume p:last-child')
         p5.textContent = "Monto: $" + transferirCantidad;
         let resumeContainer = document.getElementById('resume');
@@ -57,6 +69,23 @@ function transfLaura() {
     let transferirCantidad = parseFloat(inputLaura);
     if (transferirCantidad <= cuentaDeLaura.verSaldo()) {
         cuentaDeLaura.transferencia(transferirCantidad, cuentaDePablo);
+        Swal.fire({
+            title: 'You will send $' + inputLaura + ' to ' + cliente1.nombreCliente,
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Proceed with transfer'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire(
+                    'Transfer sent to recipient',
+                    '',
+                    'success'
+                )
+            }
+        })
         let pLaura = document.querySelector('#resumeLaura p:last-child');
         pLaura.textContent = "Monto: $" + transferirCantidad;
         let resumeContainerLaura = document.getElementById('resumeLaura');
@@ -222,10 +251,8 @@ function PF_P() {
     } else {
         alert("Fondos insuficientes.");
     }
-
     document.getElementById('input-pablo').value = '';
     document.getElementById('input-laura').value = '';
-
     window.setTimeout(function () {
         let resumePablo = document.getElementById('resume-pf');
         if (resumePablo) {
