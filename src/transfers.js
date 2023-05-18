@@ -35,7 +35,6 @@ function transferCustomer() {
     let inputCustomer = document.getElementById('input-customer').value;
     let transferirCantidad = parseFloat(inputCustomer)
     if (transferirCantidad <= cuentaDePablo.verSaldo()) {
-        cuentaDePablo.transferencia(transferirCantidad, cuentaDeLaura);
         Swal.fire({
             title: 'You will send $' + inputCustomer + ' to ' + cliente2.nombreCliente,
             text: "You won't be able to revert this!",
@@ -46,11 +45,41 @@ function transferCustomer() {
             confirmButtonText: 'Proceed with transfer'
         }).then((result) => {
             if (result.isConfirmed) {
+                cuentaDePablo.transferencia(transferirCantidad, cuentaDeLaura);
                 Swal.fire(
                     'Transfer sent to recipient',
                     '',
                     'success'
                 )
+                let div = document.createElement('div')
+                div.id = 'resume';
+                div.className = 'resume-container';
+                let h2 = document.createElement('h2')
+                h2.textContent = "Resumen de Transferencia"
+                div.appendChild(h2)
+                let pnumerotransaccion = document.createElement('p')
+                pnumerotransaccion.textContent = "Destinatario: " + cliente2.nombreCliente
+                div.appendChild(pnumerotransaccion)
+                let p = document.createElement('p')
+                p.className = 'p-js'
+                p.textContent = "Origen: " + cliente1.nombreCliente
+                div.appendChild(p)
+                let pdestiny = document.createElement('p')
+                pdestiny.textContent = "Número de operación: " + generatedPassword
+                div.appendChild(pdestiny)
+                let p3 = document.createElement('p')
+                div.appendChild(p3)
+                p3.textContent = "Banco " + cuentaDeLaura.banco
+                let p4 = document.createElement('p')
+                div.appendChild(p4)
+                p4.textContent = "Cuenta " + cuentaDeLaura.numeroCuenta
+                let p5 = document.createElement('p')
+                div.appendChild(p5)
+                p5.textContent = "DNI " + cliente2.dniCliente
+                let p6 = document.createElement('p')
+                div.appendChild(p6)
+                document.body.appendChild(div)
+
             }
         })
         let p5 = document.querySelector('#resume p:last-child')
@@ -64,15 +93,23 @@ function transferCustomer() {
             text: '',
         })
     }
-    eliminarResumenTransferLaura()
-    document.getElementById('input-pablo').value = '';
-    document.getElementById('input-laura').value = '';
+
 }
+function eliminarResumenTransferPablo() {
+    setTimeout(function () {
+        let resumePablo = document.getElementById('resume');
+        if (resumePablo) {
+            resumePablo.remove();
+        }
+    }, 15000);
+}
+eliminarResumenTransferPablo()
+
+
 function transfLaura() {
     let inputLaura = document.getElementById('input-laura').value;
     let transferirCantidad = parseFloat(inputLaura);
     if (transferirCantidad <= cuentaDeLaura.verSaldo()) {
-        cuentaDeLaura.transferencia(transferirCantidad, cuentaDePablo);
         Swal.fire({
             title: 'You will send $' + inputLaura + ' to ' + cliente1.nombreCliente,
             text: "You won't be able to revert this!",
@@ -83,23 +120,47 @@ function transfLaura() {
             confirmButtonText: 'Proceed with transfer'
         }).then((result) => {
             if (result.isConfirmed) {
+                cuentaDeLaura.transferencia(transferirCantidad, cuentaDePablo);
                 Swal.fire(
                     'Transfer sent to recipient',
                     '',
                     'success'
                 )
+                // LAURA resumen de transferencia
+                let divLaura = document.createElement('div');
+                divLaura.id = 'resumeLaura';
+                divLaura.className = 'resume-container';
+                let h2Laura = document.createElement('h2');
+                h2Laura.textContent = "Resumen de Transferencia";
+                divLaura.appendChild(h2Laura);
+                let pnumerotransaccionlaura = document.createElement('p');
+                pnumerotransaccionlaura.textContent = "Destinatario: " + cliente1.nombreCliente;
+                divLaura.appendChild(pnumerotransaccionlaura);
+                let pLaura = document.createElement('p');
+                pLaura.className = 'p-js-laura';
+                pLaura.textContent = "Origen: " + cliente2.nombreCliente;
+                divLaura.appendChild(pLaura);
+                let pdestino = document.createElement('p');
+                pdestino.textContent = "Número de operación: " + generatedPassword;
+                divLaura.appendChild(pdestino);
+                let p3Laura = document.createElement('p');
+                divLaura.appendChild(p3Laura);
+                p3Laura.textContent = "Banco " + cuentaDeLaura.banco;
+                let p4Laura = document.createElement('p');
+                divLaura.appendChild(p4Laura);
+                p4Laura.textContent = "Cuenta " + cuentaDeLaura.numeroCuenta;
+                let p5Laura = document.createElement('p');
+                divLaura.appendChild(p5Laura);
+                p5Laura.textContent = "DNI " + cliente2.dniCliente;
+                let p6Laura = document.createElement('p');
+                divLaura.appendChild(p6Laura);
+                document.body.appendChild(divLaura);
+                pLaura = document.querySelector('#resumeLaura p:last-child');
+                pLaura.textContent = "Monto: $" + transferirCantidad;
+                let resumeContainerLaura = document.getElementById('resumeLaura');
+                resumeContainerLaura.style.display = 'block';
             }
         })
-        let pLaura = document.querySelector('#resumeLaura p:last-child');
-        pLaura.textContent = "Monto: $" + transferirCantidad;
-        let resumeContainerLaura = document.getElementById('resumeLaura');
-        resumeContainerLaura.style.display = 'block';
-
-        // Plazo Fijo resume
-        let pLauraPF = document.querySelector('#resumeLaura-pf p:last-child');
-        pLauraPF.textContent = "Monto: $" + transferirCantidad;
-        let resumeContainerLauraPF = document.getElementById('resumeLaura-pf');
-        resumeContainerLauraPF.style.display = 'block';
     } else {
         Swal.fire({
             icon: 'error',
@@ -107,10 +168,25 @@ function transfLaura() {
             text: '',
         })
     }
-    eliminarResumenTransferLaura()
-    document.getElementById('input-pablo').value = '';
-    document.getElementById('input-laura').value = '';
+
+
+    // Plazo Fijo resume
+    let pLauraPF = document.querySelector('#resumeLaura-pf p:last-child');
+    pLauraPF.textContent = "Monto: $" + transferirCantidad;
+    let resumeContainerLauraPF = document.getElementById('resumeLaura-pf');
+    resumeContainerLauraPF.style.display = 'block';
 }
+function eliminarResumenTransferLaura() {
+    setTimeout(function () {
+        let resumeLaura = document.getElementById('resumeLaura');
+
+        if (resumeLaura) {
+            resumeLaura.remove();
+        }
+    }, 15000);
+}
+eliminarResumenTransferLaura()
+
 
 //VER SALDO
 function ejecutarPablo() {
@@ -143,83 +219,8 @@ function randomize() {
 const generatedPassword = randomize();
 
 //RESUMEN DE TRANSFERENCIA
-
-// LAURA resumen de transferencia
-let divLaura = document.createElement('div');
-divLaura.id = 'resumeLaura';
-divLaura.className = 'resume-container';
-let h2Laura = document.createElement('h2');
-h2Laura.textContent = "Resumen de Transferencia";
-divLaura.appendChild(h2Laura);
-let pnumerotransaccionlaura = document.createElement('p');
-pnumerotransaccionlaura.textContent = "Destinatario: " + cliente1.nombreCliente;
-divLaura.appendChild(pnumerotransaccionlaura);
-let pLaura = document.createElement('p');
-pLaura.className = 'p-js-laura';
-pLaura.textContent = "Origen: " + cliente2.nombreCliente;
-divLaura.appendChild(pLaura);
-let pdestino = document.createElement('p');
-pdestino.textContent = "Número de operación: " + generatedPassword;
-divLaura.appendChild(pdestino);
-let p3Laura = document.createElement('p');
-divLaura.appendChild(p3Laura);
-p3Laura.textContent = "Banco " + cuentaDeLaura.banco;
-let p4Laura = document.createElement('p');
-divLaura.appendChild(p4Laura);
-p4Laura.textContent = "Cuenta " + cuentaDeLaura.numeroCuenta;
-let p5Laura = document.createElement('p');
-divLaura.appendChild(p5Laura);
-p5Laura.textContent = "DNI " + cliente2.dniCliente;
-let p6Laura = document.createElement('p');
-divLaura.appendChild(p6Laura);
-document.body.appendChild(divLaura);
-
-
 // PABLO resumen de transferencia
-let div = document.createElement('div')
-div.id = 'resume';
-div.className = 'resume-container';
-let h2 = document.createElement('h2')
-h2.textContent = "Resumen de Transferencia"
-div.appendChild(h2)
-let pnumerotransaccion = document.createElement('p')
-pnumerotransaccion.textContent = "Destinatario: " + cliente2.nombreCliente
-div.appendChild(pnumerotransaccion)
-let p = document.createElement('p')
-p.className = 'p-js'
-p.textContent = "Origen: " + cliente1.nombreCliente
-div.appendChild(p)
-let pdestiny = document.createElement('p')
-pdestiny.textContent = "Número de operación: " + generatedPassword
-div.appendChild(pdestiny)
-let p3 = document.createElement('p')
-div.appendChild(p3)
-p3.textContent = "Banco " + cuentaDeLaura.banco
-let p4 = document.createElement('p')
-div.appendChild(p4)
-p4.textContent = "Cuenta " + cuentaDeLaura.numeroCuenta
-let p5 = document.createElement('p')
-div.appendChild(p5)
-p5.textContent = "DNI " + cliente2.dniCliente
-let p6 = document.createElement('p')
-div.appendChild(p6)
-document.body.appendChild(div)
-
 // Esconde el resumen de transferencia despues de 15 segundos
-function eliminarResumenTransferLaura() {
-    setTimeout(function () {
-        let resumeLaura = document.getElementById('resumeLaura');
-        let resumePablo = document.getElementById('resume');
-
-        if (resumeLaura) {
-            resumeLaura.remove();
-        }
-
-        if (resumePablo) {
-            resumePablo.remove();
-        }
-    }, 15000);
-}
 // PLAZO FIJO
 
 function PF_P() {
