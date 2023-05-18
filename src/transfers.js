@@ -71,19 +71,19 @@ function transferCustomer() {
                 pdestiny.textContent = "Número de operación: " + generatedPassword
                 div.appendChild(pdestiny)
                 let p3 = document.createElement('p')
-                div.appendChild(p3)
                 p3.textContent = "Banco " + cuentaDeLaura.banco
+                div.appendChild(p3)
                 let p4 = document.createElement('p')
-                div.appendChild(p4)
                 p4.textContent = "Cuenta " + cuentaDeLaura.numeroCuenta
+                div.appendChild(p4)
                 let p5 = document.createElement('p')
+                p5.textContent = "DNI " + cliente1.dniCliente
                 div.appendChild(p5)
-                p5.textContent = "DNI " + cliente2.dniCliente
                 let p6 = document.createElement('p')
                 div.appendChild(p6)
                 document.body.appendChild(div)
                 let p7 = document.querySelector('#resume p:last-child')
-                p5.textContent = "Monto: $" + transferirCantidad;
+                p7.textContent = "Monto: $" + transferirCantidad;
                 let resumeContainer = document.getElementById('resume');
                 resumeContainer.style.display = 'block';
             }
