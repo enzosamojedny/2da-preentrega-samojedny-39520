@@ -58,7 +58,11 @@ function transferCustomer() {
         let resumeContainer = document.getElementById('resume');
         resumeContainer.style.display = 'block';
     } else {
-        alert("Fondos insuficientes.");
+        Swal.fire({
+            icon: 'error',
+            title: 'Insufficient funds in your savings account',
+            text: '',
+        })
     }
     eliminarResumenTransferLaura()
     document.getElementById('input-pablo').value = '';
@@ -97,7 +101,11 @@ function transfLaura() {
         let resumeContainerLauraPF = document.getElementById('resumeLaura-pf');
         resumeContainerLauraPF.style.display = 'block';
     } else {
-        alert("Fondos insuficientes.");
+        Swal.fire({
+            icon: 'error',
+            title: 'Insufficient funds in your savings account',
+            text: '',
+        })
     }
     eliminarResumenTransferLaura()
     document.getElementById('input-pablo').value = '';
