@@ -296,3 +296,13 @@ h6 {
   width: 100%;
   object-fit: cover;
 }
+.column {
+  margin-top: 100px;
+  border: #000000;
+  border-style: solid;
+}
+.table-wrapper-scroll-y {
+  margin-top: 100px;
+  margin-left: 50px;
+  margin-right: 50px;
+}
