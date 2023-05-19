@@ -79,52 +79,61 @@
 
 <body>
     <div class="table-wrapper-scroll-y my-custom-scrollbar">
-        <table class="table table-bordered table-striped mb-0">
+        <table class="table table-bordered table-striped mb-0 table-hover">
             <thead>
                 <tr>
                     <th scope="col">Ticker</th>
                     <th scope="col">Open</th>
                     <th scope="col">Close</th>
                     <th scope="col">Volume</th>
-                    <th scope="col">Weekly change</th>
-                    <th scope="col">YTD</th>
+                    <th scope="col">
+                        <div class="">
+                            <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                                <option selected>Select timeframe</option>
+                                <option value="1">Weekly</option>
+                                <option value="2">Monthly</option>
+                                <option value="3">Yearly</option>
+                            </select>
+                        </div>
+                    </th>
                     <th scope="col">Market Sentiment</th>
+                    <th scope="col">Buy/Sell</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <th scope="row" id="1">IBM</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <th scope="row" id="2">MSFT</th>
-                    <td></td>
+                    <td id="IBM-ID"></td>
                     <td></td>
                     <td></td>
                 </tr>
                 <tr>
-                    <th scope="row" id="3">GOOGL</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <th scope="row" id="4">NVDA</th>
-                    <td></td>
+                    <th scope="row">MSFT</th>
+                    <td id="MSFT-ID"></td>
                     <td></td>
                     <td></td>
                 </tr>
                 <tr>
-                    <th scope="row" id="5">WMT</th>
-                    <td></td>
+                    <th scope="row">GOOGL</th>
+                    <td id="GOOGL-ID"></td>
                     <td></td>
                     <td></td>
                 </tr>
                 <tr>
-                    <th scope="row" id="6">BABA</th>
+                    <th scope="row">NVDA</th>
+                    <td id="NVDA-ID"></td>
                     <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th scope="row">WMT</th>
+                    <td id="WMT-ID"></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th scope="row">BABA</th>
+                    <td id="BABA-ID"></td>
                     <td></td>
                     <td></td>
                 </tr>
