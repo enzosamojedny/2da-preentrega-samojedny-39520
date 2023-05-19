@@ -1,5 +1,7 @@
 
 const url = 'https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY_ADJUSTED&symbol=IBM&apikey=0Y9J544VII9BYP7K';
+const urlMonthly = 'https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY_ADJUSTED&symbol=IBM&apikey=0Y9J544VII9BYP7K'
+const marketSentiment = 'https://www.alphavantage.co/query?function=NEWS_SENTIMENT&tickers=AAPL&apikey=0Y9J544VII9BYP7'
 const symbol = 'IBM'
 // https://www.alphavantage.co/support/#api-key
 
