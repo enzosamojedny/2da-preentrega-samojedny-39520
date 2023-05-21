@@ -36,7 +36,7 @@ function transferCustomer() {
     let transferirCantidad = parseFloat(inputCustomer)
     if (transferirCantidad <= cuentaDePablo.verSaldo()) {
         Swal.fire({
-            title: 'You will send $' + inputCustomer + ' to ' + cliente2.nombreCliente,
+            title: 'You are about to send $' + inputCustomer + ' to ' + cliente2.nombreCliente,
             text: "You won't be able to revert this!",
             icon: 'warning',
             showCancelButton: true,
