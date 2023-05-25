@@ -96,11 +96,28 @@
             <button class="form-control btn-fields" type="submit" id="pf-laura">Cotizar Plazo Fijo</button>
             <p id="saldo-laura"></p>
         </div>
+        <div class="div-laura">
+            <h6 id="cuenta-cliente"></h6>
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text" id="addon-wrapping">$</span>
+                <input type="text" class="form-control" placeholder="Insert quantity" aria-label="Quantity"
+                    aria-describedby="addon-wrapping" id="input-cliente-final">
+            </div>
+            <select class="form-select" aria-label="Default">
+                <option selected>Select a recipient</option>
+                <option value="Pablo Lescano">Pablo Lescano</option>
+                <option value="Laura Gomez">Laura Gomez</option>
+            </select>
+            <button class="form-control btn-fields" type="submit" id="transferir-laura-btn">Transferir</button>
+            <button class="form-control btn-fields" type="submit" id="saldoLauraBtn">Click para ver saldo</button>
+            <button class="form-control btn-fields" type="submit" id="pf-laura">Cotizar Plazo Fijo</button>
+            <p id="saldo-laura"></p>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script type="module" src="../src/classes.js"></script>
     <script type="module" src="../src/transfers.js"></script>
+    <script type="module" src="../src/transfer2.js"></script>
 </body>
 
 </html>

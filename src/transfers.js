@@ -1,10 +1,10 @@
-import { CuentaCorriente, Cliente, Plazo_Fijo, CompraDolar } from './classes.js';
+import { CuentaCorriente, Cliente, Plazo_Fijo } from './classes.js';
+
 const date = moment().format('LLL');
 const cliente1 = new Cliente("Pablo Lescano", "38.112.194");
 const cliente2 = new Cliente("Laura Gomez", "23.456.321");
 const cuentaDePablo = new CuentaCorriente(cliente1, "Santander", 0, "001");
 const cuentaDeLaura = new CuentaCorriente(cliente2, "Brubank", 0, "002");
-const compraDivisa = new CompraDolar(0, 0, 0);
 //PLAZO FIJO
 const pfCuentaCliente = new Cliente("Plazo Fijo", "#001");
 const cuentaDePlazoFijo = new CuentaCorriente(pfCuentaCliente, "Banco Santander", 0, "#0001");

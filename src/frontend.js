@@ -1,33 +1,29 @@
-import { CuentaCorriente } from './classes.js';
-import { Cliente } from './register-form.js';
+import { userData } from './transfer2.js';
+const exportedVariables = userData()
 
-$(document).ready(function () {
+function tbE() {
     let welcomeDiv = document.createElement('div');
     welcomeDiv.id = 'welcomeIndex';
     welcomeDiv.className = 'welcomeIndex';
     let h1Welcome = document.createElement('h1');
 
-    //NOMBRE USUARIO
-    const clienteTestJSON = sessionStorage.getItem('clienteTest');
-    const clienteTest = JSON.parse(clienteTestJSON);
-    const nombreCliente = clienteTest.nombreCliente;
-    h1Welcome.textContent = "Bienvenido, " + nombreCliente;
+    h1Welcome.textContent = "Bienvenido, " + exportedVariables.nombreCliente;
     welcomeDiv.appendChild(h1Welcome);
     let bodyIndex = document.querySelector('#body-index');
     bodyIndex.appendChild(welcomeDiv);
     //DNI
-    const dniUsuario = clienteTest.dniCliente
-    const clienteUsuario = new Cliente(nombreCliente, dniUsuario)
-    const cuentaDeCliente = new CuentaCorriente(clienteUsuario, "Starlight Financial", "Cuenta Única 212-23232/9", 10000)
+    const dniUsuario = exportedVariables.dniCliente
+    const cuentaVisible = exportedVariables.cuentaDeCliente;
     const saldoFrontend = document.getElementById('saldo-frontend');
     saldoFrontend.className = 'row form-control'
     let pCuenta = document.createElement('p')
-    pCuenta.textContent = cuentaDeCliente.saldo
+    pCuenta.textContent = cuentaVisible.saldo
     saldoFrontend.appendChild(pCuenta)
     let psaldo = document.createElement('p')
-    psaldo.textContent = "$ " + cuentaDeCliente.numeroCuenta
+    psaldo.textContent = "$ " + cuentaVisible.numeroCuenta
     saldoFrontend.appendChild(psaldo)
-})
+}
+tbE()
 
 //NAVBAR ANIMATION
 $(window).scroll(function () {
