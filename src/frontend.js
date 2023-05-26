@@ -6,7 +6,6 @@ function tbE() {
     welcomeDiv.id = 'welcomeIndex';
     welcomeDiv.className = 'welcomeIndex';
     let h1Welcome = document.createElement('h1');
-
     h1Welcome.textContent = "Bienvenido, " + exportedVariables.nombreCliente;
     welcomeDiv.appendChild(h1Welcome);
     let bodyIndex = document.querySelector('#body-index');
@@ -17,10 +16,10 @@ function tbE() {
     const saldoFrontend = document.getElementById('saldo-frontend');
     saldoFrontend.className = 'row form-control'
     let pCuenta = document.createElement('p')
-    pCuenta.textContent = cuentaVisible.saldo
+    pCuenta.textContent = cuentaVisible.numeroCuenta
     saldoFrontend.appendChild(pCuenta)
     let psaldo = document.createElement('p')
-    psaldo.textContent = "$ " + cuentaVisible.numeroCuenta
+    psaldo.textContent = "$ " + cuentaVisible.saldo
     saldoFrontend.appendChild(psaldo)
 }
 tbE()

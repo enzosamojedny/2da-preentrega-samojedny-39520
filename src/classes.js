@@ -1,10 +1,10 @@
 export class CuentaCorriente {
-    constructor(cliente, banco, saldo, numeroCuenta) {
+    constructor(cliente, banco, numeroCuenta, saldo) {
         this.cliente = cliente;
         this.banco = banco;
         this.numeroCuenta = numeroCuenta;
         this.saldo = saldo || 0;
-        this.historial = [];
+
     }
     depositoEnCuenta(valor) {
         if (valor > 0) {

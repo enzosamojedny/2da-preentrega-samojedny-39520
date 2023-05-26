@@ -79,23 +79,6 @@
 
 <body class="body-css">
     <div class="whole-container">
-        <div class="div-pablo">
-            <h6>CUENTA DE PABLO</h6>
-            <input type="text" id="input-customer">
-            <button class="form-control btn-fields" type="submit" id="transferir-pablo-btn">Transferir</button>
-            <button class="form-control btn-fields mi-saldo" type="submit" id="saldoPabloBtn">Click para ver
-                saldo</button>
-            <button class="form-control btn-fields" type="submit" id="pf-pablo">Cotizar Plazo Fijo</button>
-            <p id="saldo-pablo"></p>
-        </div>
-        <div class="div-laura">
-            <h6>CUENTA DE LAURA</h6>
-            <input type="text" id="input-laura">
-            <button class="form-control btn-fields" type="submit" id="transferir-laura-btn">Transferir</button>
-            <button class="form-control btn-fields" type="submit" id="saldoLauraBtn">Click para ver saldo</button>
-            <button class="form-control btn-fields" type="submit" id="pf-laura">Cotizar Plazo Fijo</button>
-            <p id="saldo-laura"></p>
-        </div>
         <div class="div-laurita">
             <h6 class="cuenta-cliente"></h6>
             <div class="input-group flex-nowrap">
@@ -103,12 +86,12 @@
                 <input type="text" class="form-control" placeholder="Insert quantity" aria-label="Quantity"
                     aria-describedby="addon-wrapping" id="input-cliente-final">
             </div>
-            <select class="form-select" aria-label="Default">
+            <select class="form-select" aria-label="Default" id="main-select">
                 <option selected>Select a recipient</option>
-                <option value="Pablo Lescano" id="">Pablo Lescano</option>
-                <option value="Laura Gomez">Laura Gomez</option>
+                <option value="Pablo Lescano"">Pablo Lescano</option>
+                <option value=" Laura Gomez">Laura Gomez</option>
             </select>
-            <button class="form-control btn-fields" type="submit" id="transferir-laura-btn">Transferir</button>
+            <button class="form-control btn-fields transfer-button" type="submit">Transferir</button>
             <button class="form-control btn-fields" type="submit" id="saldo-cliente-btn">Click para ver saldo</button>
             <button class="form-control btn-fields" type="submit" id="pf-laura">Cotizar Plazo Fijo</button>
             <p id="saldo-cliente-p"></p>
