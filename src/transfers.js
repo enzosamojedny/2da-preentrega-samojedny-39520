@@ -1,4 +1,12 @@
 import { CuentaCorriente, Cliente, Plazo_Fijo } from './classes.js';
+import { userData } from './transfer2.js';
+const exportedVariables = userData()
+
+let divTransferCheck = document.querySelector('.div-laurita')
+const h6DisplayData = document.querySelector('.cuenta-cliente')
+
+h6DisplayData.textContent = "Cuenta Cliente " + exportedVariables.nombreCliente
+
 
 const date = moment().format('LLL');
 const cliente1 = new Cliente("Pablo Lescano", "38.112.194");
@@ -21,15 +29,16 @@ const pfPabloBtn = document.getElementById("pf-pablo");
 const transferirLauraBtn = document.getElementById("transferir-laura-btn");
 const saldoLauraBtn = document.getElementById("saldoLauraBtn");
 const pfLauraBtn = document.getElementById("pf-laura");
-
+const saldoClienteBtn = document.getElementById('saldo-cliente-btn')
 // Event listeners
+
 transferirPabloBtn.addEventListener("click", transferCustomer);
 saldoPabloBtn.addEventListener("click", ejecutarPablo);
 pfPabloBtn.addEventListener("click", PF_P);
 transferirLauraBtn.addEventListener("click", transfLaura);
 saldoLauraBtn.addEventListener("click", ejecutarLaura);
 pfLauraBtn.addEventListener("click", PF_L);
-
+saldoClienteBtn.addEventListener("click", ejecutarCliente())
 //TRANSFERENCIAS
 function transferCustomer() {
     let inputCustomer = document.getElementById('input-customer').value;
@@ -204,6 +213,11 @@ function ejecutarLaura() {
     let miSaldo = document.getElementById('saldo-laura');
     saldoLaura = cuentaDeLaura.verSaldo();
     miSaldo.textContent = "Saldo de Laura: " + saldoLaura;
+}
+function ejecutarCliente() {
+    const saldoClienteP = document.getElementById('saldo-cliente-p')
+    let saldoCliente = exportedVariables.cuentaDeCliente.verSaldo()
+    saldoClienteP.textContent = "Saldo de Cliente: " + saldoCliente;
 }
 cuentaDePablo.depositoEnCuenta(5000);
 cuentaDeLaura.depositoEnCuenta(5000);

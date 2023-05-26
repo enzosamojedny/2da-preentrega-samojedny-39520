@@ -38,7 +38,8 @@ nav {
   margin-bottom: 50px;
   background-color: #dfdadab2;
 }
-.div-laura {
+.div-laura,
+.div-laurita {
   display: flex;
   flex-direction: column;
   justify-content: center;

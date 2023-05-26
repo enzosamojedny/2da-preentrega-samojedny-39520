@@ -1,8 +1,8 @@
 import { CuentaCorriente } from './classes.js';
 import { Cliente } from './classes.js';
 
+const cuentaCliente = document.getElementsByClassName('cuenta-cliente')//ERROR HERE AND IN TRANSFER.HTML / TRANSFER.JS
 
-const cuentaCliente = document.getElementById('cuenta-cliente')
 const inputClienteFinal = document.getElementById('input-cliente-final')
 
 export function userData() {
@@ -12,7 +12,7 @@ export function userData() {
     const dniUsuario = clienteTest.dniCliente
     const clienteUsuario = new Cliente(nombreCliente, dniUsuario)
     const cuentaDeCliente = new CuentaCorriente(clienteUsuario, "Starlight Financial", "Cuenta Única 212-23232/9", 10000)
-    cuentaCliente.textContent = cuentaDeCliente.saldo + "  " + nombreCliente
+    cuentaCliente.textContent = cuentaDeCliente.saldo + "  " + "Cliente" + " " + nombreCliente
     return { nombreCliente, dniUsuario, clienteUsuario, cuentaDeCliente };
 }
 function transfers() {
@@ -28,6 +28,5 @@ function transfers() {
         })
     }
 }
-
 transfers()
 window.addEventListener('click', transfers);
