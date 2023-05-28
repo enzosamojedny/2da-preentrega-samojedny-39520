@@ -23,8 +23,6 @@ let transferFunction = saldoClienteBtn.addEventListener('click', function () {
 })
 transferFunction
 
-
-
 transferButton.addEventListener('click', function () {
     function randomize() {
         const arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -67,55 +65,49 @@ transferButton.addEventListener('click', function () {
                         '',
                         'success'
                     )
-                    let div = document.createElement('div')
-                    div.id = 'resume';
-                    div.className = 'resume-container';
-                    let h2 = document.createElement('h2')
-                    h2.textContent = "Resumen de Transferencia"
-                    div.appendChild(h2)
-                    let pnumerotransaccion = document.createElement('p')
-                    pnumerotransaccion.textContent = "Destinatario: " + cliente1.nombreCliente
-                    div.appendChild(pnumerotransaccion)
-                    let p = document.createElement('p')
-                    p.className = 'p-js'
-                    p.textContent = "Origen: " + exportedVariables.clienteUsuario.nombreCliente
-                    div.appendChild(p)
-                    let ptimePablo = document.createElement('p')
-                    ptimePablo.textContent = "Fecha de transferencia: " + date;
-                    div.appendChild(ptimePablo)
-                    let pdestiny = document.createElement('p')
-                    pdestiny.textContent = "Número de operación: " + generatedPassword
-                    div.appendChild(pdestiny)
-                    let p3 = document.createElement('p')
-                    p3.textContent = "Banco " + cuentaDeLaura.banco
-                    div.appendChild(p3)
-                    let p4 = document.createElement('p')
-                    p4.textContent = "Cuenta " + cuentaDeLaura.numeroCuenta
-                    div.appendChild(p4)
-                    let p5 = document.createElement('p')
-                    p5.textContent = "DNI " + cliente1.dniCliente
-                    div.appendChild(p5)
-                    let p6 = document.createElement('p')
-                    div.appendChild(p6)
-                    document.body.appendChild(div)
-                    let p7 = document.querySelector('#resume p:last-child')
-                    p7.textContent = "Monto: $" + transferirCant;
-                    let resumeContainer = document.getElementById('resume');
-                    resumeContainer.style.display = 'block';
                 }
             });
-        } else {
-            Swal.fire({
-                icon: 'error',
-                title: 'Insufficient funds in your savings account',
-                text: '',
-            })
+            let div = document.createElement('div')
+            div.id = 'resume';
+            div.className = 'resume-container';
+            let h2 = document.createElement('h2')
+            h2.textContent = "Resumen de Transferencia"
+            div.appendChild(h2)
+            let pnumerotransaccion = document.createElement('p')
+            pnumerotransaccion.textContent = "Destinatario: " + cliente1.nombreCliente
+            div.appendChild(pnumerotransaccion)
+            let p = document.createElement('p')
+            p.className = 'p-js'
+            p.textContent = "Origen: " + exportedVariables.clienteUsuario.nombreCliente
+            div.appendChild(p)
+            let ptimePablo = document.createElement('p')
+            ptimePablo.textContent = "Fecha de transferencia: " + date;
+            div.appendChild(ptimePablo)
+            let pdestiny = document.createElement('p')
+            pdestiny.textContent = "Número de operación: " + generatedPassword
+            div.appendChild(pdestiny)
+            let p3 = document.createElement('p')
+            p3.textContent = "Banco " + cuentaDeLaura.banco
+            div.appendChild(p3)
+            let p4 = document.createElement('p')
+            p4.textContent = "Cuenta " + cuentaDeLaura.numeroCuenta
+            div.appendChild(p4)
+            let p5 = document.createElement('p')
+            p5.textContent = "DNI " + cliente1.dniCliente
+            div.appendChild(p5)
+            let p6 = document.createElement('p')
+            div.appendChild(p6)
+            document.body.appendChild(div)
+            let p7 = document.querySelector('#resume p:last-child')
+            p7.textContent = "Monto: $" + transferirCant;
+            let resumeContainer = document.getElementById('resume');
+            resumeContainer.style.display = 'block';
         }
     }
     function transfLaura() {
         let inputLaura = document.getElementById('input-cliente-final').value;
         let transferirCantidad = parseFloat(inputLaura);
-        if (transferirCantidad <= exportedVariables.cuentaDeCliente.verSaldo()) {
+        if (transferirCantidad <= exportedVariables.cuentaDeCliente.verSaldo()) {//why isnt this accepting the name of variable
             Swal.fire({
                 title: 'You will send $' + inputLaura + ' to ' + cliente2.nombreCliente,
                 text: "You won't be able to revert this!",
@@ -170,10 +162,16 @@ transferButton.addEventListener('click', function () {
                     resumeContainerLaura.style.display = 'block';
                 }
             })
+        } else if (transferirCantidad > exportedVariables.cuentaDeCliente.verSaldo()) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Insufficient funds in your account',
+                text: '',
+            })
         } else {
             Swal.fire({
                 icon: 'error',
-                title: 'Insufficient funds in your savings account',
+                title: 'Please enter numeric input',
                 text: '',
             })
         }
