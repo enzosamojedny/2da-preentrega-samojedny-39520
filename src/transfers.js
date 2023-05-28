@@ -7,9 +7,6 @@ const cliente1 = new Cliente("Pablo Lescano", "38.112.194");
 const cliente2 = new Cliente("Laura Gomez", "23.456.321");
 const cuentaDePablo = new CuentaCorriente(cliente1, "Santander", 0, "001");
 const cuentaDeLaura = new CuentaCorriente(cliente2, "Brubank", 0, "002");
-const pfCuentaCliente = new Cliente("Plazo Fijo", "#001");
-const cuentaDePlazoFijo = new CuentaCorriente(pfCuentaCliente, "Banco Santander", 0, "#0001");
-const plazoFijoClassCall = new Plazo_Fijo(0, 0, 0.85);
 const divTransferCheck = document.querySelector('.div-laurita')
 const h6DisplayData = document.querySelector('.cuenta-cliente')
 const mainSelect = document.getElementById('main-select')
@@ -23,7 +20,8 @@ function verElSaldo() {
     saldoClienteP.textContent = "Saldo: " + saldoCliente;
 }
 saldoClienteBtn.addEventListener('click', verElSaldo)
-mainSelect.addEventListener('change', function () {
+
+transferButton.addEventListener('click', function () {
     if (mainSelect.value === 'Pablo Lescano') {
         transferButton.id = 'transferir-pablo-btn'
         let transferCustomer1 = document.querySelector('#transferir-pablo-btn')
@@ -45,11 +43,10 @@ mainSelect.addEventListener('change', function () {
         }
         return password;
     } const generatedPassword = randomize();
-
     function transferCustomer() {
         let inputCustomer = document.getElementById('input-cliente-final').value;
-        let transferirCantidad = parseFloat(inputCustomer)
-        if (transferirCantidad <= exportedVariables.cuentaDeCliente.verSaldo()) {
+        let transferirCant = parseFloat(inputCustomer)
+        if (transferirCant <= exportedVariables.cuentaDeCliente.verSaldo()) {
             Swal.fire({
                 title: 'You are about to send $' + inputCustomer + ' to ' + cliente2.nombreCliente,
                 text: "You won't be able to revert this!",
@@ -60,7 +57,7 @@ mainSelect.addEventListener('change', function () {
                 confirmButtonText: 'Proceed with transfer'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    cuentaDePablo.transferencia(transferirCantidad, cuentaDeLaura);
+                    cuentaDePablo.transferencia(transferirCant, cuentaDeLaura);
                     Swal.fire(
                         'Transfer sent to recipient',
                         '',
@@ -98,7 +95,7 @@ mainSelect.addEventListener('change', function () {
                     div.appendChild(p6)
                     document.body.appendChild(div)
                     let p7 = document.querySelector('#resume p:last-child')
-                    p7.textContent = "Monto: $" + transferirCantidad;
+                    p7.textContent = "Monto: $" + transferirCant;
                     let resumeContainer = document.getElementById('resume');
                     resumeContainer.style.display = 'block';
                 }
@@ -110,9 +107,10 @@ mainSelect.addEventListener('change', function () {
                 text: '',
             })
         }
-    } function transfLaura() {
-        let inputCustomer = document.getElementById('input-cliente-final').value;
-        let transferirCantidad = parseFloat(inputCustomer);
+    }
+    function transfLaura() {
+        let inputLaura = document.getElementById('input-cliente-final').value;
+        let transferirCantidad = parseFloat(inputLaura);
         if (transferirCantidad <= exportedVariables.cuentaDeCliente.verSaldo()) {
             Swal.fire({
                 title: 'You will send $' + inputCustomer + ' to ' + cliente1.nombreCliente,
@@ -167,6 +165,7 @@ mainSelect.addEventListener('change', function () {
                     let resumeContainerLaura = document.getElementById('resumeLaura');
                     resumeContainerLaura.style.display = 'block';
                 }
+                exportedVariables.cuentaDeCliente.verSaldo()
             })
         } else {
             Swal.fire({
@@ -176,7 +175,17 @@ mainSelect.addEventListener('change', function () {
             })
         }
     }
+    transferCustomer()
+    transfLaura()
 })
+
+function transferDestiny() {
+    try {
+        transfLaura()
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 // function eliminarResumenTransferPablo() {
 //     setTimeout(function () {
