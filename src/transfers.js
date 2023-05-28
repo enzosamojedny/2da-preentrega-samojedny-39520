@@ -1,12 +1,13 @@
 import { CuentaCorriente, Cliente, Plazo_Fijo } from './classes.js';
 import { userData } from './transfer2.js';
 const exportedVariables = userData()
-
+let saldoCuenta = exportedVariables.cuentaDeCliente.verSaldo()
+let cuentaTransferenciaCliente = exportedVariables.cuentaDeCliente
 const date = moment().format('LLL');
 const cliente1 = new Cliente("Pablo Lescano", "38.112.194");
 const cliente2 = new Cliente("Laura Gomez", "23.456.321");
-const cuentaDePablo = new CuentaCorriente(cliente1, "Santander", 0, "001");
-const cuentaDeLaura = new CuentaCorriente(cliente2, "Brubank", 0, "002");
+const cuentaDePablo = new CuentaCorriente(cliente1, "Santander", "001", 0);
+const cuentaDeLaura = new CuentaCorriente(cliente2, "Brubank", "002", 0);
 const divTransferCheck = document.querySelector('.div-laurita')
 const h6DisplayData = document.querySelector('.cuenta-cliente')
 const mainSelect = document.getElementById('main-select')
@@ -14,23 +15,17 @@ const transferButton = document.querySelector('.transfer-button')
 const saldoClienteBtn = document.getElementById('saldo-cliente-btn')
 h6DisplayData.textContent = "Cuenta Cliente " + exportedVariables.nombreCliente
 
-function verElSaldo() {
+let transferFunction = saldoClienteBtn.addEventListener('click', function () {
+    //el saldo no se actualiza porque siempre retoma los 10000 de saldo 
     let saldoClienteP = document.getElementById('saldo-cliente-p')
     let saldoCliente = exportedVariables.cuentaDeCliente.verSaldo()
     saldoClienteP.textContent = "Saldo: " + saldoCliente;
-}
-saldoClienteBtn.addEventListener('click', verElSaldo)
+})
+transferFunction
+
+
 
 transferButton.addEventListener('click', function () {
-    if (mainSelect.value === 'Pablo Lescano') {
-        transferButton.id = 'transferir-pablo-btn'
-        let transferCustomer1 = document.querySelector('#transferir-pablo-btn')
-        transferCustomer1.addEventListener("click", transferCustomer);
-    } else if (mainSelect.value === 'Laura Gomez') {
-        transferButton.id = 'transferir-laura-btn'
-        let transferCustomer2 = document.querySelector('#transferir-laura-btn')
-        transferCustomer2.addEventListener("click", transfLaura);
-    }
     function randomize() {
         const arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
         const arrOp = [9, 8, 7, 6, 5, 4, 3, 2, 1];
@@ -42,13 +37,22 @@ transferButton.addEventListener('click', function () {
             password += randomNum;
         }
         return password;
-    } const generatedPassword = randomize();
+    } let generatedPassword = randomize();
+    if (mainSelect.value === 'Pablo Lescano') {
+        transferButton.id = 'transferir-pablo-btn'
+        let transferCustomer1 = document.querySelector('#transferir-pablo-btn')
+        transferCustomer1.addEventListener("click", transferCustomer);
+    } else if (mainSelect.value === 'Laura Gomez') {
+        transferButton.id = 'transferir-laura-btn'
+        let transferCustomer2 = document.querySelector('#transferir-laura-btn')
+        transferCustomer2.addEventListener("click", transfLaura);
+    }
     function transferCustomer() {
         let inputCustomer = document.getElementById('input-cliente-final').value;
         let transferirCant = parseFloat(inputCustomer)
-        if (transferirCant <= exportedVariables.cuentaDeCliente.verSaldo()) {
+        if (transferirCant <= saldoCuenta) {
             Swal.fire({
-                title: 'You are about to send $' + inputCustomer + ' to ' + cliente2.nombreCliente,
+                title: 'You are about to send $' + inputCustomer + ' to ' + cliente1.nombreCliente,
                 text: "You won't be able to revert this!",
                 icon: 'warning',
                 showCancelButton: true,
@@ -57,7 +61,7 @@ transferButton.addEventListener('click', function () {
                 confirmButtonText: 'Proceed with transfer'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    cuentaDePablo.transferencia(transferirCant, cuentaDeLaura);
+                    cuentaTransferenciaCliente.transferencia(transferirCant, cuentaDePablo);
                     Swal.fire(
                         'Transfer sent to recipient',
                         '',
@@ -70,11 +74,11 @@ transferButton.addEventListener('click', function () {
                     h2.textContent = "Resumen de Transferencia"
                     div.appendChild(h2)
                     let pnumerotransaccion = document.createElement('p')
-                    pnumerotransaccion.textContent = "Destinatario: " + cliente2.nombreCliente
+                    pnumerotransaccion.textContent = "Destinatario: " + cliente1.nombreCliente
                     div.appendChild(pnumerotransaccion)
                     let p = document.createElement('p')
                     p.className = 'p-js'
-                    p.textContent = "Origen: " + cliente1.nombreCliente
+                    p.textContent = "Origen: " + exportedVariables.clienteUsuario.nombreCliente
                     div.appendChild(p)
                     let ptimePablo = document.createElement('p')
                     ptimePablo.textContent = "Fecha de transferencia: " + date;
@@ -113,7 +117,7 @@ transferButton.addEventListener('click', function () {
         let transferirCantidad = parseFloat(inputLaura);
         if (transferirCantidad <= exportedVariables.cuentaDeCliente.verSaldo()) {
             Swal.fire({
-                title: 'You will send $' + inputCustomer + ' to ' + cliente1.nombreCliente,
+                title: 'You will send $' + inputLaura + ' to ' + cliente2.nombreCliente,
                 text: "You won't be able to revert this!",
                 icon: 'warning',
                 showCancelButton: true,
@@ -122,7 +126,7 @@ transferButton.addEventListener('click', function () {
                 confirmButtonText: 'Proceed with transfer'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    cuentaDeLaura.transferencia(transferirCantidad, cuentaDePablo);
+                    cuentaTransferenciaCliente.transferencia(transferirCantidad, cuentaDeLaura);
                     Swal.fire(
                         'Transfer sent to recipient',
                         '',
@@ -136,11 +140,11 @@ transferButton.addEventListener('click', function () {
                     h2Laura.textContent = "Resumen de Transferencia";
                     divLaura.appendChild(h2Laura);
                     let pnumerotransaccionlaura = document.createElement('p');
-                    pnumerotransaccionlaura.textContent = "Destinatario: " + cliente1.nombreCliente;
+                    pnumerotransaccionlaura.textContent = "Destinatario: " + cliente2.nombreCliente;
                     divLaura.appendChild(pnumerotransaccionlaura);
                     let pLaura = document.createElement('p');
                     pLaura.className = 'p-js-laura';
-                    pLaura.textContent = "Origen: " + cliente2.nombreCliente;
+                    pLaura.textContent = "Origen: " + exportedVariables.clienteUsuario.nombreCliente;
                     divLaura.appendChild(pLaura);
                     let ptime = document.createElement('p')
                     ptime.textContent = "Fecha de transferencia: " + date;
@@ -165,7 +169,6 @@ transferButton.addEventListener('click', function () {
                     let resumeContainerLaura = document.getElementById('resumeLaura');
                     resumeContainerLaura.style.display = 'block';
                 }
-                exportedVariables.cuentaDeCliente.verSaldo()
             })
         } else {
             Swal.fire({
@@ -179,13 +182,7 @@ transferButton.addEventListener('click', function () {
     transfLaura()
 })
 
-function transferDestiny() {
-    try {
-        transfLaura()
-    } catch (error) {
-        console.log(error)
-    }
-}
+
 
 // function eliminarResumenTransferPablo() {
 //     setTimeout(function () {
