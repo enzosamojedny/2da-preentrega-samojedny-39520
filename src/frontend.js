@@ -2,11 +2,16 @@ import { userData } from './transfer2.js';
 const exportedVariables = userData()
 
 export function moneyToUpdate() {
-    sessionStorage.setItem('money', exportedVariables.cuentaDeCliente.verSaldo())
+    let money = exportedVariables.cuentaDeCliente.verSaldo();
+    sessionStorage.setItem('money', money);
+    return money;
 }
+
+let check = parseFloat(sessionStorage.getItem('money'))
+
 export function updatedMoney() {
-    let updatedCash = sessionStorage.getItem('updatedAmount');
-    if (updatedCash === null || updatedCash === '' || isNaN(parseFloat(updatedCash))) {
+    let updatedCash = parseFloat(sessionStorage.getItem('updatedAmount'));
+    if (isNaN(updatedCash)) {
         let moneySession = moneyToUpdate();
         return moneySession;
     } else {
@@ -33,7 +38,12 @@ function tbE() {
         pCuenta.textContent = cuentaVisible.numeroCuenta
         saldoFrontend.appendChild(pCuenta)
         let psaldo = document.createElement('p')
-        psaldo.textContent = "$ " + updatedMoney()
+        let updatedMoneyValue = parseFloat(updatedMoney());
+        if (updatedMoneyValue === null || isNaN(updatedMoneyValue) || updatedMoneyValue === undefined) {
+            psaldo.textContent = "$ " + check
+        } else {
+            psaldo.textContent = "$ " + updatedMoneyValue
+        }
         saldoFrontend.appendChild(psaldo)
     } catch (error) {
     }
