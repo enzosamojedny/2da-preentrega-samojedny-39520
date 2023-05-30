@@ -20,21 +20,23 @@ function verElSaldo() {
 saldoClienteBtn.addEventListener('click', verElSaldo)
 
 mainSelect.addEventListener('change', function () {
-    console.log(mainSelect.value);
+    if (mainSelect.value === 'Pablo Lescano') {
+        transferButton.id = 'transferir-pablo-btn'
+    } else if (mainSelect.value === 'Laura Gomez') {
+        transferButton.id = 'transferir-laura-btn'
+    }
 });
 
 transferButton.addEventListener('click', function () {
-    if (mainSelect.value === 'Pablo Lescano') {
-        transferButton.id = 'transferir-pablo-btn'
-        let transferCustomer1 = document.querySelector('#transferir-pablo-btn')
-        transferCustomer1.addEventListener("click", transferCustomer);
-    } else if (mainSelect.value === 'Laura Gomez') {
-        transferButton.id = 'transferir-laura-btn'
-        let transferCustomer2 = document.querySelector('#transferir-laura-btn')
-        transferCustomer2.addEventListener("click", transfLaura);
+    if (transferButton.id == 'transferir-pablo-btn') {
+        transferCustomer()
+    } else if (transferButton.id == 'transferir-laura-btn') {
+        transfLaura()
     } else {
         console.log("error here")
+        return;
     }
+
     function randomize() {
         const arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
         const arrOp = [9, 8, 7, 6, 5, 4, 3, 2, 1];
@@ -47,12 +49,13 @@ transferButton.addEventListener('click', function () {
         }
         return password;
     } const generatedPassword = randomize();
+
     function transferCustomer() {
         let inputCustomer = document.getElementById('input-cliente-final').value;
         let transferirCant = parseFloat(inputCustomer)
         if (transferirCant <= exportedVariables.cuentaDeCliente.verSaldo()) {
             Swal.fire({
-                title: 'You are about to send $' + inputCustomer + ' to ' + cliente2.nombreCliente,
+                title: 'You are about to send $' + inputCustomer + ' to ' + cliente1.nombreCliente,
                 text: "You won't be able to revert this!",
                 icon: 'warning',
                 showCancelButton: true,
@@ -61,13 +64,13 @@ transferButton.addEventListener('click', function () {
                 confirmButtonText: 'Proceed with transfer'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    cuentaDePablo.transferencia(transferirCant, cuentaDeLaura);
+                    exportedVariables.cuentaDeCliente.transferencia(transferirCant, cuentaDePablo);
                     Swal.fire(
                         'Transfer sent to recipient',
                         '',
                         'success'
                     )
-                    //PROBLEM NOT HERE//PROBLEM NOT HERE//PROBLEM NOT HERE//PROBLEM NOT HERE
+
                     let div = document.createElement('div')
                     div.id = 'resume';
                     div.className = 'resume-container';
@@ -75,7 +78,7 @@ transferButton.addEventListener('click', function () {
                     h2.textContent = "Resumen de Transferencia"
                     div.appendChild(h2)
                     let pnumerotransaccion = document.createElement('p')
-                    pnumerotransaccion.textContent = "Destinatario: " + cliente2.nombreCliente
+                    pnumerotransaccion.textContent = "Destinatario: " + cliente1.nombreCliente
                     div.appendChild(pnumerotransaccion)
                     let p = document.createElement('p')
                     p.className = 'p-js'
@@ -105,7 +108,7 @@ transferButton.addEventListener('click', function () {
                     resumeContainer.style.display = 'block';
                 }
             });
-        } else {//PROBLEM NOT HERE
+        } else {
             Swal.fire({
                 icon: 'error',
                 title: 'Insufficient funds in your savings account',
@@ -118,7 +121,7 @@ transferButton.addEventListener('click', function () {
         let transferirCantidad = parseFloat(inputLaura);
         if (transferirCantidad <= exportedVariables.cuentaDeCliente.verSaldo()) {
             Swal.fire({
-                title: 'You will send $' + inputLaura + ' to ' + cliente1.nombreCliente,
+                title: 'You will send $' + inputLaura + ' to ' + cliente2.nombreCliente,
                 text: "You won't be able to revert this!",
                 icon: 'warning',
                 showCancelButton: true,
@@ -127,13 +130,13 @@ transferButton.addEventListener('click', function () {
                 confirmButtonText: 'Proceed with transfer'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    cuentaDeLaura.transferencia(transferirCantidad, cuentaDePablo);
+                    exportedVariables.cuentaDeCliente.transferencia(transferirCantidad, cuentaDeLaura);
                     Swal.fire(
                         'Transfer sent to recipient',
                         '',
                         'success'
                     )
-                    //PROBLEM NOT HERE//PROBLEM NOT HERE//PROBLEM NOT HERE//PROBLEM NOT HERE
+
                     let divLaura = document.createElement('div');
                     divLaura.id = 'resumeLaura';
                     divLaura.className = 'resume-container';
@@ -141,7 +144,7 @@ transferButton.addEventListener('click', function () {
                     h2Laura.textContent = "Resumen de Transferencia";
                     divLaura.appendChild(h2Laura);
                     let pnumerotransaccionlaura = document.createElement('p');
-                    pnumerotransaccionlaura.textContent = "Destinatario: " + cliente1.nombreCliente;
+                    pnumerotransaccionlaura.textContent = "Destinatario: " + cliente2.nombreCliente;
                     divLaura.appendChild(pnumerotransaccionlaura);
                     let pLaura = document.createElement('p');
                     pLaura.className = 'p-js-laura';
@@ -172,7 +175,7 @@ transferButton.addEventListener('click', function () {
                 }
                 exportedVariables.cuentaDeCliente.verSaldo()
             })
-        } else {//PROBLEM NOT HERE
+        } else {
             Swal.fire({
                 icon: 'error',
                 title: 'Insufficient funds in your savings account',
