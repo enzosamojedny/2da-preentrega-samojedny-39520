@@ -4,8 +4,8 @@ const exportedVariables = userData()
 const date = moment().format('LLL');
 const cliente1 = new Cliente("Pablo Lescano", "38.112.194");
 const cliente2 = new Cliente("Laura Gomez", "23.456.321");
-const cuentaDePablo = new CuentaCorriente(cliente1, "Santander", 0, "001");
-const cuentaDeLaura = new CuentaCorriente(cliente2, "Brubank", 0, "002");
+const cuentaDePablo = new CuentaCorriente(cliente1, "Santander", "001");
+const cuentaDeLaura = new CuentaCorriente(cliente2, "Brubank", "002");
 const h6DisplayData = document.querySelector('.cuenta-cliente')
 let mainSelect = document.querySelector('select');
 const transferButton = document.querySelector('.transfer-button')
@@ -33,8 +33,11 @@ transferButton.addEventListener('click', function () {
     } else if (transferButton.id == 'transferir-laura-btn') {
         transfLaura()
     } else {
-        console.log("error here")
-        return;
+        Swal.fire({
+            icon: 'error',
+            title: 'Please select a valid recipient',
+            text: '',
+        })
     }
 
     function randomize() {
@@ -48,7 +51,7 @@ transferButton.addEventListener('click', function () {
             password += randomNum;
         }
         return password;
-    } const generatedPassword = randomize();
+    } let generatedPassword = randomize();
 
     function transferCustomer() {
         let inputCustomer = document.getElementById('input-cliente-final').value;
@@ -90,10 +93,10 @@ transferButton.addEventListener('click', function () {
                     pdestiny.textContent = "Número de operación: " + generatedPassword
                     div.appendChild(pdestiny)
                     let p3 = document.createElement('p')
-                    p3.textContent = "Banco " + cuentaDeLaura.banco
+                    p3.textContent = "Banco " + cuentaDePablo.banco
                     div.appendChild(p3)
                     let p4 = document.createElement('p')
-                    p4.textContent = "Cuenta " + cuentaDeLaura.numeroCuenta
+                    p4.textContent = "Cuenta " + cuentaDePablo.numeroCuenta
                     div.appendChild(p4)
                     let p5 = document.createElement('p')
                     p5.textContent = "DNI " + cliente1.dniCliente
@@ -107,10 +110,16 @@ transferButton.addEventListener('click', function () {
                     resumeContainer.style.display = 'block';
                 }
             });
-        } else {
+        } else if (transferirCant > exportedVariables.cuentaDeCliente.verSaldo()) {
             Swal.fire({
                 icon: 'error',
                 title: 'Insufficient funds in your savings account',
+                text: '',
+            })
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Please insert a numeric value',
                 text: '',
             })
         }
@@ -173,10 +182,16 @@ transferButton.addEventListener('click', function () {
                 }
                 exportedVariables.cuentaDeCliente.verSaldo()
             })
-        } else {
+        } else if (transfLaura > exportedVariables.cuentaDeCliente.verSaldo()) {
             Swal.fire({
                 icon: 'error',
                 title: 'Insufficient funds in your savings account',
+                text: '',
+            })
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Please insert a numeric value',
                 text: '',
             })
         }
