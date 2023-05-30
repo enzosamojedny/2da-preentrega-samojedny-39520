@@ -70,7 +70,6 @@ transferButton.addEventListener('click', function () {
                         '',
                         'success'
                     )
-
                     let div = document.createElement('div')
                     div.id = 'resume';
                     div.className = 'resume-container';
@@ -136,7 +135,6 @@ transferButton.addEventListener('click', function () {
                         '',
                         'success'
                     )
-
                     let divLaura = document.createElement('div');
                     divLaura.id = 'resumeLaura';
                     divLaura.className = 'resume-container';
@@ -183,6 +181,4 @@ transferButton.addEventListener('click', function () {
             })
         }
     }
-    transferCustomer()
-    transfLaura()
 })
