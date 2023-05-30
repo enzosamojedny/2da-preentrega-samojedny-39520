@@ -1,5 +1,6 @@
-import { CuentaCorriente, Cliente, Plazo_Fijo } from './classes.js';
+import { CuentaCorriente, Cliente } from './classes.js';
 import { userData } from './transfer2.js';
+import { updatedMoney } from './frontend.js';
 const exportedVariables = userData()
 const date = moment().format('LLL');
 const cliente1 = new Cliente("Pablo Lescano", "38.112.194");
@@ -10,12 +11,13 @@ const h6DisplayData = document.querySelector('.cuenta-cliente')
 let mainSelect = document.querySelector('select');
 const transferButton = document.querySelector('.transfer-button')
 const saldoClienteBtn = document.getElementById('saldo-cliente-btn')
+let saldoImportado = updatedMoney()
 
 h6DisplayData.textContent = "Cuenta Cliente " + exportedVariables.nombreCliente
 function verElSaldo() {
     let saldoClienteP = document.getElementById('saldo-cliente-p')
     let saldoCliente = exportedVariables.cuentaDeCliente.verSaldo()
-    saldoClienteP.textContent = "Saldo: " + saldoCliente;
+    saldoClienteP.textContent = "Saldo: " + saldoImportado;
 }
 saldoClienteBtn.addEventListener('click', verElSaldo)
 
@@ -26,7 +28,6 @@ mainSelect.addEventListener('change', function () {
         transferButton.id = 'transferir-laura-btn'
     }
 });
-
 transferButton.addEventListener('click', function () {
     if (transferButton.id == 'transferir-pablo-btn') {
         transferCustomer()
@@ -39,7 +40,6 @@ transferButton.addEventListener('click', function () {
             text: '',
         })
     }
-
     function randomize() {
         const arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
         const arrOp = [9, 8, 7, 6, 5, 4, 3, 2, 1];
@@ -56,7 +56,7 @@ transferButton.addEventListener('click', function () {
     function transferCustomer() {
         let inputCustomer = document.getElementById('input-cliente-final').value;
         let transferirCant = parseFloat(inputCustomer)
-        if (transferirCant <= exportedVariables.cuentaDeCliente.verSaldo()) {
+        if (transferirCant <= saldoImportado) {
             Swal.fire({
                 title: 'You are about to send $' + inputCustomer + ' to ' + cliente1.nombreCliente,
                 text: "You won't be able to revert this!",
@@ -73,6 +73,7 @@ transferButton.addEventListener('click', function () {
                         '',
                         'success'
                     )
+                    sessionStorage.setItem('updatedAmount', exportedVariables.cuentaDeCliente.verSaldo());
                     let div = document.createElement('div')
                     div.id = 'resume';
                     div.className = 'resume-container';
@@ -110,7 +111,7 @@ transferButton.addEventListener('click', function () {
                     resumeContainer.style.display = 'block';
                 }
             });
-        } else if (transferirCant > exportedVariables.cuentaDeCliente.verSaldo()) {
+        } else if (transferirCant > saldoImportado) {
             Swal.fire({
                 icon: 'error',
                 title: 'Insufficient funds in your savings account',
@@ -127,7 +128,7 @@ transferButton.addEventListener('click', function () {
     function transfLaura() {
         let inputLaura = document.getElementById('input-cliente-final').value;
         let transferirCantidad = parseFloat(inputLaura);
-        if (transferirCantidad <= exportedVariables.cuentaDeCliente.verSaldo()) {
+        if (transferirCantidad <= saldoImportado) {
             Swal.fire({
                 title: 'You will send $' + inputLaura + ' to ' + cliente2.nombreCliente,
                 text: "You won't be able to revert this!",
@@ -144,6 +145,7 @@ transferButton.addEventListener('click', function () {
                         '',
                         'success'
                     )
+                    sessionStorage.setItem('updatedAmount', exportedVariables.cuentaDeCliente.verSaldo());
                     let divLaura = document.createElement('div');
                     divLaura.id = 'resumeLaura';
                     divLaura.className = 'resume-container';
@@ -180,9 +182,8 @@ transferButton.addEventListener('click', function () {
                     let resumeContainerLaura = document.getElementById('resumeLaura');
                     resumeContainerLaura.style.display = 'block';
                 }
-                exportedVariables.cuentaDeCliente.verSaldo()
             })
-        } else if (transfLaura > exportedVariables.cuentaDeCliente.verSaldo()) {
+        } else if (transfLaura > saldoImportado) {
             Swal.fire({
                 icon: 'error',
                 title: 'Insufficient funds in your savings account',

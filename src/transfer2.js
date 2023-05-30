@@ -1,9 +1,7 @@
 import { CuentaCorriente } from './classes.js';
 import { Cliente } from './classes.js';
 
-const cuentaCliente = document.getElementsByClassName('cuenta-cliente')//ERROR HERE AND IN TRANSFER.HTML / TRANSFER.JS
-
-const inputClienteFinal = document.getElementById('input-cliente-final')
+const cuentaCliente = document.getElementsByClassName('cuenta-cliente')
 
 export function userData() {
     const clienteTestJSON = sessionStorage.getItem('clienteTest');
@@ -15,6 +13,7 @@ export function userData() {
     cuentaCliente.textContent = cuentaDeCliente.saldo + "  " + "Cliente" + " " + nombreCliente
     return { nombreCliente, dniUsuario, clienteUsuario, cuentaDeCliente };
 }
+
 function transfers() {
     try {
         userData()
