@@ -56,8 +56,8 @@ transferButton.addEventListener('click', function () {
 
     function transferCustomer() {
         let inputCustomer = document.getElementById('input-cliente-final').value;
-        let transferirCant = parseFloat(inputCustomer)
-        if (transferirCant <= saldoImportado) {
+        let transferirCant = inputCustomer
+        if (transferirCant <= saldoImportado && transferirCant > 0) {
             Swal.fire({
                 title: 'You are about to send $' + inputCustomer + ' to ' + cliente1.nombreCliente,
                 text: "You won't be able to revert this!",
@@ -79,7 +79,6 @@ transferButton.addEventListener('click', function () {
                     } else {
                         sessionStorage.setItem('updatedAmount', exportedVariables.cuentaDeCliente.verSaldo());
                     }
-
                     let div = document.createElement('div')
                     div.id = 'resume';
                     div.className = 'resume-container';
@@ -125,16 +124,16 @@ transferButton.addEventListener('click', function () {
             })
         } else {
             Swal.fire({
-                icon: 'error',
-                title: 'Please insert a numeric value',
-                text: '',
+                icon: 'warning',
+                title: 'The value to transfer is not correct. ',
+                text: 'Remember to insert only numeric values',
             })
         }
     }
     function transfLaura() {
         let inputLaura = document.getElementById('input-cliente-final').value;
-        let transferirCantidad = parseFloat(inputLaura);
-        if (transferirCantidad <= saldoImportado) {
+        let transferirCantidad = inputLaura;
+        if (transferirCantidad <= saldoImportado && transferirCantidad > 0) {
             Swal.fire({
                 title: 'You will send $' + inputLaura + ' to ' + cliente2.nombreCliente,
                 text: "You won't be able to revert this!",
@@ -201,9 +200,9 @@ transferButton.addEventListener('click', function () {
             })
         } else {
             Swal.fire({
-                icon: 'error',
-                title: 'Please insert a numeric value',
-                text: '',
+                icon: 'warning',
+                title: 'The value to transfer is not correct. ',
+                text: 'Remember to insert only numeric values',
             })
         }
     }
