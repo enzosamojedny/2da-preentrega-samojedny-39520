@@ -14,12 +14,13 @@ const saldoClienteBtn = document.getElementById('saldo-cliente-btn')
 let saldoImportado = updatedMoney()
 
 h6DisplayData.textContent = "Cuenta Cliente " + exportedVariables.nombreCliente
-function verElSaldo() {
+
+saldoClienteBtn.addEventListener('click', function () {
     let saldoClienteP = document.getElementById('saldo-cliente-p')
-    let saldoCliente = exportedVariables.cuentaDeCliente.verSaldo()
-    saldoClienteP.textContent = "Saldo: " + saldoImportado;
-}
-saldoClienteBtn.addEventListener('click', verElSaldo)
+    let saldoActualizado = updatedMoney()
+    saldoClienteP.textContent = "Saldo: " + saldoActualizado;
+    return;
+})
 
 mainSelect.addEventListener('change', function () {
     if (mainSelect.value === 'Pablo Lescano') {
@@ -73,7 +74,12 @@ transferButton.addEventListener('click', function () {
                         '',
                         'success'
                     )
-                    sessionStorage.setItem('updatedAmount', exportedVariables.cuentaDeCliente.verSaldo());
+                    if (sessionStorage.getItem('updatedAmount') == true) {
+                        return sessionStorage.getItem('updatedAmount');
+                    } else {
+                        sessionStorage.setItem('updatedAmount', exportedVariables.cuentaDeCliente.verSaldo());
+                    }
+
                     let div = document.createElement('div')
                     div.id = 'resume';
                     div.className = 'resume-container';
@@ -145,7 +151,11 @@ transferButton.addEventListener('click', function () {
                         '',
                         'success'
                     )
-                    sessionStorage.setItem('updatedAmount', exportedVariables.cuentaDeCliente.verSaldo());
+                    if (sessionStorage.getItem('updatedAmount') == true) {
+                        return sessionStorage.getItem('updatedAmount');
+                    } else {
+                        sessionStorage.setItem('updatedAmount', exportedVariables.cuentaDeCliente.verSaldo());
+                    }
                     let divLaura = document.createElement('div');
                     divLaura.id = 'resumeLaura';
                     divLaura.className = 'resume-container';
