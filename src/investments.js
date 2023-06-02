@@ -3,6 +3,7 @@ const urlMSFT = 'https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY_A
 const urlGOOGL = 'https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY_ADJUSTED&symbol=GOOGL&apikey=0Y9J544VII9BYP7K';
 const urlNVDA = 'https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY_ADJUSTED&symbol=NVDA&apikey=0Y9J544VII9BYP7K';
 const urlWMT = 'https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY_ADJUSTED&symbol=WMT&apikey=0Y9J544VII9BYP7K';
+
 fetch(urlIBM)
     .then((response) => {
         if (!response.ok) {
@@ -155,23 +156,28 @@ const msft_sell_button = document.getElementById('sell-msft')
 const googl_sell_button = document.getElementById('sell-googl')
 const nvda_sell_button = document.getElementById('sell-nvda')
 const wmt_sell_button = document.getElementById('sell-wmt')
-const ibm_Data = sessionStorage.getItem('ibm-data')
-const msft_Data = sessionStorage.getItem('msft-data')
-const nvda_Data = sessionStorage.getItem('nvda-data')
-const wmt_Data = sessionStorage.getItem('wmt-data')
-const googl_Data = sessionStorage.getItem('googl-data')
+const ibmData = sessionStorage.getItem('ibm-data')
+const msftData = sessionStorage.getItem('msft-data')
+const nvdaData = sessionStorage.getItem('nvda-data')
+const wmtData = sessionStorage.getItem('wmt-data')
+const googlData = sessionStorage.getItem('googl-data')
 
 ibm_buy_button.addEventListener('click', function () {
     Swal.fire({
-        title: "You are about to buy IBM in $" + ibm_Data,
+        title: "You are about to buy IBM in $" + ibmData,//the first time it's entered, it returns null
         text: "Insert quantity of stock below",
         input: 'text',
+        inputAttributes: {
+            id: 'ibm-quantity'
+        },
         showCancelButton: true
     }).then((result) => {
         if (result.value) {
+            let ibmQuantity = document.getElementById('ibm-quantity').value
+            let ibmValue = parseInt(ibmQuantity) * ibmData
             Swal.fire({
                 icon: 'success',
-                title: 'You have bought x IBM stock in $' + ibm_Data,
+                title: 'You have bought ' + ibmQuantity + 'IBM stock in $' + ibmData + 'for a total of $' + ibmValue,
                 text: '',
             })
         } else {
@@ -185,7 +191,7 @@ ibm_buy_button.addEventListener('click', function () {
 })
 msft_buy_button.addEventListener('click', function () {
     Swal.fire({
-        title: "You are about to buy MSFT in $" + msft_Data,
+        title: "You are about to buy MSFT in $" + msftData,
         text: "Insert quantity of stock below",
         input: 'text',
         showCancelButton: true
@@ -193,7 +199,7 @@ msft_buy_button.addEventListener('click', function () {
         if (result.value) {
             Swal.fire({
                 icon: 'success',
-                title: 'You have bought x MSFT stock in $' + msft_Data,
+                title: 'You have bought MSFT stock in $' + msftData,
                 text: '',
             })
         } else {
@@ -207,7 +213,7 @@ msft_buy_button.addEventListener('click', function () {
 })
 googl_buy_button.addEventListener('click', function () {
     Swal.fire({
-        title: "You are about to buy GOOGL in $" + googl_Data,
+        title: "You are about to buy GOOGL in $" + googlData,
         text: "Insert quantity of stock below",
         input: 'text',
         showCancelButton: true
@@ -215,7 +221,7 @@ googl_buy_button.addEventListener('click', function () {
         if (result.value) {
             Swal.fire({
                 icon: 'success',
-                title: 'You have bought x GOOGL stock in $' + googl_Data,
+                title: 'You have bought GOOGL stock in $' + googlData,
                 text: '',
             })
         } else {
@@ -229,7 +235,7 @@ googl_buy_button.addEventListener('click', function () {
 })
 wmt_buy_button.addEventListener('click', function () {
     Swal.fire({
-        title: "You are about to buy WMT in $" + wmt_Data,
+        title: "You are about to buy WMT in $" + wmtData,
         text: "Insert quantity of stock below",
         input: 'text',
         showCancelButton: true
@@ -237,7 +243,7 @@ wmt_buy_button.addEventListener('click', function () {
         if (result.value) {
             Swal.fire({
                 icon: 'success',
-                title: 'You have bought x WMT stock in $' + wmt_Data,
+                title: 'You have bought WMT stock in $' + wmtData,
                 text: '',
             })
         } else {
@@ -251,7 +257,7 @@ wmt_buy_button.addEventListener('click', function () {
 })
 nvda_buy_button.addEventListener('click', function () {
     Swal.fire({
-        title: "You are about to buy NVDA in $" + nvda_Data,
+        title: "You are about to buy NVDA in $" + nvdaData,
         text: "Insert quantity of stock below",
         input: 'text',
         showCancelButton: true
@@ -259,7 +265,7 @@ nvda_buy_button.addEventListener('click', function () {
         if (result.value) {
             Swal.fire({
                 icon: 'success',
-                title: 'You have bought x NVDA stock in $' + nvda_Data,
+                title: 'You have bought NVDA stock in $' + nvdaData,
                 text: '',
             })
         } else {
@@ -272,8 +278,9 @@ nvda_buy_button.addEventListener('click', function () {
     });
 })
 ibm_sell_button.addEventListener('click', function () {
+
     Swal.fire({
-        title: "You are about to sell IBM in $" + ibm_Data,
+        title: "You are about to sell IBM in $" + ibmData,
         text: "Insert quantity of stock below",
         input: 'text',
         showCancelButton: true
@@ -281,7 +288,7 @@ ibm_sell_button.addEventListener('click', function () {
         if (result.value) {
             Swal.fire({
                 icon: 'success',
-                title: 'You have sold x IBM stock in $' + ibm_Data,
+                title: 'You have sold IBM stock in $' + ibmData,
                 text: '',
             })
         } else {
@@ -295,7 +302,7 @@ ibm_sell_button.addEventListener('click', function () {
 })
 msft_sell_button.addEventListener('click', function () {
     Swal.fire({
-        title: "You are about to sell MSFT in $" + msft_Data,
+        title: "You are about to sell MSFT in $" + msftData,
         text: "Insert quantity of stock below",
         input: 'text',
         showCancelButton: true
@@ -303,7 +310,7 @@ msft_sell_button.addEventListener('click', function () {
         if (result.value) {
             Swal.fire({
                 icon: 'success',
-                title: 'You have sold x MSFT stock in $' + msft_Data,
+                title: 'You have sold MSFT stock in $' + msftData,
                 text: '',
             })
         } else {
@@ -317,7 +324,7 @@ msft_sell_button.addEventListener('click', function () {
 })
 googl_sell_button.addEventListener('click', function () {
     Swal.fire({
-        title: "You are about to sell GOOGL in $" + googl_Data,
+        title: "You are about to sell GOOGL in $" + googlData,
         text: "Insert quantity of stock below",
         input: 'text',
         showCancelButton: true
@@ -325,7 +332,7 @@ googl_sell_button.addEventListener('click', function () {
         if (result.value) {
             Swal.fire({
                 icon: 'success',
-                title: 'You have sold x GOOGL stock in $' + googl_Data,
+                title: 'You have sold GOOGL stock in $' + googlData,
                 text: '',
             })
         } else {
@@ -339,7 +346,7 @@ googl_sell_button.addEventListener('click', function () {
 })
 wmt_sell_button.addEventListener('click', function () {
     Swal.fire({
-        title: "You are about to sell WMT in $" + wmt_Data,
+        title: "You are about to sell WMT in $" + wmtData,
         text: "Insert quantity of stock below",
         input: 'text',
         showCancelButton: true
@@ -347,7 +354,7 @@ wmt_sell_button.addEventListener('click', function () {
         if (result.value) {
             Swal.fire({
                 icon: 'success',
-                title: 'You have sold x WMT stock in $' + wmt_Data,
+                title: 'You have sold WMT stock in $' + wmtData,
                 text: '',
             })
         } else {
@@ -361,7 +368,7 @@ wmt_sell_button.addEventListener('click', function () {
 })
 nvda_sell_button.addEventListener('click', function () {
     Swal.fire({
-        title: "You are about to sell NVDA in $" + nvda_Data,
+        title: "You are about to sell NVDA in $" + nvdaData,
         text: "Insert quantity of stock below",
         input: 'text',
         showCancelButton: true
@@ -369,7 +376,7 @@ nvda_sell_button.addEventListener('click', function () {
         if (result.value) {
             Swal.fire({
                 icon: 'success',
-                title: 'You have sold x NVDA stock in $' + nvda_Data,
+                title: 'You have sold NVDA stock in $' + nvdaData,
                 text: '',
             })
         } else {
