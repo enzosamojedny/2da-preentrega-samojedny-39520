@@ -174,10 +174,10 @@ ibm_buy_button.addEventListener('click', function () {
     }).then((result) => {
         if (result.value) {
             let ibmQuantity = document.getElementById('ibm-quantity').value
-            let ibmValue = parseInt(ibmQuantity) * ibmData
+            let ibmValue = parseInt(ibmQuantity) * parseInt(ibmData)
             Swal.fire({
                 icon: 'success',
-                title: 'You have bought ' + ibmQuantity + 'IBM stock in $' + ibmData + 'for a total of $' + ibmValue,
+                title: ibmQuantity + ' IBM class "A" shares bought in $' + ibmData + 'for a total of $' + ibmValue,
                 text: '',
             })
         } else {
@@ -191,15 +191,20 @@ ibm_buy_button.addEventListener('click', function () {
 })
 msft_buy_button.addEventListener('click', function () {
     Swal.fire({
-        title: "You are about to buy MSFT in $" + msftData,
+        title: "You are about to buy MSFT in $" + msftData,//the first time it's entered, it returns null
         text: "Insert quantity of stock below",
         input: 'text',
+        inputAttributes: {
+            id: 'msft-quantity'
+        },
         showCancelButton: true
     }).then((result) => {
         if (result.value) {
+            let msftQuantity = document.getElementById('msft-quantity').value
+            let msftValue = parseInt(msftQuantity) * parseInt(msftData)
             Swal.fire({
                 icon: 'success',
-                title: 'You have bought MSFT stock in $' + msftData,
+                title: msftQuantity + ' IBM class "A" share(s) bought in $' + msftData + ' for a total of $' + msftValue,
                 text: '',
             })
         } else {
@@ -216,12 +221,17 @@ googl_buy_button.addEventListener('click', function () {
         title: "You are about to buy GOOGL in $" + googlData,
         text: "Insert quantity of stock below",
         input: 'text',
+        inputAttributes: {
+            id: 'googl-quantity'
+        },
         showCancelButton: true
     }).then((result) => {
         if (result.value) {
+            let googlQuantity = document.getElementById('googl-quantity').value
+            let googlValue = parseInt(googlQuantity) * parseInt(googlData)
             Swal.fire({
                 icon: 'success',
-                title: 'You have bought GOOGL stock in $' + googlData,
+                title: googlQuantity + ' GOOGL class "A" share(s) bought in $' + googlData + ' for a total of $' + googlValue,
                 text: '',
             })
         } else {
@@ -238,13 +248,18 @@ wmt_buy_button.addEventListener('click', function () {
         title: "You are about to buy WMT in $" + wmtData,
         text: "Insert quantity of stock below",
         input: 'text',
+        inputAttributes: {
+            id: 'wmt-quantity'
+        },
         showCancelButton: true
     }).then((result) => {
         if (result.value) {
+            let wmtQuantity = document.getElementById('wmt-quantity').value
+            let wmtValue = parseInt(wmtQuantity) * parseInt(wmtData)
             Swal.fire({
                 icon: 'success',
                 title: 'You have bought WMT stock in $' + wmtData,
-                text: '',
+                title: wmtQuantity + ' WMT class "A" share(s) bought in $' + wmtData + ' for a total of $' + wmtValue,
             })
         } else {
             Swal.fire({
@@ -260,12 +275,17 @@ nvda_buy_button.addEventListener('click', function () {
         title: "You are about to buy NVDA in $" + nvdaData,
         text: "Insert quantity of stock below",
         input: 'text',
+        inputAttributes: {
+            id: 'nvda-quantity'
+        },
         showCancelButton: true
     }).then((result) => {
         if (result.value) {
+            let nvdaQuantity = document.getElementById('nvda-quantity').value
+            let nvdaValue = parseInt(nvdaQuantity) * parseInt(nvdaData)
             Swal.fire({
                 icon: 'success',
-                title: 'You have bought NVDA stock in $' + nvdaData,
+                title: nvdaQuantity + ' NVDA class "A" share(s) bought in $' + nvdaData + ' for a total of $' + nvdaValue,
                 text: '',
             })
         } else {
