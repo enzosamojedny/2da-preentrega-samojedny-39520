@@ -3,12 +3,6 @@ const urlMSFT = 'https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY_A
 const urlGOOGL = 'https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY_ADJUSTED&symbol=GOOGL&apikey=0Y9J544VII9BYP7K';
 const urlNVDA = 'https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY_ADJUSTED&symbol=NVDA&apikey=0Y9J544VII9BYP7K';
 const urlWMT = 'https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY_ADJUSTED&symbol=WMT&apikey=0Y9J544VII9BYP7K';
-console.log(urlIBM);
-console.log(urlMSFT);
-console.log(urlGOOGL);
-console.log(urlNVDA);
-console.log(urlWMT);
-
 fetch(urlIBM)
     .then((response) => {
         if (!response.ok) {
@@ -23,6 +17,7 @@ fetch(urlIBM)
         const lastOpen = timeSeries[lastDate]['1. open'];
         const lastVolume = timeSeries[lastDate]['6. volume'];
         const lastPrice = timeSeries[lastDate]['5. adjusted close'];
+        let ibmData = sessionStorage.setItem('ibm-data', lastPrice)
         //IBM
         const IBMID = document.getElementById('IBM-OPEN')
         let IBMp = document.createElement('p')
@@ -31,7 +26,11 @@ fetch(urlIBM)
         IBMID.appendChild(IBMp)
     }).catch((error) => {
         console.log(error)
-        showLoading()
+        const IBMID = document.getElementById('IBM-OPEN')
+        let IBMp = document.createElement('p')
+        IBMp.className = 'IBMp-JS'
+        IBMp.textContent = sessionStorage.getItem('ibm-data')
+        IBMID.appendChild(IBMp)
     })
 fetch(urlMSFT)
     .then((response) => {
@@ -46,6 +45,7 @@ fetch(urlMSFT)
         const lastOpen = timeSeries[lastDate]['1. open'];
         const lastVolume = timeSeries[lastDate]['6. volume'];
         const lastPrice = timeSeries[lastDate]['5. adjusted close'];
+        let msftData = sessionStorage.setItem('msft-data', lastPrice)
         //MSFT
         const MSFTID = document.getElementById('MSFT-OPEN')
         let MSFTp = document.createElement('p')
@@ -54,7 +54,11 @@ fetch(urlMSFT)
         MSFTID.appendChild(MSFTp)
     }).catch((error) => {
         console.log(error)
-        showLoading()
+        const MSFTID = document.getElementById('MSFT-OPEN')
+        let MSFTp = document.createElement('p')
+        MSFTp.className = 'MSFTp-JS'
+        MSFTp.textContent = sessionStorage.getItem('msft-data')
+        MSFTID.appendChild(MSFTp)
     })
 fetch(urlGOOGL)
     .then((response) => {
@@ -69,6 +73,7 @@ fetch(urlGOOGL)
         const lastOpen = timeSeries[lastDate]['1. open'];
         const lastVolume = timeSeries[lastDate]['6. volume'];
         const lastPrice = timeSeries[lastDate]['5. adjusted close'];
+        let googlData = sessionStorage.setItem('googl-data', lastPrice)
         //GOOGL
         const GOOGLID = document.getElementById('GOOGL-OPEN')
         let GOOGLp = document.createElement('p')
@@ -77,7 +82,11 @@ fetch(urlGOOGL)
         GOOGLID.appendChild(GOOGLp)
     }).catch((error) => {
         console.log(error)
-        showLoading()
+        const GOOGLID = document.getElementById('GOOGL-OPEN')
+        let GOOGLp = document.createElement('p')
+        GOOGLp.className = 'GOOGLp-JS'
+        GOOGLp.textContent = sessionStorage.getItem('googl-data')
+        GOOGLID.appendChild(GOOGLp)
     })
 fetch(urlNVDA)
     .then((response) => {
@@ -92,6 +101,7 @@ fetch(urlNVDA)
         const lastOpen = timeSeries[lastDate]['1. open'];
         const lastVolume = timeSeries[lastDate]['6. volume'];
         const lastPrice = timeSeries[lastDate]['5. adjusted close'];
+        let nvdaData = sessionStorage.setItem('nvda-data', lastPrice)
         //NVDA
         const NVDAID = document.getElementById('NVDA-OPEN')
         let NVDAp = document.createElement('p')
@@ -100,7 +110,11 @@ fetch(urlNVDA)
         NVDAID.appendChild(NVDAp)
     }).catch((error) => {
         console.log(error)
-        showLoading()
+        const NVDAID = document.getElementById('NVDA-OPEN')
+        let NVDAp = document.createElement('p')
+        NVDAp.className = 'NVDAp-JS'
+        NVDAp.textContent = sessionStorage.getItem('nvda-data')
+        NVDAID.appendChild(NVDAp)
     })
 fetch(urlWMT)
     .then((response) => {
@@ -115,6 +129,7 @@ fetch(urlWMT)
         const lastOpen = timeSeries[lastDate]['1. open'];
         const lastVolume = timeSeries[lastDate]['6. volume'];
         const lastPrice = timeSeries[lastDate]['5. adjusted close'];
+        let wmtData = sessionStorage.setItem('wmt-data', lastPrice)
         //WMT
         const WMTCLOSE = document.getElementById('WMT-OPEN')
         let WMTp = document.createElement('p')
@@ -123,26 +138,29 @@ fetch(urlWMT)
         WMTCLOSE.appendChild(WMTp)
     }).catch((error) => {
         console.log(error)
-        showLoading()
+        const WMTCLOSE = document.getElementById('WMT-OPEN')
+        let WMTp = document.createElement('p')
+        WMTCLOSE.className = 'WMTp-JS'
+        WMTCLOSE.textContent = sessionStorage.getItem('wmt-data')
+        WMTCLOSE.appendChild(WMTp)
     })
 
-function showLoading() {
-    Swal.fire({
-        title: "Retrieving data from our servers",
-        text: "Please wait",
-        imageUrl: "../images/loading-buffering.gif",
-        showConfirmButton: false,
-        allowOutsideClick: false,
-        imageWidth: 200,  // Set the desired width of the image
-        imageHeight: 170  // Set the desired height of the image
-    });
-    //using setTimeout to simulate ajax request
-    setTimeout(() => {
-        Swal.fire({
-            icon: 'success',
-            title: "Data retrieved succesfully! ",
-            showConfirmButton: false,
-            timer: 8000
-        });
-    }, 8000);
-}
+const ibm_buy_button = document.getElementById('buy-ibm')
+const msft_buy_button = document.getElementById('buy-msft')
+const googl_buy_button = document.getElementById('buy-googl')
+const nvda_buy_button = document.getElementById('buy-nvda')
+const wmt_buy_button = document.getElementById('buy-wmt')
+const ibm_sell_button = document.getElementById('sell-ibm')
+const msft_sell_button = document.getElementById('sell-msft')
+const googl_sell_button = document.getElementById('sell-googl')
+const nvda_sell_button = document.getElementById('sell-nvda')
+const wmt_sell_button = document.getElementById('sell-wmt')
+const ibm_Data = sessionStorage.getItem('ibm-data')
+const msft_Data = sessionStorage.getItem('msft-data')
+const nvda_Data = sessionStorage.getItem('nvda-data')
+const wmt_Data = sessionStorage.getItem('wmt-data')
+const googl_Data = sessionStorage.getItem('googl-data')
+
+ibm_buy_button.addEventListener('click', function () {
+
+})
