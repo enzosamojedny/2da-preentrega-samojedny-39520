@@ -300,15 +300,20 @@ nvda_buy_button.addEventListener('click', function () {
 ibm_sell_button.addEventListener('click', function () {
 
     Swal.fire({
-        title: "You are about to sell IBM in $" + ibmData,
+        title: "You are about to sell IBM stock in $" + ibmData,
         text: "Insert quantity of stock below",
         input: 'text',
+        inputAttributes: {
+            id: 'ibm-quantity-sell'
+        },
         showCancelButton: true
     }).then((result) => {
+        let ibmQuantity = document.getElementById('ibm-quantity-sell').value
+        let ibmValue = parseInt(ibmQuantity) * parseInt(ibmData)
         if (result.value) {
             Swal.fire({
                 icon: 'success',
-                title: 'You have sold IBM stock in $' + ibmData,
+                title: ibmQuantity + ' IBM class "A" share(s) sold in $' + ibmData + ' for a total of $' + ibmValue,
                 text: '',
             })
         } else {
@@ -322,15 +327,20 @@ ibm_sell_button.addEventListener('click', function () {
 })
 msft_sell_button.addEventListener('click', function () {
     Swal.fire({
-        title: "You are about to sell MSFT in $" + msftData,
+        title: "You are about to sell MSFT stock in $" + msftData,
         text: "Insert quantity of stock below",
         input: 'text',
+        inputAttributes: {
+            id: 'msft-quantity-sell'
+        },
         showCancelButton: true
     }).then((result) => {
+        let msftQuantity = document.getElementById('msft-quantity-sell').value
+        let msftValue = parseInt(msftQuantity) * parseInt(msftData)
         if (result.value) {
             Swal.fire({
                 icon: 'success',
-                title: 'You have sold MSFT stock in $' + msftData,
+                title: msftQuantity + ' MSFT class "A" share(s) sold in $' + msftData + ' for a total of $' + msftValue,
                 text: '',
             })
         } else {
@@ -344,15 +354,20 @@ msft_sell_button.addEventListener('click', function () {
 })
 googl_sell_button.addEventListener('click', function () {
     Swal.fire({
-        title: "You are about to sell GOOGL in $" + googlData,
+        title: "You are about to sell GOOGL stock in $" + googlData,
         text: "Insert quantity of stock below",
         input: 'text',
+        inputAttributes: {
+            id: 'googl-quantity-sell'
+        },
         showCancelButton: true
     }).then((result) => {
+        let googlQuantity = document.getElementById('googl-quantity-sell').value
+        let googlValue = parseInt(googlQuantity) * parseInt(googlData)
         if (result.value) {
             Swal.fire({
                 icon: 'success',
-                title: 'You have sold GOOGL stock in $' + googlData,
+                title: googlQuantity + ' GOOGL class "A" share(s) sold in $' + googlData + ' for a total of $' + googlValue,
                 text: '',
             })
         } else {
@@ -366,15 +381,20 @@ googl_sell_button.addEventListener('click', function () {
 })
 wmt_sell_button.addEventListener('click', function () {
     Swal.fire({
-        title: "You are about to sell WMT in $" + wmtData,
+        title: "You are about to sell WMT stock in $" + wmtData,
         text: "Insert quantity of stock below",
         input: 'text',
+        inputAttributes: {
+            id: 'wmt-quantity-sell'
+        },
         showCancelButton: true
     }).then((result) => {
+        let wmtQuantity = document.getElementById('wmt-quantity-sell').value
+        let wmtValue = parseInt(wmtQuantity) * parseInt(wmtData)
         if (result.value) {
             Swal.fire({
                 icon: 'success',
-                title: 'You have sold WMT stock in $' + wmtData,
+                title: wmtQuantity + ' WMT class "A" share(s) sold in $' + wmtData + ' for a total of $' + wmtValue,
                 text: '',
             })
         } else {
@@ -388,15 +408,20 @@ wmt_sell_button.addEventListener('click', function () {
 })
 nvda_sell_button.addEventListener('click', function () {
     Swal.fire({
-        title: "You are about to sell NVDA in $" + nvdaData,
+        title: "You are about to sell NVDA stock in $" + nvdaData,
         text: "Insert quantity of stock below",
         input: 'text',
+        inputAttributes: {
+            id: 'nvda-quantity-sell'
+        },
         showCancelButton: true
     }).then((result) => {
+        let nvdaQuantity = document.getElementById('nvda-quantity-sell').value
+        let nvdaValue = parseInt(nvdaQuantity) * parseInt(nvdaData)
         if (result.value) {
             Swal.fire({
                 icon: 'success',
-                title: 'You have sold NVDA stock in $' + nvdaData,
+                title: nvdaQuantity + ' NVDA class "A" share(s) sold in $' + nvdaData + ' for a total of $' + nvdaValue,
                 text: '',
             })
         } else {
@@ -408,3 +433,25 @@ nvda_sell_button.addEventListener('click', function () {
         }
     });
 })
+
+async function showLoading() {
+    Swal.fire({
+        title: "Retrieving data from our servers",
+        text: "Please wait",
+        imageUrl: "../images/loading-buffering.gif",
+        showConfirmButton: false,
+        allowOutsideClick: false,
+        imageWidth: 200,  // Set the desired width of the image
+        imageHeight: 170  // Set the desired height of the image
+    });
+    //using setTimeout to simulate ajax request
+    setTimeout(() => {
+        Swal.fire({
+            icon: 'success',
+            title: "Data retrieved succesfully! ",
+            showConfirmButton: false,
+            timer: 3000
+        });
+    }, 8000);
+}
+showLoading()
