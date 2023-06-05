@@ -6,17 +6,17 @@ const urlNVDA = 'https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY_A
 const urlWMT = 'https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY_ADJUSTED&symbol=WMT&apikey=0Y9J544VII9BYP7K';
 
 async function IBM_FUNCTION() {
-    let response = await fetch(urlIBM);
-    let ibmAsync = await response.json();
-    const timeSeries = ibmAsync['Weekly Adjusted Time Series'];
-    const lastDate = Object.keys(timeSeries)[0];
-    const lastPrice = timeSeries[lastDate]['5. adjusted close'];
-    sessionStorage.setItem('ibm-data', lastPrice)
     try {
+        let response = await fetch(urlIBM);
+        let ibmAsync = await response.json();
+        const timeSeries = ibmAsync['Weekly Adjusted Time Series'];
+        const lastDate = Object.keys(timeSeries)[0];
+        const lastPrice = timeSeries[lastDate]['5. adjusted close'];
+        const sessionIBM = sessionStorage.setItem('ibm-data', lastPrice);
         const IBMID = document.getElementById('IBM-OPEN');
         let IBMp = document.createElement('p');
         IBMp.className = 'IBMp-JS';
-        IBMp.textContent = lastPrice;
+        IBMp.textContent = lastPrice || sessionIBM;
         IBMID.appendChild(IBMp);
     } catch (error) {
         console.log(error);
@@ -28,17 +28,17 @@ async function IBM_FUNCTION() {
     }
 }
 async function MSFT_FUNCTION() {
-    let response = await fetch(urlMSFT);
-    let data = await response.json();
-    const timeSeries = data['Weekly Adjusted Time Series'];
-    const lastDate = Object.keys(timeSeries)[0];
-    const lastPrice = timeSeries[lastDate]['5. adjusted close'];
-    sessionStorage.setItem('msft-data', lastPrice);
     try {
+        let response = await fetch(urlMSFT);
+        let data = await response.json();
+        const timeSeries = data['Weekly Adjusted Time Series'];
+        const lastDate = Object.keys(timeSeries)[0];
+        const lastPrice = timeSeries[lastDate]['5. adjusted close'];
+        const sessionMSFT = sessionStorage.setItem('msft-data', lastPrice);
         const MSFTID = document.getElementById('MSFT-OPEN');
         let MSFTp = document.createElement('p');
         MSFTp.className = 'MSFTp-JS';
-        MSFTp.textContent = lastPrice;
+        MSFTp.textContent = lastPrice || sessionMSFT;
         MSFTID.appendChild(MSFTp);
     } catch (error) {
         console.log(error);
@@ -50,17 +50,17 @@ async function MSFT_FUNCTION() {
     }
 }
 async function GOOGL_FUNCTION() {
-    let response = await fetch(urlGOOGL);
-    let data = await response.json();
-    const timeSeries = data['Weekly Adjusted Time Series'];
-    const lastDate = Object.keys(timeSeries)[0];
-    const lastPrice = timeSeries[lastDate]['5. adjusted close'];
-    sessionStorage.setItem('googl-data', lastPrice);
     try {
+        let response = await fetch(urlGOOGL);
+        let data = await response.json();
+        const timeSeries = data['Weekly Adjusted Time Series'];
+        const lastDate = Object.keys(timeSeries)[0];
+        const lastPrice = timeSeries[lastDate]['5. adjusted close'];
+        const sessionGOOGL = sessionStorage.setItem('googl-data', lastPrice);
         const GOOGLID = document.getElementById('GOOGL-OPEN');
         let GOOGLp = document.createElement('p');
         GOOGLp.className = 'GOOGLp-JS';
-        GOOGLp.textContent = lastPrice;
+        GOOGLp.textContent = lastPrice || sessionGOOGL;
         GOOGLID.appendChild(GOOGLp);
     } catch (error) {
         console.log(error);
@@ -71,18 +71,40 @@ async function GOOGL_FUNCTION() {
         GOOGLID.appendChild(GOOGLp);
     }
 }
-async function NVDA_FUNCTION() {
-    let response = await fetch(urlNVDA);
-    let data = await response.json();
-    const timeSeries = data['Weekly Adjusted Time Series'];
-    const lastDate = Object.keys(timeSeries)[0];
-    const lastPrice = timeSeries[lastDate]['5. adjusted close'];
-    sessionStorage.setItem('nvda-data', lastPrice);
+async function WMT_FUNCTION() {
     try {
+        let response = await fetch(urlWMT);
+        let data = await response.json();
+        const timeSeries = data['Weekly Adjusted Time Series'];
+        const lastDate = Object.keys(timeSeries)[0];
+        const lastPrice = timeSeries[lastDate]['5. adjusted close'];
+        const sessionWMT = sessionStorage.setItem('wmt-data', lastPrice);
+        const WMTID = document.getElementById('WMT-OPEN');
+        let WMTp = document.createElement('p');
+        WMTp.className = 'WMTp-JS';
+        WMTp.textContent = lastPrice || sessionWMT;
+        WMTID.appendChild(WMTp);
+    } catch (error) {
+        console.log(error);
+        const WMTID = document.getElementById('WMT-OPEN');
+        let WMTp = document.createElement('p');
+        WMTp.className = 'WMTp-JS';
+        WMTp.textContent = sessionStorage.getItem('wmt-data');
+        WMTID.appendChild(WMTp);
+    }
+}
+async function NVDA_FUNCTION() {
+    try {
+        let response = await fetch(urlNVDA);
+        let data = await response.json();
+        const timeSeries = data['Weekly Adjusted Time Series'];
+        const lastDate = Object.keys(timeSeries)[0];
+        const lastPrice = timeSeries[lastDate]['5. adjusted close'];
+        const sessionNVDA = sessionStorage.setItem('nvda-data', lastPrice);
         const NVDAID = document.getElementById('NVDA-OPEN');
         let NVDAp = document.createElement('p');
         NVDAp.className = 'NVDAp-JS';
-        NVDAp.textContent = lastPrice;
+        NVDAp.textContent = lastPrice || sessionNVDA;
         NVDAID.appendChild(NVDAp);
     } catch (error) {
         console.log(error);
@@ -91,28 +113,6 @@ async function NVDA_FUNCTION() {
         NVDAp.className = 'NVDAp-JS';
         NVDAp.textContent = sessionStorage.getItem('nvda-data');
         NVDAID.appendChild(NVDAp);
-    }
-}
-async function WMT_FUNCTION() {
-    let response = await fetch(urlWMT);
-    let data = await response.json();
-    const timeSeries = data['Weekly Adjusted Time Series'];
-    const lastDate = Object.keys(timeSeries)[0];
-    const lastPrice = timeSeries[lastDate]['5. adjusted close'];
-    sessionStorage.setItem('wmt-data', lastPrice);
-    try {
-        const WMTCLOSE = document.getElementById('WMT-OPEN');
-        let WMTp = document.createElement('p');
-        WMTCLOSE.className = 'WMTp-JS';
-        WMTCLOSE.textContent = lastPrice;
-        WMTCLOSE.appendChild(WMTp);
-    } catch (error) {
-        console.log(error);
-        const WMTCLOSE = document.getElementById('WMT-OPEN');
-        let WMTp = document.createElement('p');
-        WMTCLOSE.className = 'WMTp-JS';
-        WMTCLOSE.textContent = sessionStorage.getItem('wmt-data');
-        WMTCLOSE.appendChild(WMTp);
     }
 }
 IBM_FUNCTION()
@@ -131,13 +131,17 @@ const msft_sell_button = document.getElementById('sell-msft')
 const googl_sell_button = document.getElementById('sell-googl')
 const nvda_sell_button = document.getElementById('sell-nvda')
 const wmt_sell_button = document.getElementById('sell-wmt')
-const ibmData = sessionStorage.getItem('ibm-data')
-const msftData = sessionStorage.getItem('msft-data')
-const nvdaData = sessionStorage.getItem('nvda-data')
-const wmtData = sessionStorage.getItem('wmt-data')
-const googlData = sessionStorage.getItem('googl-data')
+
+
+
+
+
+
+//i should make an async function with a timeout to wait for the function call which might take
+//2 or 3 seconds, in order to avoid getItem() to be null
 
 ibm_buy_button.addEventListener('click', function () {
+    const ibmData = sessionStorage.getItem('ibm-data')
     Swal.fire({
         title: "You are about to buy IBM in $" + ibmData,//the first time it's entered, it returns null
         text: "Insert quantity of stock below",
@@ -147,6 +151,7 @@ ibm_buy_button.addEventListener('click', function () {
         },
         showCancelButton: true
     }).then((result) => {
+
         if (result.value) {
             let ibmQuantity = document.getElementById('ibm-quantity').value
             let ibmValue = parseInt(ibmQuantity) * parseInt(ibmData)
@@ -165,6 +170,7 @@ ibm_buy_button.addEventListener('click', function () {
     });
 })
 msft_buy_button.addEventListener('click', function () {
+    const msftData = sessionStorage.getItem('msft-data')
     Swal.fire({
         title: "You are about to buy MSFT in $" + msftData,//the first time it's entered, it returns null
         text: "Insert quantity of stock below",
@@ -192,6 +198,7 @@ msft_buy_button.addEventListener('click', function () {
     });
 })
 googl_buy_button.addEventListener('click', function () {
+    const googlData = sessionStorage.getItem('googl-data')
     Swal.fire({
         title: "You are about to buy GOOGL in $" + googlData,
         text: "Insert quantity of stock below",
@@ -219,6 +226,7 @@ googl_buy_button.addEventListener('click', function () {
     });
 })
 wmt_buy_button.addEventListener('click', function () {
+    const wmtData = sessionStorage.getItem('wmt-data')
     Swal.fire({
         title: "You are about to buy WMT in $" + wmtData,
         text: "Insert quantity of stock below",
@@ -246,6 +254,7 @@ wmt_buy_button.addEventListener('click', function () {
     });
 })
 nvda_buy_button.addEventListener('click', function () {
+    const nvdaData = sessionStorage.getItem('nvda-data')
     Swal.fire({
         title: "You are about to buy NVDA in $" + nvdaData,
         text: "Insert quantity of stock below",
@@ -273,6 +282,7 @@ nvda_buy_button.addEventListener('click', function () {
     });
 })
 ibm_sell_button.addEventListener('click', function () {
+    const ibmData = sessionStorage.getItem('ibm-data')
     Swal.fire({
         title: "You are about to sell IBM stock in $" + ibmData,
         text: "Insert quantity of stock below",
@@ -300,6 +310,7 @@ ibm_sell_button.addEventListener('click', function () {
     });
 })
 msft_sell_button.addEventListener('click', function () {
+    const msftData = sessionStorage.getItem('msft-data')
     Swal.fire({
         title: "You are about to sell MSFT stock in $" + msftData,
         text: "Insert quantity of stock below",
@@ -327,6 +338,7 @@ msft_sell_button.addEventListener('click', function () {
     });
 })
 googl_sell_button.addEventListener('click', function () {
+    const googlData = sessionStorage.getItem('googl-data')
     Swal.fire({
         title: "You are about to sell GOOGL stock in $" + googlData,
         text: "Insert quantity of stock below",
@@ -354,6 +366,7 @@ googl_sell_button.addEventListener('click', function () {
     });
 })
 wmt_sell_button.addEventListener('click', function () {
+    const wmtData = sessionStorage.getItem('wmt-data')
     Swal.fire({
         title: "You are about to sell WMT stock in $" + wmtData,
         text: "Insert quantity of stock below",
@@ -361,8 +374,12 @@ wmt_sell_button.addEventListener('click', function () {
         inputAttributes: {
             id: 'wmt-quantity-sell'
         },
-        showCancelButton: true
+        showCancelButton: true,
+        onOpen: function () {
+            $('.swal2-cancel').attr('cancel-button', 'btnCancel');
+        }
     }).then((result) => {
+        let cancelButton = document.getElementById('cancel-button')
         let wmtQuantity = document.getElementById('wmt-quantity-sell').value
         let wmtValue = parseInt(wmtQuantity) * parseInt(wmtData)
         if (result.value) {
@@ -371,16 +388,19 @@ wmt_sell_button.addEventListener('click', function () {
                 title: wmtQuantity + ' WMT class "A" share(s) sold in $' + wmtData + ' for a total of $' + wmtValue,
                 text: '',
             })
-        } else {
+        } else if (cancelButton) {
             Swal.fire({
-                icon: 'error',
-                title: 'Insufficient funds in your savings account',
+                icon: 'success',
+                title: 'Testing',
                 text: '',
             })
+        } else {
+
         }
     });
 })
 nvda_sell_button.addEventListener('click', function () {
+    const nvdaData = sessionStorage.getItem('nvda-data')
     Swal.fire({
         title: "You are about to sell NVDA stock in $" + nvdaData,
         text: "Insert quantity of stock below",
@@ -415,10 +435,9 @@ async function showLoading() {
         imageUrl: "../images/loading-buffering.gif",
         showConfirmButton: false,
         allowOutsideClick: false,
-        imageWidth: 200,  // Set the desired width of the image
-        imageHeight: 170  // Set the desired height of the image
+        imageWidth: 200,
+        imageHeight: 170
     });
-    //using setTimeout to simulate ajax request
     setTimeout(() => {
         Swal.fire({
             icon: 'success',
@@ -426,6 +445,6 @@ async function showLoading() {
             showConfirmButton: false,
             timer: 3000
         });
-    }, 8000);
+    }, 3000);
 }
 showLoading()
