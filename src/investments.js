@@ -1,150 +1,125 @@
+
 const urlIBM = 'https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY_ADJUSTED&symbol=IBM&apikey=0Y9J544VII9BYP7K';
 const urlMSFT = 'https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY_ADJUSTED&symbol=MSFT&apikey=0Y9J544VII9BYP7K';
 const urlGOOGL = 'https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY_ADJUSTED&symbol=GOOGL&apikey=0Y9J544VII9BYP7K';
 const urlNVDA = 'https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY_ADJUSTED&symbol=NVDA&apikey=0Y9J544VII9BYP7K';
 const urlWMT = 'https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY_ADJUSTED&symbol=WMT&apikey=0Y9J544VII9BYP7K';
 
-fetch(urlIBM)
-    .then((response) => {
-        if (!response.ok) {
-            throw new Error('Failed to fetch IBM data')
-        }
-        return response.json()
-    })
-    .then((data) => {
-        const timeSeries = data['Weekly Adjusted Time Series'];
-        const lastDate = Object.keys(timeSeries)[0];
-        //i need to get openprice, close price and volume
-        const lastOpen = timeSeries[lastDate]['1. open'];
-        const lastVolume = timeSeries[lastDate]['6. volume'];
-        const lastPrice = timeSeries[lastDate]['5. adjusted close'];
-        sessionStorage.setItem('ibm-data', lastPrice)
-        //IBM
-        const IBMID = document.getElementById('IBM-OPEN')
-        let IBMp = document.createElement('p')
-        IBMp.className = 'IBMp-JS'
-        IBMp.textContent = lastPrice
-        IBMID.appendChild(IBMp)
-    }).catch((error) => {
-        console.log(error)
-        const IBMID = document.getElementById('IBM-OPEN')
-        let IBMp = document.createElement('p')
-        IBMp.className = 'IBMp-JS'
-        IBMp.textContent = sessionStorage.getItem('ibm-data')
-        IBMID.appendChild(IBMp)
-    })
-fetch(urlMSFT)
-    .then((response) => {
-        if (!response.ok) {
-            throw new Error('Failed to fetch IBM data')
-        }
-        return response.json()
-    })
-    .then((data) => {
-        const timeSeries = data['Weekly Adjusted Time Series'];
-        const lastDate = Object.keys(timeSeries)[0];
-        const lastOpen = timeSeries[lastDate]['1. open'];
-        const lastVolume = timeSeries[lastDate]['6. volume'];
-        const lastPrice = timeSeries[lastDate]['5. adjusted close'];
-        sessionStorage.setItem('msft-data', lastPrice)
-        //MSFT
-        const MSFTID = document.getElementById('MSFT-OPEN')
-        let MSFTp = document.createElement('p')
-        MSFTp.className = 'MSFTp-JS'
-        MSFTp.textContent = lastPrice
-        MSFTID.appendChild(MSFTp)
-    }).catch((error) => {
-        console.log(error)
-        const MSFTID = document.getElementById('MSFT-OPEN')
-        let MSFTp = document.createElement('p')
-        MSFTp.className = 'MSFTp-JS'
-        MSFTp.textContent = sessionStorage.getItem('msft-data')
-        MSFTID.appendChild(MSFTp)
-    })
-fetch(urlGOOGL)
-    .then((response) => {
-        if (!response.ok) {
-            throw new Error('Failed to fetch IBM data')
-        }
-        return response.json()
-    })
-    .then((data) => {
-        const timeSeries = data['Weekly Adjusted Time Series'];
-        const lastDate = Object.keys(timeSeries)[0];
-        const lastOpen = timeSeries[lastDate]['1. open'];
-        const lastVolume = timeSeries[lastDate]['6. volume'];
-        const lastPrice = timeSeries[lastDate]['5. adjusted close'];
-        sessionStorage.setItem('googl-data', lastPrice)
-        //GOOGL
-        const GOOGLID = document.getElementById('GOOGL-OPEN')
-        let GOOGLp = document.createElement('p')
-        GOOGLp.className = 'GOOGLp-JS'
-        GOOGLp.textContent = lastPrice
-        GOOGLID.appendChild(GOOGLp)
-    }).catch((error) => {
-        console.log(error)
-        const GOOGLID = document.getElementById('GOOGL-OPEN')
-        let GOOGLp = document.createElement('p')
-        GOOGLp.className = 'GOOGLp-JS'
-        GOOGLp.textContent = sessionStorage.getItem('googl-data')
-        GOOGLID.appendChild(GOOGLp)
-    })
-fetch(urlNVDA)
-    .then((response) => {
-        if (!response.ok) {
-            throw new Error('Failed to fetch IBM data')
-        }
-        return response.json()
-    })
-    .then((data) => {
-        const timeSeries = data['Weekly Adjusted Time Series'];
-        const lastDate = Object.keys(timeSeries)[0];
-        const lastOpen = timeSeries[lastDate]['1. open'];
-        const lastVolume = timeSeries[lastDate]['6. volume'];
-        const lastPrice = timeSeries[lastDate]['5. adjusted close'];
-        sessionStorage.setItem('nvda-data', lastPrice)
-        //NVDA
-        const NVDAID = document.getElementById('NVDA-OPEN')
-        let NVDAp = document.createElement('p')
-        NVDAp.className = 'NVDAp-JS'
-        NVDAp.textContent = lastPrice
-        NVDAID.appendChild(NVDAp)
-    }).catch((error) => {
-        console.log(error)
-        const NVDAID = document.getElementById('NVDA-OPEN')
-        let NVDAp = document.createElement('p')
-        NVDAp.className = 'NVDAp-JS'
-        NVDAp.textContent = sessionStorage.getItem('nvda-data')
-        NVDAID.appendChild(NVDAp)
-    })
-fetch(urlWMT)
-    .then((response) => {
-        if (!response.ok) {
-            throw new Error('Failed to fetch IBM data')
-        }
-        return response.json()
-    })
-    .then((data) => {
-        const timeSeries = data['Weekly Adjusted Time Series'];
-        const lastDate = Object.keys(timeSeries)[0];
-        const lastOpen = timeSeries[lastDate]['1. open'];
-        const lastVolume = timeSeries[lastDate]['6. volume'];
-        const lastPrice = timeSeries[lastDate]['5. adjusted close'];
-        sessionStorage.setItem('wmt-data', lastPrice)
-        //WMT
-        const WMTCLOSE = document.getElementById('WMT-OPEN')
-        let WMTp = document.createElement('p')
-        WMTCLOSE.className = 'WMTp-JS'
-        WMTCLOSE.textContent = lastPrice
-        WMTCLOSE.appendChild(WMTp)
-    }).catch((error) => {
-        console.log(error)
-        const WMTCLOSE = document.getElementById('WMT-OPEN')
-        let WMTp = document.createElement('p')
-        WMTCLOSE.className = 'WMTp-JS'
-        WMTCLOSE.textContent = sessionStorage.getItem('wmt-data')
-        WMTCLOSE.appendChild(WMTp)
-    })
+async function IBM_FUNCTION() {
+    let response = await fetch(urlIBM);
+    let ibmAsync = await response.json();
+    const timeSeries = ibmAsync['Weekly Adjusted Time Series'];
+    const lastDate = Object.keys(timeSeries)[0];
+    const lastPrice = timeSeries[lastDate]['5. adjusted close'];
+    sessionStorage.setItem('ibm-data', lastPrice)
+    try {
+        const IBMID = document.getElementById('IBM-OPEN');
+        let IBMp = document.createElement('p');
+        IBMp.className = 'IBMp-JS';
+        IBMp.textContent = lastPrice;
+        IBMID.appendChild(IBMp);
+    } catch (error) {
+        console.log(error);
+        const IBMID = document.getElementById('IBM-OPEN');
+        let IBMp = document.createElement('p');
+        IBMp.className = 'IBMp-JS';
+        IBMp.textContent = sessionStorage.getItem('ibm-data');
+        IBMID.appendChild(IBMp);
+    }
+}
+async function MSFT_FUNCTION() {
+    let response = await fetch(urlMSFT);
+    let data = await response.json();
+    const timeSeries = data['Weekly Adjusted Time Series'];
+    const lastDate = Object.keys(timeSeries)[0];
+    const lastPrice = timeSeries[lastDate]['5. adjusted close'];
+    sessionStorage.setItem('msft-data', lastPrice);
+    try {
+        const MSFTID = document.getElementById('MSFT-OPEN');
+        let MSFTp = document.createElement('p');
+        MSFTp.className = 'MSFTp-JS';
+        MSFTp.textContent = lastPrice;
+        MSFTID.appendChild(MSFTp);
+    } catch (error) {
+        console.log(error);
+        const MSFTID = document.getElementById('MSFT-OPEN');
+        let MSFTp = document.createElement('p');
+        MSFTp.className = 'MSFTp-JS';
+        MSFTp.textContent = sessionStorage.getItem('msft-data');
+        MSFTID.appendChild(MSFTp);
+    }
+}
+async function GOOGL_FUNCTION() {
+    let response = await fetch(urlGOOGL);
+    let data = await response.json();
+    const timeSeries = data['Weekly Adjusted Time Series'];
+    const lastDate = Object.keys(timeSeries)[0];
+    const lastPrice = timeSeries[lastDate]['5. adjusted close'];
+    sessionStorage.setItem('googl-data', lastPrice);
+    try {
+        const GOOGLID = document.getElementById('GOOGL-OPEN');
+        let GOOGLp = document.createElement('p');
+        GOOGLp.className = 'GOOGLp-JS';
+        GOOGLp.textContent = lastPrice;
+        GOOGLID.appendChild(GOOGLp);
+    } catch (error) {
+        console.log(error);
+        const GOOGLID = document.getElementById('GOOGL-OPEN');
+        let GOOGLp = document.createElement('p');
+        GOOGLp.className = 'GOOGLp-JS';
+        GOOGLp.textContent = sessionStorage.getItem('googl-data');
+        GOOGLID.appendChild(GOOGLp);
+    }
+}
+async function NVDA_FUNCTION() {
+    let response = await fetch(urlNVDA);
+    let data = await response.json();
+    const timeSeries = data['Weekly Adjusted Time Series'];
+    const lastDate = Object.keys(timeSeries)[0];
+    const lastPrice = timeSeries[lastDate]['5. adjusted close'];
+    sessionStorage.setItem('nvda-data', lastPrice);
+    try {
+        const NVDAID = document.getElementById('NVDA-OPEN');
+        let NVDAp = document.createElement('p');
+        NVDAp.className = 'NVDAp-JS';
+        NVDAp.textContent = lastPrice;
+        NVDAID.appendChild(NVDAp);
+    } catch (error) {
+        console.log(error);
+        const NVDAID = document.getElementById('NVDA-OPEN');
+        let NVDAp = document.createElement('p');
+        NVDAp.className = 'NVDAp-JS';
+        NVDAp.textContent = sessionStorage.getItem('nvda-data');
+        NVDAID.appendChild(NVDAp);
+    }
+}
+async function WMT_FUNCTION() {
+    let response = await fetch(urlWMT);
+    let data = await response.json();
+    const timeSeries = data['Weekly Adjusted Time Series'];
+    const lastDate = Object.keys(timeSeries)[0];
+    const lastPrice = timeSeries[lastDate]['5. adjusted close'];
+    sessionStorage.setItem('wmt-data', lastPrice);
+    try {
+        const WMTCLOSE = document.getElementById('WMT-OPEN');
+        let WMTp = document.createElement('p');
+        WMTCLOSE.className = 'WMTp-JS';
+        WMTCLOSE.textContent = lastPrice;
+        WMTCLOSE.appendChild(WMTp);
+    } catch (error) {
+        console.log(error);
+        const WMTCLOSE = document.getElementById('WMT-OPEN');
+        let WMTp = document.createElement('p');
+        WMTCLOSE.className = 'WMTp-JS';
+        WMTCLOSE.textContent = sessionStorage.getItem('wmt-data');
+        WMTCLOSE.appendChild(WMTp);
+    }
+}
+IBM_FUNCTION()
+MSFT_FUNCTION()
+GOOGL_FUNCTION()
+NVDA_FUNCTION()
+WMT_FUNCTION()
 
 const ibm_buy_button = document.getElementById('buy-ibm')
 const msft_buy_button = document.getElementById('buy-msft')
@@ -184,7 +159,7 @@ ibm_buy_button.addEventListener('click', function () {
             Swal.fire({
                 icon: 'error',
                 title: 'Insufficient funds in your savings account',
-                text: '',
+                text: ''
             })
         }
     });
@@ -298,7 +273,6 @@ nvda_buy_button.addEventListener('click', function () {
     });
 })
 ibm_sell_button.addEventListener('click', function () {
-
     Swal.fire({
         title: "You are about to sell IBM stock in $" + ibmData,
         text: "Insert quantity of stock below",
