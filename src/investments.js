@@ -4,11 +4,9 @@ const urlMSFT = 'https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY_A
 const urlGOOGL = 'https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY_ADJUSTED&symbol=GOOGL&apikey=0Y9J544VII9BYP7K';
 const urlNVDA = 'https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY_ADJUSTED&symbol=NVDA&apikey=0Y9J544VII9BYP7K';
 const urlWMT = 'https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY_ADJUSTED&symbol=WMT&apikey=0Y9J544VII9BYP7K';
-
-import { userData } from './transfer2.js';
-import { updatedMoney } from './frontend.js';
-const variables = userData()
-
+import { moneyToUpdate, updatedMoney } from './frontend.js';
+let saldoInversionActualizado = updatedMoney()
+let saldoInicial = moneyToUpdate()
 
 async function IBM_FUNCTION() {
     try {
@@ -140,8 +138,6 @@ const wmt_sell_button = document.getElementById('sell-wmt')
 //i should make an async function with a timeout to wait for the function call which might take
 //2 or 3 seconds, in order to avoid getItem() to be null
 
-
-
 function ibmBuy() {
     const ibmData = sessionStorage.getItem('ibm-data');
     Swal.fire({
@@ -151,8 +147,7 @@ function ibmBuy() {
         inputAttributes: {
             id: 'ibm-quantity'
         },
-        showCancelButton: true,
-        closeOnCancel: true
+        showCancelButton: true
     }).then((result) => {
         if (result.value) {
             let ibmQuantity = document.getElementById('ibm-quantity').value;
@@ -174,18 +169,27 @@ function ibmBuy() {
                 return;
             }
             let ibmValue = ibmQuantity * ibmData;
-            Swal.fire({
-                icon: 'success',
-                title: ibmQuantity + ' IBM class "A" shares bought in $' + ibmData + ' for a total of $' + ibmValue,
-                text: '',
-            });
+            if (saldoInversionActualizado >= ibmValue ?? saldoInicial >= ibmValue) {
+                Swal.fire({
+                    icon: 'success',
+                    title: ibmQuantity + ' IBM class "A" shares bought in $' + ibmData + ' for a total of $' + ibmValue,
+                    text: 'Your balance is $ ' + (saldoInversionActualizado - ibmValue),
+                });
+                if (sessionStorage.getItem('updatedAmount') === true) {
+                    return parseInt(sessionStorage.getItem('updatedAmount'));
+                } else {
+                    sessionStorage.setItem('updatedAmount', saldoInversionActualizado - ibmValue);
+                }
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Insufficient funds in your savings account',
+                    text: '',
+                });
+            }
         } else {
             return;
-            // Swal.fire({
-            //     icon: 'error',
-            //     title: 'Insufficient funds in your savings account',
-            //     text: '',
-            // });
+
         }
     });
 }
@@ -200,8 +204,8 @@ function msftBuy() {
         inputAttributes: {
             id: 'msft-quantity'
         },
-        showCancelButton: true,
-        closeOnCancel: true
+        showCancelButton: true
+
     }).then((result) => {
         if (result.value) {
             let msftQuantity = document.getElementById('msft-quantity').value;
@@ -223,6 +227,8 @@ function msftBuy() {
                 return;
             }
             let msftValue = msftQuantity * msftData;
+
+
             Swal.fire({
                 icon: 'success',
                 title: msftQuantity + ' MSFT class "A" shares bought in $' + msftData + ' for a total of $' + msftValue,
@@ -249,8 +255,8 @@ function googlBuy() {
         inputAttributes: {
             id: 'googl-quantity'
         },
-        showCancelButton: true,
-        closeOnCancel: true
+        showCancelButton: true
+
     }).then((result) => {
         if (result.value) {
             let googlQuantity = document.getElementById('googl-quantity').value;
@@ -298,8 +304,8 @@ function wmtBuy() {
         inputAttributes: {
             id: 'wmt-quantity'
         },
-        showCancelButton: true,
-        closeOnCancel: true
+        showCancelButton: true
+
     }).then((result) => {
         if (result.value) {
             let wmtQuantity = document.getElementById('wmt-quantity').value;
@@ -347,8 +353,8 @@ function nvdaBuy() {
         inputAttributes: {
             id: 'nvda-quantity'
         },
-        showCancelButton: true,
-        closeOnCancel: true
+        showCancelButton: true
+
     }).then((result) => {
         if (result.value) {
             let nvdaQuantity = document.getElementById('nvda-quantity').value;
@@ -396,8 +402,8 @@ function ibmSell() {
         inputAttributes: {
             id: 'ibm-quantity'
         },
-        showCancelButton: true,
-        closeOnCancel: true
+        showCancelButton: true
+
     }).then((result) => {
         if (result.value) {
             let ibmQuantity = document.getElementById('ibm-quantity').value;
@@ -445,8 +451,8 @@ function msftSell() {
         inputAttributes: {
             id: 'msft-quantity'
         },
-        showCancelButton: true,
-        closeOnCancel: true
+        showCancelButton: true
+
     }).then((result) => {
         if (result.value) {
             let msftQuantity = document.getElementById('msft-quantity').value;
@@ -494,8 +500,8 @@ function googlSell() {
         inputAttributes: {
             id: 'googl-quantity'
         },
-        showCancelButton: true,
-        closeOnCancel: true
+        showCancelButton: true
+
     }).then((result) => {
         if (result.value) {
             let googlQuantity = document.getElementById('googl-quantity').value;
@@ -543,8 +549,8 @@ function wmtSell() {
         inputAttributes: {
             id: 'wmt-quantity'
         },
-        showCancelButton: true,
-        closeOnCancel: true
+        showCancelButton: true
+
     }).then((result) => {
         if (result.value) {
             let wmtQuantity = document.getElementById('wmt-quantity').value;
@@ -592,8 +598,8 @@ function nvdaSell() {
         inputAttributes: {
             id: 'nvda-quantity'
         },
-        showCancelButton: true,
-        closeOnCancel: true
+        showCancelButton: true
+
     }).then((result) => {
         if (result.value) {
             let nvdaQuantity = document.getElementById('nvda-quantity').value;
