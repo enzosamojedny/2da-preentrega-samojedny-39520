@@ -5,6 +5,11 @@ const urlGOOGL = 'https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY_
 const urlNVDA = 'https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY_ADJUSTED&symbol=NVDA&apikey=0Y9J544VII9BYP7K';
 const urlWMT = 'https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY_ADJUSTED&symbol=WMT&apikey=0Y9J544VII9BYP7K';
 
+import { userData } from './transfer2.js';
+import { updatedMoney } from './frontend.js';
+const variables = userData()
+
+
 async function IBM_FUNCTION() {
     try {
         let response = await fetch(urlIBM);
@@ -132,73 +137,111 @@ const googl_sell_button = document.getElementById('sell-googl')
 const nvda_sell_button = document.getElementById('sell-nvda')
 const wmt_sell_button = document.getElementById('sell-wmt')
 
-
-
-
-
-
 //i should make an async function with a timeout to wait for the function call which might take
 //2 or 3 seconds, in order to avoid getItem() to be null
 
-ibm_buy_button.addEventListener('click', function () {
-    const ibmData = sessionStorage.getItem('ibm-data')
+
+
+function ibmBuy() {
+    const ibmData = sessionStorage.getItem('ibm-data');
     Swal.fire({
-        title: "You are about to buy IBM in $" + ibmData,//the first time it's entered, it returns null
+        title: "You are about to buy IBM in $" + ibmData,
         text: "Insert quantity of stock below",
         input: 'text',
         inputAttributes: {
             id: 'ibm-quantity'
         },
-        showCancelButton: true
+        showCancelButton: true,
+        closeOnCancel: true
     }).then((result) => {
-
         if (result.value) {
-            let ibmQuantity = document.getElementById('ibm-quantity').value
-            let ibmValue = parseInt(ibmQuantity) * parseInt(ibmData)
+            let ibmQuantity = document.getElementById('ibm-quantity').value;
+            if (isNaN(ibmQuantity) || ibmQuantity === '') {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Please insert a valid number',
+                    text: '',
+                })
+                return;
+            }
+            ibmQuantity = parseInt(ibmQuantity);
+            if (ibmQuantity < 1) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'You need to buy at least 1 unit of stock',
+                    text: '',
+                })
+                return;
+            }
+            let ibmValue = ibmQuantity * ibmData;
             Swal.fire({
                 icon: 'success',
-                title: ibmQuantity + ' IBM class "A" shares bought in $' + ibmData + 'for a total of $' + ibmValue,
+                title: ibmQuantity + ' IBM class "A" shares bought in $' + ibmData + ' for a total of $' + ibmValue,
                 text: '',
-            })
+            });
         } else {
-            Swal.fire({
-                icon: 'error',
-                title: 'Insufficient funds in your savings account',
-                text: ''
-            })
+            return;
+            // Swal.fire({
+            //     icon: 'error',
+            //     title: 'Insufficient funds in your savings account',
+            //     text: '',
+            // });
         }
     });
-})
-msft_buy_button.addEventListener('click', function () {
-    const msftData = sessionStorage.getItem('msft-data')
+}
+ibm_buy_button.addEventListener('click', ibmBuy)
+
+function msftBuy() {
+    const msftData = sessionStorage.getItem('msft-data');
     Swal.fire({
-        title: "You are about to buy MSFT in $" + msftData,//the first time it's entered, it returns null
+        title: "You are about to buy MSFT in $" + msftData,
         text: "Insert quantity of stock below",
         input: 'text',
         inputAttributes: {
             id: 'msft-quantity'
         },
-        showCancelButton: true
+        showCancelButton: true,
+        closeOnCancel: true
     }).then((result) => {
         if (result.value) {
-            let msftQuantity = document.getElementById('msft-quantity').value
-            let msftValue = parseInt(msftQuantity) * parseInt(msftData)
+            let msftQuantity = document.getElementById('msft-quantity').value;
+            if (isNaN(msftQuantity) || msftQuantity === '') {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Please insert a valid number',
+                    text: '',
+                })
+                return;
+            }
+            msftQuantity = parseInt(msftQuantity);
+            if (msftQuantity < 1) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'You need to buy at least 1 unit of stock',
+                    text: '',
+                })
+                return;
+            }
+            let msftValue = msftQuantity * msftData;
             Swal.fire({
                 icon: 'success',
-                title: msftQuantity + ' IBM class "A" share(s) bought in $' + msftData + ' for a total of $' + msftValue,
+                title: msftQuantity + ' MSFT class "A" shares bought in $' + msftData + ' for a total of $' + msftValue,
                 text: '',
-            })
+            });
         } else {
-            Swal.fire({
-                icon: 'error',
-                title: 'Insufficient funds in your savings account',
-                text: '',
-            })
+            return;
+            // Swal.fire({
+            //     icon: 'error',
+            //     title: 'Insufficient funds in your savings account',
+            //     text: '',
+            // });
         }
     });
-})
-googl_buy_button.addEventListener('click', function () {
-    const googlData = sessionStorage.getItem('googl-data')
+}
+msft_buy_button.addEventListener('click', msftBuy)
+
+function googlBuy() {
+    const googlData = sessionStorage.getItem('googl-data');
     Swal.fire({
         title: "You are about to buy GOOGL in $" + googlData,
         text: "Insert quantity of stock below",
@@ -206,27 +249,48 @@ googl_buy_button.addEventListener('click', function () {
         inputAttributes: {
             id: 'googl-quantity'
         },
-        showCancelButton: true
+        showCancelButton: true,
+        closeOnCancel: true
     }).then((result) => {
         if (result.value) {
-            let googlQuantity = document.getElementById('googl-quantity').value
-            let googlValue = parseInt(googlQuantity) * parseInt(googlData)
+            let googlQuantity = document.getElementById('googl-quantity').value;
+            if (isNaN(googlQuantity) || googlQuantity === '') {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Please insert a valid number',
+                    text: '',
+                })
+                return;
+            }
+            googlQuantity = parseInt(googlQuantity);
+            if (googlQuantity < 1) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'You need to buy at least 1 unit of stock',
+                    text: '',
+                })
+                return;
+            }
+            let googlValue = googlQuantity * googlData;
             Swal.fire({
                 icon: 'success',
-                title: googlQuantity + ' GOOGL class "A" share(s) bought in $' + googlData + ' for a total of $' + googlValue,
+                title: googlQuantity + ' GOOGL class "A" shares bought in $' + googlData + ' for a total of $' + googlValue,
                 text: '',
-            })
+            });
         } else {
-            Swal.fire({
-                icon: 'error',
-                title: 'Insufficient funds in your savings account',
-                text: '',
-            })
+            return;
+            // Swal.fire({
+            //     icon: 'error',
+            //     title: 'Insufficient funds in your savings account',
+            //     text: '',
+            // });
         }
     });
-})
-wmt_buy_button.addEventListener('click', function () {
-    const wmtData = sessionStorage.getItem('wmt-data')
+}
+googl_buy_button.addEventListener('click', googlBuy)
+
+function wmtBuy() {
+    const wmtData = sessionStorage.getItem('wmt-data');
     Swal.fire({
         title: "You are about to buy WMT in $" + wmtData,
         text: "Insert quantity of stock below",
@@ -234,27 +298,48 @@ wmt_buy_button.addEventListener('click', function () {
         inputAttributes: {
             id: 'wmt-quantity'
         },
-        showCancelButton: true
+        showCancelButton: true,
+        closeOnCancel: true
     }).then((result) => {
         if (result.value) {
-            let wmtQuantity = document.getElementById('wmt-quantity').value
-            let wmtValue = parseInt(wmtQuantity) * parseInt(wmtData)
+            let wmtQuantity = document.getElementById('wmt-quantity').value;
+            if (isNaN(wmtQuantity) || wmtQuantity === '') {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Please insert a valid number',
+                    text: '',
+                })
+                return;
+            }
+            wmtQuantity = parseInt(wmtQuantity);
+            if (wmtQuantity < 1) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'You need to buy at least 1 unit of stock',
+                    text: '',
+                })
+                return;
+            }
+            let wmtValue = wmtQuantity * wmtData;
             Swal.fire({
                 icon: 'success',
-                title: 'You have bought WMT stock in $' + wmtData,
-                title: wmtQuantity + ' WMT class "A" share(s) bought in $' + wmtData + ' for a total of $' + wmtValue,
-            })
-        } else {
-            Swal.fire({
-                icon: 'error',
-                title: 'Insufficient funds in your savings account',
+                title: wmtQuantity + ' WMT class "A" shares bought in $' + wmtData + ' for a total of $' + wmtValue,
                 text: '',
-            })
+            });
+        } else {
+            return;
+            // Swal.fire({
+            //     icon: 'error',
+            //     title: 'Insufficient funds in your savings account',
+            //     text: '',
+            // });
         }
     });
-})
-nvda_buy_button.addEventListener('click', function () {
-    const nvdaData = sessionStorage.getItem('nvda-data')
+}
+wmt_buy_button.addEventListener('click', wmtBuy)
+
+function nvdaBuy() {
+    const nvdaData = sessionStorage.getItem('nvda-data');
     Swal.fire({
         title: "You are about to buy NVDA in $" + nvdaData,
         text: "Insert quantity of stock below",
@@ -262,171 +347,290 @@ nvda_buy_button.addEventListener('click', function () {
         inputAttributes: {
             id: 'nvda-quantity'
         },
-        showCancelButton: true
+        showCancelButton: true,
+        closeOnCancel: true
     }).then((result) => {
         if (result.value) {
-            let nvdaQuantity = document.getElementById('nvda-quantity').value
-            let nvdaValue = parseInt(nvdaQuantity) * parseInt(nvdaData)
+            let nvdaQuantity = document.getElementById('nvda-quantity').value;
+            if (isNaN(nvdaQuantity) || nvdaQuantity === '') {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Please insert a valid number',
+                    text: '',
+                })
+                return;
+            }
+            nvdaQuantity = parseInt(nvdaQuantity);
+            if (nvdaQuantity < 1) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'You need to buy at least 1 unit of stock',
+                    text: '',
+                })
+                return;
+            }
+            let nvdaValue = nvdaQuantity * nvdaData;
             Swal.fire({
                 icon: 'success',
-                title: nvdaQuantity + ' NVDA class "A" share(s) bought in $' + nvdaData + ' for a total of $' + nvdaValue,
+                title: nvdaQuantity + ' NVDA class "A" shares bought in $' + nvdaData + ' for a total of $' + nvdaValue,
                 text: '',
-            })
+            });
         } else {
-            Swal.fire({
-                icon: 'error',
-                title: 'Insufficient funds in your savings account',
-                text: '',
-            })
+            return;
+            // Swal.fire({
+            //     icon: 'error',
+            //     title: 'Insufficient funds in your savings account',
+            //     text: '',
+            // });
         }
     });
-})
-ibm_sell_button.addEventListener('click', function () {
-    const ibmData = sessionStorage.getItem('ibm-data')
+}
+nvda_buy_button.addEventListener('click', nvdaBuy)
+
+function ibmSell() {
+    const ibmData = sessionStorage.getItem('ibm-data');
     Swal.fire({
-        title: "You are about to sell IBM stock in $" + ibmData,
+        title: "You are about to sell IBM in $" + ibmData,
         text: "Insert quantity of stock below",
         input: 'text',
         inputAttributes: {
-            id: 'ibm-quantity-sell'
-        },
-        showCancelButton: true
-    }).then((result) => {
-        let ibmQuantity = document.getElementById('ibm-quantity-sell').value
-        let ibmValue = parseInt(ibmQuantity) * parseInt(ibmData)
-        if (result.value) {
-            Swal.fire({
-                icon: 'success',
-                title: ibmQuantity + ' IBM class "A" share(s) sold in $' + ibmData + ' for a total of $' + ibmValue,
-                text: '',
-            })
-        } else {
-            Swal.fire({
-                icon: 'error',
-                title: 'Insufficient funds in your savings account',
-                text: '',
-            })
-        }
-    });
-})
-msft_sell_button.addEventListener('click', function () {
-    const msftData = sessionStorage.getItem('msft-data')
-    Swal.fire({
-        title: "You are about to sell MSFT stock in $" + msftData,
-        text: "Insert quantity of stock below",
-        input: 'text',
-        inputAttributes: {
-            id: 'msft-quantity-sell'
-        },
-        showCancelButton: true
-    }).then((result) => {
-        let msftQuantity = document.getElementById('msft-quantity-sell').value
-        let msftValue = parseInt(msftQuantity) * parseInt(msftData)
-        if (result.value) {
-            Swal.fire({
-                icon: 'success',
-                title: msftQuantity + ' MSFT class "A" share(s) sold in $' + msftData + ' for a total of $' + msftValue,
-                text: '',
-            })
-        } else {
-            Swal.fire({
-                icon: 'error',
-                title: 'Insufficient funds in your savings account',
-                text: '',
-            })
-        }
-    });
-})
-googl_sell_button.addEventListener('click', function () {
-    const googlData = sessionStorage.getItem('googl-data')
-    Swal.fire({
-        title: "You are about to sell GOOGL stock in $" + googlData,
-        text: "Insert quantity of stock below",
-        input: 'text',
-        inputAttributes: {
-            id: 'googl-quantity-sell'
-        },
-        showCancelButton: true
-    }).then((result) => {
-        let googlQuantity = document.getElementById('googl-quantity-sell').value
-        let googlValue = parseInt(googlQuantity) * parseInt(googlData)
-        if (result.value) {
-            Swal.fire({
-                icon: 'success',
-                title: googlQuantity + ' GOOGL class "A" share(s) sold in $' + googlData + ' for a total of $' + googlValue,
-                text: '',
-            })
-        } else {
-            Swal.fire({
-                icon: 'error',
-                title: 'Insufficient funds in your savings account',
-                text: '',
-            })
-        }
-    });
-})
-wmt_sell_button.addEventListener('click', function () {
-    const wmtData = sessionStorage.getItem('wmt-data')
-    Swal.fire({
-        title: "You are about to sell WMT stock in $" + wmtData,
-        text: "Insert quantity of stock below",
-        input: 'text',
-        inputAttributes: {
-            id: 'wmt-quantity-sell'
+            id: 'ibm-quantity'
         },
         showCancelButton: true,
-        onOpen: function () {
-            $('.swal2-cancel').attr('cancel-button', 'btnCancel');
-        }
+        closeOnCancel: true
     }).then((result) => {
-        let cancelButton = document.getElementById('cancel-button')
-        let wmtQuantity = document.getElementById('wmt-quantity-sell').value
-        let wmtValue = parseInt(wmtQuantity) * parseInt(wmtData)
         if (result.value) {
+            let ibmQuantity = document.getElementById('ibm-quantity').value;
+            if (isNaN(ibmQuantity) || ibmQuantity === '') {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Please insert a valid number',
+                    text: '',
+                })
+                return;
+            }
+            ibmQuantity = parseInt(ibmQuantity);
+            if (ibmQuantity < 1) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'You need to buy at least 1 unit of stock',
+                    text: '',
+                })
+                return;
+            }
+            let ibmValue = ibmQuantity * ibmData;
             Swal.fire({
                 icon: 'success',
-                title: wmtQuantity + ' WMT class "A" share(s) sold in $' + wmtData + ' for a total of $' + wmtValue,
+                title: ibmQuantity + ' IBM class "A" shares sold in $' + ibmData + ' for a total of $' + ibmValue,
                 text: '',
-            })
-        } else if (cancelButton) {
-            Swal.fire({
-                icon: 'success',
-                title: 'Testing',
-                text: '',
-            })
+            });
         } else {
-
+            return;
+            // Swal.fire({
+            //     icon: 'error',
+            //     title: 'Insufficient funds in your savings account',
+            //     text: '',
+            // });
         }
     });
-})
-nvda_sell_button.addEventListener('click', function () {
-    const nvdaData = sessionStorage.getItem('nvda-data')
+}
+ibm_sell_button.addEventListener('click', ibmSell)
+
+function msftSell() {
+    const msftData = sessionStorage.getItem('msft-data');
     Swal.fire({
-        title: "You are about to sell NVDA stock in $" + nvdaData,
+        title: "You are about to sell MSFT in $" + msftData,
         text: "Insert quantity of stock below",
         input: 'text',
         inputAttributes: {
-            id: 'nvda-quantity-sell'
+            id: 'msft-quantity'
         },
-        showCancelButton: true
+        showCancelButton: true,
+        closeOnCancel: true
     }).then((result) => {
-        let nvdaQuantity = document.getElementById('nvda-quantity-sell').value
-        let nvdaValue = parseInt(nvdaQuantity) * parseInt(nvdaData)
         if (result.value) {
+            let msftQuantity = document.getElementById('msft-quantity').value;
+            if (isNaN(msftQuantity) || msftQuantity === '') {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Please insert a valid number',
+                    text: '',
+                })
+                return;
+            }
+            msftQuantity = parseInt(msftQuantity);
+            if (msftQuantity < 1) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'You need to buy at least 1 unit of stock',
+                    text: '',
+                })
+                return;
+            }
+            let msftValue = msftQuantity * msftData;
             Swal.fire({
                 icon: 'success',
-                title: nvdaQuantity + ' NVDA class "A" share(s) sold in $' + nvdaData + ' for a total of $' + nvdaValue,
+                title: msftQuantity + ' MSFT class "A" shares sold in $' + msftData + ' for a total of $' + msftValue,
                 text: '',
-            })
+            });
         } else {
-            Swal.fire({
-                icon: 'error',
-                title: 'Insufficient funds in your savings account',
-                text: '',
-            })
+            return;
+            // Swal.fire({
+            //     icon: 'error',
+            //     title: 'Insufficient funds in your savings account',
+            //     text: '',
+            // });
         }
     });
-})
+}
+msft_sell_button.addEventListener('click', msftSell)
+
+function googlSell() {
+    const googlData = sessionStorage.getItem('googl-data');
+    Swal.fire({
+        title: "You are about to sell GOOGL in $" + googlData,
+        text: "Insert quantity of stock below",
+        input: 'text',
+        inputAttributes: {
+            id: 'googl-quantity'
+        },
+        showCancelButton: true,
+        closeOnCancel: true
+    }).then((result) => {
+        if (result.value) {
+            let googlQuantity = document.getElementById('googl-quantity').value;
+            if (isNaN(googlQuantity) || googlQuantity === '') {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Please insert a valid number',
+                    text: '',
+                })
+                return;
+            }
+            googlQuantity = parseInt(googlQuantity);
+            if (googlQuantity < 1) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'You need to buy at least 1 unit of stock',
+                    text: '',
+                })
+                return;
+            }
+            let googlValue = googlQuantity * googlData;
+            Swal.fire({
+                icon: 'success',
+                title: googlQuantity + ' GOOGL class "A" shares sold in $' + googlData + ' for a total of $' + googlValue,
+                text: '',
+            });
+        } else {
+            return;
+            // Swal.fire({
+            //     icon: 'error',
+            //     title: 'Insufficient funds in your savings account',
+            //     text: '',
+            // });
+        }
+    });
+}
+googl_sell_button.addEventListener('click', googlSell)
+
+function wmtSell() {
+    const wmtData = sessionStorage.getItem('wmt-data');
+    Swal.fire({
+        title: "You are about to sell WMT in $" + wmtData,
+        text: "Insert quantity of stock below",
+        input: 'text',
+        inputAttributes: {
+            id: 'wmt-quantity'
+        },
+        showCancelButton: true,
+        closeOnCancel: true
+    }).then((result) => {
+        if (result.value) {
+            let wmtQuantity = document.getElementById('wmt-quantity').value;
+            if (isNaN(wmtQuantity) || wmtQuantity === '') {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Please insert a valid number',
+                    text: '',
+                })
+                return;
+            }
+            wmtQuantity = parseInt(wmtQuantity);
+            if (wmtQuantity < 1) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'You need to buy at least 1 unit of stock',
+                    text: '',
+                })
+                return;
+            }
+            let wmtValue = wmtQuantity * wmtData;
+            Swal.fire({
+                icon: 'success',
+                title: wmtQuantity + ' WMT class "A" shares sold in $' + wmtData + ' for a total of $' + wmtValue,
+                text: '',
+            });
+        } else {
+            return;
+            // Swal.fire({
+            //     icon: 'error',
+            //     title: 'Insufficient funds in your savings account',
+            //     text: '',
+            // });
+        }
+    });
+}
+wmt_sell_button.addEventListener('click', wmtSell)
+
+function nvdaSell() {
+    const nvdaData = sessionStorage.getItem('nvda-data');
+    Swal.fire({
+        title: "You are about to sell NVDA in $" + nvdaData,
+        text: "Insert quantity of stock below",
+        input: 'text',
+        inputAttributes: {
+            id: 'nvda-quantity'
+        },
+        showCancelButton: true,
+        closeOnCancel: true
+    }).then((result) => {
+        if (result.value) {
+            let nvdaQuantity = document.getElementById('nvda-quantity').value;
+            if (isNaN(nvdaQuantity) || nvdaQuantity === '') {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Please insert a valid number',
+                    text: '',
+                })
+                return;
+            }
+            nvdaQuantity = parseInt(nvdaQuantity);
+            if (nvdaQuantity < 1) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'You need to buy at least 1 unit of stock',
+                    text: '',
+                })
+                return;
+            }
+            let nvdaValue = nvdaQuantity * nvdaData;
+            Swal.fire({
+                icon: 'success',
+                title: nvdaQuantity + ' NVDA class "A" shares sold in $' + nvdaData + ' for a total of $' + nvdaValue,
+                text: '',
+            });
+        } else {
+            return;
+            // Swal.fire({
+            //     icon: 'error',
+            //     title: 'Insufficient funds in your savings account',
+            //     text: '',
+            // });
+        }
+    });
+}
+nvda_sell_button.addEventListener('click', nvdaSell)
 
 async function showLoading() {
     Swal.fire({
