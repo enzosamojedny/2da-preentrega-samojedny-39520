@@ -316,7 +316,6 @@ function wmtBuy() {
             id: 'wmt-quantity'
         },
         showCancelButton: true
-
     }).then((result) => {
         if (result.value) {
             let wmtQuantity = document.getElementById('wmt-quantity').value;
@@ -338,21 +337,27 @@ function wmtBuy() {
                 return;
             }
             let wmtValue = wmtQuantity * wmtData;
-            Swal.fire({
-                icon: 'success',
-                title: wmtQuantity + ' WMT class "A" shares bought in $' + wmtData + ' for a total of $' + wmtValue,
-                text: '',
-            });
+            if (saldoInversionActualizado >= wmtValue ?? saldoInicial >= wmtValue) {
+                Swal.fire({
+                    icon: 'success',
+                    title: wmtQuantity + ' WMT class "A" shares bought in $' + wmtData + ' for a total of $' + wmtValue,
+                    text: 'Your balance is $ ' + (saldoInversionActualizado - wmtValue),
+                });
+                sessionStorage.setItem('updatedAmount', saldoInversionActualizado - wmtValue);
+                saldoInversionActualizado = parseInt(sessionStorage.getItem('updatedAmount'));
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Insufficient funds in your savings account',
+                    text: '',
+                })
+            }
         } else {
             return;
-            // Swal.fire({
-            //     icon: 'error',
-            //     title: 'Insufficient funds in your savings account',
-            //     text: '',
-            // });
         }
     });
 }
+
 wmt_buy_button.addEventListener('click', wmtBuy)
 
 function nvdaBuy() {
@@ -365,7 +370,6 @@ function nvdaBuy() {
             id: 'nvda-quantity'
         },
         showCancelButton: true
-
     }).then((result) => {
         if (result.value) {
             let nvdaQuantity = document.getElementById('nvda-quantity').value;
@@ -387,18 +391,21 @@ function nvdaBuy() {
                 return;
             }
             let nvdaValue = nvdaQuantity * nvdaData;
-            Swal.fire({
-                icon: 'success',
-                title: nvdaQuantity + ' NVDA class "A" shares bought in $' + nvdaData + ' for a total of $' + nvdaValue,
-                text: '',
-            });
+            if (saldoInversionActualizado >= nvdaValue ?? saldoInicial >= nvdaValue) {
+                Swal.fire({
+                    icon: 'success',
+                    title: nvdaQuantity + ' NVDA class "A" shares bought in $' + nvdaData + ' for a total of $' + nvdaValue,
+                    text: 'Your balance is $ ' + (saldoInversionActualizado - nvdaValue),
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Insufficient funds in your savings account',
+                    text: '',
+                })
+            }
         } else {
             return;
-            // Swal.fire({
-            //     icon: 'error',
-            //     title: 'Insufficient funds in your savings account',
-            //     text: '',
-            // });
         }
     });
 }
@@ -406,6 +413,7 @@ nvda_buy_button.addEventListener('click', nvdaBuy)
 
 function ibmSell() {
     const ibmData = sessionStorage.getItem('ibm-data');
+    const ibmBalance = sessionStorage.getItem('updatedAmount')
     Swal.fire({
         title: "You are about to sell IBM in $" + ibmData,
         text: "Insert quantity of stock below",
@@ -414,7 +422,6 @@ function ibmSell() {
             id: 'ibm-quantity'
         },
         showCancelButton: true
-
     }).then((result) => {
         if (result.value) {
             let ibmQuantity = document.getElementById('ibm-quantity').value;
@@ -436,18 +443,23 @@ function ibmSell() {
                 return;
             }
             let ibmValue = ibmQuantity * ibmData;
-            Swal.fire({
-                icon: 'success',
-                title: ibmQuantity + ' IBM class "A" shares sold in $' + ibmData + ' for a total of $' + ibmValue,
-                text: '',
-            });
+            if (saldoInversionActualizado >= ibmValue ?? saldoInicial >= ibmValue) {
+                Swal.fire({
+                    icon: 'success',
+                    title: ibmQuantity + ' IBM class "A" shares sold in $' + ibmData + ' for a total of $' + ibmValue,
+                    text: 'Your balance is $ ' + (saldoInversionActualizado + ibmValue),
+                });
+                sessionStorage.setItem('updatedAmount', saldoInversionActualizado + ibmValue);
+                saldoInversionActualizado = parseInt(sessionStorage.getItem('updatedAmount'));
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Insufficient funds in your savings account',//stock quantity to be added
+                    text: '',
+                });
+            }
         } else {
             return;
-            // Swal.fire({
-            //     icon: 'error',
-            //     title: 'Insufficient funds in your savings account',
-            //     text: '',
-            // });
         }
     });
 }
@@ -455,6 +467,7 @@ ibm_sell_button.addEventListener('click', ibmSell)
 
 function msftSell() {
     const msftData = sessionStorage.getItem('msft-data');
+    const msftBalance = sessionStorage.getItem('updatedAmount')
     Swal.fire({
         title: "You are about to sell MSFT in $" + msftData,
         text: "Insert quantity of stock below",
@@ -463,7 +476,6 @@ function msftSell() {
             id: 'msft-quantity'
         },
         showCancelButton: true
-
     }).then((result) => {
         if (result.value) {
             let msftQuantity = document.getElementById('msft-quantity').value;
@@ -479,24 +491,29 @@ function msftSell() {
             if (msftQuantity < 1) {
                 Swal.fire({
                     icon: 'error',
-                    title: 'You need to buy at least 1 unit of stock',
+                    title: 'You need to sell at least 1 unit of stock',
                     text: '',
                 })
                 return;
             }
             let msftValue = msftQuantity * msftData;
-            Swal.fire({
-                icon: 'success',
-                title: msftQuantity + ' MSFT class "A" shares sold in $' + msftData + ' for a total of $' + msftValue,
-                text: '',
-            });
+            if (saldoInversionActualizado >= msftValue ?? saldoInicial >= msftValue) {
+                Swal.fire({
+                    icon: 'success',
+                    title: msftQuantity + ' MSFT class "A" shares soldt in $' + msftData + ' for a total of $' + msftValue,
+                    text: 'Your balance is $ ' + (saldoInversionActualizado + msftValue),
+                });
+                sessionStorage.setItem('updatedAmount', saldoInversionActualizado + msftValue);
+                saldoInversionActualizado = parseInt(sessionStorage.getItem('updatedAmount'));
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Insufficient funds in your savings account',
+                    text: '',
+                })
+            }
         } else {
             return;
-            // Swal.fire({
-            //     icon: 'error',
-            //     title: 'Insufficient funds in your savings account',
-            //     text: '',
-            // });
         }
     });
 }
@@ -504,6 +521,7 @@ msft_sell_button.addEventListener('click', msftSell)
 
 function googlSell() {
     const googlData = sessionStorage.getItem('googl-data');
+    const googlBalance = sessionStorage.getItem('updatedAmount')
     Swal.fire({
         title: "You are about to sell GOOGL in $" + googlData,
         text: "Insert quantity of stock below",
@@ -512,7 +530,6 @@ function googlSell() {
             id: 'googl-quantity'
         },
         showCancelButton: true
-
     }).then((result) => {
         if (result.value) {
             let googlQuantity = document.getElementById('googl-quantity').value;
@@ -528,24 +545,29 @@ function googlSell() {
             if (googlQuantity < 1) {
                 Swal.fire({
                     icon: 'error',
-                    title: 'You need to buy at least 1 unit of stock',
+                    title: 'You need to sell at least 1 unit of stock',
                     text: '',
                 })
                 return;
             }
             let googlValue = googlQuantity * googlData;
-            Swal.fire({
-                icon: 'success',
-                title: googlQuantity + ' GOOGL class "A" shares sold in $' + googlData + ' for a total of $' + googlValue,
-                text: '',
-            });
+            if (saldoInversionActualizado >= googlValue ?? saldoInicial >= googlValue) {
+                Swal.fire({
+                    icon: 'success',
+                    title: googlQuantity + ' GOOGL class "A" shares sold in $' + googlData + ' for a total of $' + googlValue,
+                    text: 'Your balance is $ ' + (saldoInversionActualizado + googlValue),
+                });
+                sessionStorage.setItem('updatedAmount', saldoInversionActualizado + googlValue);
+                saldoInversionActualizado = parseInt(sessionStorage.getItem('updatedAmount'));
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Insufficient funds in your savings account',
+                    text: '',
+                })
+            }
         } else {
             return;
-            // Swal.fire({
-            //     icon: 'error',
-            //     title: 'Insufficient funds in your savings account',
-            //     text: '',
-            // });
         }
     });
 }
@@ -561,7 +583,6 @@ function wmtSell() {
             id: 'wmt-quantity'
         },
         showCancelButton: true
-
     }).then((result) => {
         if (result.value) {
             let wmtQuantity = document.getElementById('wmt-quantity').value;
@@ -577,24 +598,29 @@ function wmtSell() {
             if (wmtQuantity < 1) {
                 Swal.fire({
                     icon: 'error',
-                    title: 'You need to buy at least 1 unit of stock',
+                    title: 'You need to sell at least 1 unit of stock',
                     text: '',
                 })
                 return;
             }
             let wmtValue = wmtQuantity * wmtData;
-            Swal.fire({
-                icon: 'success',
-                title: wmtQuantity + ' WMT class "A" shares sold in $' + wmtData + ' for a total of $' + wmtValue,
-                text: '',
-            });
+            if (saldoInversionActualizado >= wmtValue ?? saldoInicial >= wmtValue) {
+                Swal.fire({
+                    icon: 'success',
+                    title: wmtQuantity + ' WMT class "A" shares sold in $' + wmtData + ' for a total of $' + wmtValue,
+                    text: 'Your balance is $ ' + (saldoInversionActualizado + wmtValue),
+                });
+                sessionStorage.setItem('updatedAmount', saldoInversionActualizado + wmtValue);
+                saldoInversionActualizado = parseInt(sessionStorage.getItem('updatedAmount'));
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Insufficient funds in your savings account',
+                    text: '',
+                })
+            }
         } else {
             return;
-            // Swal.fire({
-            //     icon: 'error',
-            //     title: 'Insufficient funds in your savings account',
-            //     text: '',
-            // });
         }
     });
 }
@@ -610,7 +636,6 @@ function nvdaSell() {
             id: 'nvda-quantity'
         },
         showCancelButton: true
-
     }).then((result) => {
         if (result.value) {
             let nvdaQuantity = document.getElementById('nvda-quantity').value;
@@ -626,24 +651,29 @@ function nvdaSell() {
             if (nvdaQuantity < 1) {
                 Swal.fire({
                     icon: 'error',
-                    title: 'You need to buy at least 1 unit of stock',
+                    title: 'You need to sell at least 1 unit of stock',
                     text: '',
                 })
                 return;
             }
             let nvdaValue = nvdaQuantity * nvdaData;
-            Swal.fire({
-                icon: 'success',
-                title: nvdaQuantity + ' NVDA class "A" shares sold in $' + nvdaData + ' for a total of $' + nvdaValue,
-                text: '',
-            });
+            if (saldoInversionActualizado >= nvdaValue ?? saldoInicial >= nvdaValue) {
+                Swal.fire({
+                    icon: 'success',
+                    title: nvdaQuantity + ' NVDA class "A" shares sold in $' + nvdaData + ' for a total of $' + nvdaValue,
+                    text: 'Your balance is $ ' + (saldoInversionActualizado + nvdaValue),
+                });
+                sessionStorage.setItem('updatedAmount', saldoInversionActualizado + nvdaValue);
+                saldoInversionActualizado = parseInt(sessionStorage.getItem('updatedAmount'));
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Insufficient funds in your savings account',
+                    text: '',
+                })
+            }
         } else {
             return;
-            // Swal.fire({
-            //     icon: 'error',
-            //     title: 'Insufficient funds in your savings account',
-            //     text: '',
-            // });
         }
     });
 }
