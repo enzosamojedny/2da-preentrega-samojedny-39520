@@ -78,29 +78,42 @@
 
 <body class="loan-body">
     <div class="slider-container">
-        <button class="loan slider-button">Ver mis prestamos / solicitar prestamos</button>
+        <button class="loan slider-button">Active loan portfolio</button>
         <div class="slider-menu">
             <ul class="loan-ul">
-                <button>
-                    <li>12</li>
-                </button>
-                <button>
-                    <li>24</li>
-                </button>
-                <button>
-                    <li>36</li>
-                </button>
-                <button>
-                    <li>48</li>
+                <h6>Select your loan</h6>
+                <button class="loan-btn">
+                    <li></li>
                 </button>
             </ul>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script type="module" src="../src/frontend.js"></script>
-    <script type="module" src="../src/register-form.js"></script>
-    <script type="module" src="../src/loans.js"></script>
-</body>
+    <body class="loan-body">
+        <div class="slider-container">
+            <button class="loan slider-button">Apply for a new loan</button>
+            <div class="slider-menu">
+                <ul class="loan-ul">
+                    <h6 class="loan-h6">Choose desired loan payment plan</h6>
+                    <button class="loan-btn">
+                        <li>12 months</li>
+                    </button>
+                    <button class="loan-btn">
+                        <li>24 months</li>
+                    </button>
+                    <button class="loan-btn">
+                        <li>36 months</li>
+                    </button>
+                    <button class="loan-btn">
+                        <li>48 months</li>
+                    </button>
+                </ul>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script type="module" src="../src/frontend.js"></script>
+        <script type="module" src="../src/register-form.js"></script>
+        <script type="module" src="../src/loans.js"></script>
+    </body>
 
 </html>

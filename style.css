@@ -349,6 +349,21 @@ h6 {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   margin-right: 20px;
   gap:10px;
+}
+.loan-btn{
+  width: 100px;
+}
+.loan-btn:hover{
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.9);
+}
+.loan-h6{
+text-align:center;
+}
+th[data-bs-toggle="tooltip"],
+td[data-bs-toggle="tooltip"],
+button[data-bs-toggle="tooltip"] {
+    cursor: pointer;
 }
