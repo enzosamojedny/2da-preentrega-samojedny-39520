@@ -140,6 +140,7 @@ const wmt_sell_button = document.getElementById('sell-wmt')
 
 function ibmBuy() {
     const ibmData = sessionStorage.getItem('ibm-data');
+    const ibmBalance = sessionStorage.getItem('updatedAmount')
     Swal.fire({
         title: "You are about to buy IBM in $" + ibmData,
         text: "Insert quantity of stock below",
@@ -175,11 +176,8 @@ function ibmBuy() {
                     title: ibmQuantity + ' IBM class "A" shares bought in $' + ibmData + ' for a total of $' + ibmValue,
                     text: 'Your balance is $ ' + (saldoInversionActualizado - ibmValue),
                 });
-                if (sessionStorage.getItem('updatedAmount') === true) {
-                    return parseInt(sessionStorage.getItem('updatedAmount'));
-                } else {
-                    sessionStorage.setItem('updatedAmount', saldoInversionActualizado - ibmValue);
-                }
+                sessionStorage.setItem('updatedAmount', saldoInversionActualizado - ibmValue);
+                saldoInversionActualizado = parseInt(sessionStorage.getItem('updatedAmount'));
             } else {
                 Swal.fire({
                     icon: 'error',
@@ -189,14 +187,19 @@ function ibmBuy() {
             }
         } else {
             return;
-
         }
     });
 }
-ibm_buy_button.addEventListener('click', ibmBuy)
+
+function ibmBuyButton() {
+    ibm_buy_button.removeEventListener('click', ibmBuy);
+    ibm_buy_button.addEventListener('click', ibmBuy)
+}
+ibmBuyButton()
 
 function msftBuy() {
     const msftData = sessionStorage.getItem('msft-data');
+    const msftBalance = sessionStorage.getItem('updatedAmount')
     Swal.fire({
         title: "You are about to buy MSFT in $" + msftData,
         text: "Insert quantity of stock below",
@@ -205,7 +208,6 @@ function msftBuy() {
             id: 'msft-quantity'
         },
         showCancelButton: true
-
     }).then((result) => {
         if (result.value) {
             let msftQuantity = document.getElementById('msft-quantity').value;
@@ -227,27 +229,32 @@ function msftBuy() {
                 return;
             }
             let msftValue = msftQuantity * msftData;
-
-
-            Swal.fire({
-                icon: 'success',
-                title: msftQuantity + ' MSFT class "A" shares bought in $' + msftData + ' for a total of $' + msftValue,
-                text: '',
-            });
+            if (saldoInversionActualizado >= msftValue ?? saldoInicial >= msftValue) {
+                Swal.fire({
+                    icon: 'success',
+                    title: msftQuantity + ' MSFT class "A" shares bought in $' + msftData + ' for a total of $' + msftValue,
+                    text: 'Your balance is $ ' + (saldoInversionActualizado - msftValue),
+                });
+                sessionStorage.setItem('updatedAmount', saldoInversionActualizado - msftValue);
+                saldoInversionActualizado = parseInt(sessionStorage.getItem('updatedAmount'));
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Insufficient funds in your savings account',
+                    text: '',
+                })
+            }
         } else {
             return;
-            // Swal.fire({
-            //     icon: 'error',
-            //     title: 'Insufficient funds in your savings account',
-            //     text: '',
-            // });
         }
     });
 }
+
 msft_buy_button.addEventListener('click', msftBuy)
 
 function googlBuy() {
     const googlData = sessionStorage.getItem('googl-data');
+    const googlBalance = sessionStorage.getItem('updatedAmount')
     Swal.fire({
         title: "You are about to buy GOOGL in $" + googlData,
         text: "Insert quantity of stock below",
@@ -256,7 +263,6 @@ function googlBuy() {
             id: 'googl-quantity'
         },
         showCancelButton: true
-
     }).then((result) => {
         if (result.value) {
             let googlQuantity = document.getElementById('googl-quantity').value;
@@ -278,18 +284,23 @@ function googlBuy() {
                 return;
             }
             let googlValue = googlQuantity * googlData;
-            Swal.fire({
-                icon: 'success',
-                title: googlQuantity + ' GOOGL class "A" shares bought in $' + googlData + ' for a total of $' + googlValue,
-                text: '',
-            });
+            if (saldoInversionActualizado >= googlValue ?? saldoInicial >= googlValue) {
+                Swal.fire({
+                    icon: 'success',
+                    title: googlQuantity + ' GOOGL class "A" shares bought in $' + googlData + ' for a total of $' + googlValue,
+                    text: 'Your balance is $ ' + (saldoInversionActualizado - googlValue),
+                });
+                sessionStorage.setItem('updatedAmount', saldoInversionActualizado - googlValue);
+                saldoInversionActualizado = parseInt(sessionStorage.getItem('updatedAmount'));
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Insufficient funds in your savings account',
+                    text: '',
+                })
+            }
         } else {
             return;
-            // Swal.fire({
-            //     icon: 'error',
-            //     title: 'Insufficient funds in your savings account',
-            //     text: '',
-            // });
         }
     });
 }

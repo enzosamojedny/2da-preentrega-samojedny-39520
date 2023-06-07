@@ -73,7 +73,7 @@ transferButton.addEventListener('click', function () {
                         'Transfer sent to recipient',
                         '',
                         'success'
-                    )
+                    )///////////////THE PROBLEM IS HERE!
                     if (sessionStorage.getItem('updatedAmount') == true) {
                         return sessionStorage.getItem('updatedAmount');
                     } else {
@@ -150,11 +150,9 @@ transferButton.addEventListener('click', function () {
                         '',
                         'success'
                     )
-                    if (sessionStorage.getItem('updatedAmount') == true) {
-                        return sessionStorage.getItem('updatedAmount');
-                    } else {
-                        sessionStorage.setItem('updatedAmount', exportedVariables.cuentaDeCliente.verSaldo());
-                    }
+                    sessionStorage.setItem('updatedAmount', saldoInversionActualizado - ibmValue);
+                    saldoInversionActualizado = parseFloat(sessionStorage.getItem('updatedAmount'));
+
                     let divLaura = document.createElement('div');
                     divLaura.id = 'resumeLaura';
                     divLaura.className = 'resume-container';
