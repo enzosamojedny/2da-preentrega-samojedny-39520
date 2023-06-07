@@ -21,11 +21,8 @@ document.addEventListener('DOMContentLoaded', function () {
         const clienteTestJSON = JSON.stringify(clienteTest);
         sessionStorage.setItem('clienteTest', clienteTestJSON);
         window.location.href = '../frontend.html';
-
-
     });
 });
-
 //PROGRESS BAR
 $(document).ready(function () {
     let current_fs, next_fs, previous_fs;
