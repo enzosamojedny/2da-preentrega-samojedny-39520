@@ -12,9 +12,15 @@ if (exportedVariables) {
             toast.addEventListener('mouseleave', Swal.resumeTimer)
         }
     })
-
-    Toast.fire({
-        icon: 'success',
-        title: 'Signed in successfully'
-    })
+    if (exportedVariables.nombreCliente == "Micaela Cuto") {
+        Toast.fire({
+            icon: 'success',
+            title: 'Bienvenida, belleza correntina, y buenos días!'
+        })
+    } else {
+        Toast.fire({
+            icon: 'success',
+            title: 'Signed in successfully'
+        })
+    }
 }
