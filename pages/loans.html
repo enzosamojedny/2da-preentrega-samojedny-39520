@@ -82,38 +82,33 @@
         <div class="slider-menu">
             <ul class="loan-ul">
                 <h6>Select your loan</h6>
-                <button class="loan-btn">
-                    <li></li>
-                </button>
+                <li><button class="loan-btn">Loan Option 1</button></li>
+                <li><button class="loan-btn">Loan Option 2</button></li>
+                <li><button class="loan-btn">Loan Option 3</button></li>
+                <!-- Add more loan options as needed -->
             </ul>
         </div>
     </div>
-
-    <body class="loan-body">
-        <div class="slider-container">
-            <button class="loan slider-button">Apply for a new loan</button>
-            <div class="slider-menu">
-                <ul class="loan-ul">
-                    <h6 class="loan-h6">Choose desired loan payment plan</h6>
-                    <button class="loan-btn">
-                        <li>12 months</li>
-                    </button>
-                    <button class="loan-btn">
-                        <li>24 months</li>
-                    </button>
-                    <button class="loan-btn">
-                        <li>36 months</li>
-                    </button>
-                    <button class="loan-btn">
-                        <li>48 months</li>
-                    </button>
-                </ul>
-            </div>
+    <div class="slider-container">
+        <button class="loan slider-button">Apply for a new loan</button>
+        <div class="slider-menu">
+            <ul class="loan-ul">
+                <h6 class="loan-h6">Choose desired loan payment plan</h6>
+                <li><button class="loan-btn">12 months</button></li>
+                <li><button class="loan-btn">24 months</button></li>
+                <li><button class="loan-btn">36 months</button></li>
+                <li><button class="loan-btn">48 months</button></li>
+                <!-- Add more payment plan options as needed -->
+            </ul>
+            <form class="loan-form">
+                <!-- Add your form fields here -->
+            </form>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script type="module" src="../src/frontend.js"></script>
-        <script type="module" src="../src/register-form.js"></script>
-        <script type="module" src="../src/loans.js"></script>
-    </body>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="module" src="../src/frontend.js"></script>
+    <script type="module" src="../src/loans.js"></script>
+</body>
 
 </html>
