@@ -314,6 +314,7 @@ h6 {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: row;
 }
 .slider-container {
   position: relative;
@@ -321,16 +322,13 @@ h6 {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
 }
-
 .slider-button {
   background-color: #333;
   color: #fff;
   padding: 10px;
   cursor: pointer;
 }
-
 .slider-menu {
   display: none;
   background-color: #f9f9f9;
