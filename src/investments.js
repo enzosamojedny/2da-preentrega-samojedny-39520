@@ -140,7 +140,6 @@ const wmt_sell_button = document.getElementById('sell-wmt')
 
 function ibmBuy() {
     const ibmData = sessionStorage.getItem('ibm-data');
-    const ibmBalance = sessionStorage.getItem('updatedAmount')
     Swal.fire({
         title: "You are about to buy IBM in $" + ibmData,
         text: "Insert quantity of stock below",
@@ -199,7 +198,6 @@ ibmBuyButton()
 
 function msftBuy() {
     const msftData = sessionStorage.getItem('msft-data');
-    const msftBalance = sessionStorage.getItem('updatedAmount')
     Swal.fire({
         title: "You are about to buy MSFT in $" + msftData,
         text: "Insert quantity of stock below",
@@ -254,7 +252,6 @@ msft_buy_button.addEventListener('click', msftBuy)
 
 function googlBuy() {
     const googlData = sessionStorage.getItem('googl-data');
-    const googlBalance = sessionStorage.getItem('updatedAmount')
     Swal.fire({
         title: "You are about to buy GOOGL in $" + googlData,
         text: "Insert quantity of stock below",
