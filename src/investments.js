@@ -22,7 +22,6 @@ async function IBM_FUNCTION() {
         IBMp.textContent = lastPrice || sessionIBM;
         IBMID.appendChild(IBMp);
     } catch (error) {
-        console.log(error);
         const IBMID = document.getElementById('IBM-OPEN');
         let IBMp = document.createElement('p');
         IBMp.className = 'IBMp-JS';
@@ -44,7 +43,6 @@ async function MSFT_FUNCTION() {
         MSFTp.textContent = lastPrice || sessionMSFT;
         MSFTID.appendChild(MSFTp);
     } catch (error) {
-        console.log(error);
         const MSFTID = document.getElementById('MSFT-OPEN');
         let MSFTp = document.createElement('p');
         MSFTp.className = 'MSFTp-JS';
@@ -66,7 +64,6 @@ async function GOOGL_FUNCTION() {
         GOOGLp.textContent = lastPrice || sessionGOOGL;
         GOOGLID.appendChild(GOOGLp);
     } catch (error) {
-        console.log(error);
         const GOOGLID = document.getElementById('GOOGL-OPEN');
         let GOOGLp = document.createElement('p');
         GOOGLp.className = 'GOOGLp-JS';
@@ -88,7 +85,6 @@ async function WMT_FUNCTION() {
         WMTp.textContent = lastPrice || sessionWMT;
         WMTID.appendChild(WMTp);
     } catch (error) {
-        console.log(error);
         const WMTID = document.getElementById('WMT-OPEN');
         let WMTp = document.createElement('p');
         WMTp.className = 'WMTp-JS';
@@ -110,7 +106,6 @@ async function NVDA_FUNCTION() {
         NVDAp.textContent = lastPrice || sessionNVDA;
         NVDAID.appendChild(NVDAp);
     } catch (error) {
-        console.log(error);
         const NVDAID = document.getElementById('NVDA-OPEN');
         let NVDAp = document.createElement('p');
         NVDAp.className = 'NVDAp-JS';
@@ -189,7 +184,6 @@ function ibmBuy() {
         }
     });
 }
-
 function ibmBuyButton() {
     ibm_buy_button.removeEventListener('click', ibmBuy);
     ibm_buy_button.addEventListener('click', ibmBuy)
@@ -247,7 +241,6 @@ function msftBuy() {
         }
     });
 }
-
 msft_buy_button.addEventListener('click', msftBuy)
 
 function googlBuy() {
@@ -354,7 +347,6 @@ function wmtBuy() {
         }
     });
 }
-
 wmt_buy_button.addEventListener('click', wmtBuy)
 
 function nvdaBuy() {
@@ -410,7 +402,6 @@ nvda_buy_button.addEventListener('click', nvdaBuy)
 
 function ibmSell() {
     const ibmData = sessionStorage.getItem('ibm-data');
-    const ibmBalance = sessionStorage.getItem('updatedAmount')
     Swal.fire({
         title: "You are about to sell IBM in $" + ibmData,
         text: "Insert quantity of stock below",
@@ -464,7 +455,6 @@ ibm_sell_button.addEventListener('click', ibmSell)
 
 function msftSell() {
     const msftData = sessionStorage.getItem('msft-data');
-    const msftBalance = sessionStorage.getItem('updatedAmount')
     Swal.fire({
         title: "You are about to sell MSFT in $" + msftData,
         text: "Insert quantity of stock below",
@@ -518,7 +508,6 @@ msft_sell_button.addEventListener('click', msftSell)
 
 function googlSell() {
     const googlData = sessionStorage.getItem('googl-data');
-    const googlBalance = sessionStorage.getItem('updatedAmount')
     Swal.fire({
         title: "You are about to sell GOOGL in $" + googlData,
         text: "Insert quantity of stock below",
@@ -696,10 +685,3 @@ async function showLoading() {
     }, 3000);
 }
 showLoading()
-$(document).ready(function () {
-    // Initialize tooltips
-    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-        return new bootstrap.Tooltip(tooltipTriggerEl);
-    });
-});
