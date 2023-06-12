@@ -83,21 +83,47 @@ btn48.addEventListener('click', () => {
     }
 });
 function LoanInputField() {
-    let loanInput = document.getElementById('loan-input').value
+    let loanInput = document.getElementById('loan-input').value;
+    let selectOption = document.getElementById('formControlSelect').value;
     if (isNaN(loanInput) || loanInput === '') {
         Swal.fire({
             icon: 'error',
             title: 'Please insert a valid number',
-            text: '',
-        })
+            text: ''
+        });
         return;
-    }
-    if (loanInput < 10000) {
+    } else if (loanInput < 10000) {
         Swal.fire({
             icon: 'error',
             title: 'You need to request at least $10000',
-            text: '',
-        })
+            text: ''
+        });
         return;
+    } else {
+        Swal.fire({
+            title: 'You are about to ask a loan for $ ' + loanInput + ' for ' + selectOption.toLowerCase(),
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Proceed with transfer'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire(
+                    'Loan added to your savings account',
+                    '',
+                    'success'
+                );
+                sessionStorage.setItem('loan', loanInput);
+            }
+            return;
+        });
     }
 }
+
+let form = document.getElementById('form');
+
+loanSubmitBtn.addEventListener('click', function () {
+    LoanInputField()
+})
