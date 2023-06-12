@@ -24,67 +24,42 @@ $(document).ready(function () {
     $('#form').hide();
     $('#form').submit(function (event) {
         event.preventDefault();
-        let amount = $('#inputAddress').val();
-        sessionStorage.setItem('amount', amount);
         $('#form')[0].reset();
     });
 });
 function handleButton12(form) {
     form.show();
 }
-
 function handleButton24(form) {
     form.show();
 }
-
 function handleButton36(form) {
     form.show();
 }
-
 function handleButton48(form) {
     form.show();
 }
-let btn12 = document.getElementById('12')
-let btn24 = document.getElementById('24')
-let btn36 = document.getElementById('36')
-let btn48 = document.getElementById('48')
+
 let loanSubmitBtn = document.getElementById('loan-submit-btn')
 
-btn12.addEventListener('click', () => {
-    const form = document.getElementById('form')
-    if (form.style.display === 'none') {
-        form.style.display = 'block';
-    } else {
-        form.style.display = 'none';
-    }
+
+$(document).ready(function () {
+    $('#12, #24, #36, #48').click(function () {
+        const form = document.getElementById('form');
+        if (form.style.display === 'none') {
+            form.style.display = 'block';
+        } else {
+            form.style.display = 'none';
+        }
+    });
 });
-btn24.addEventListener('click', () => {
-    const form = document.getElementById('form')
-    if (form.style.display === 'none') {
-        form.style.display = 'block';
-    } else {
-        form.style.display = 'none';
-    }
-});
-btn36.addEventListener('click', () => {
-    const form = document.getElementById('form')
-    if (form.style.display === 'none') {
-        form.style.display = 'block';
-    } else {
-        form.style.display = 'none';
-    }
-});
-btn48.addEventListener('click', () => {
-    const form = document.getElementById('form')
-    if (form.style.display === 'none') {
-        form.style.display = 'block';
-    } else {
-        form.style.display = 'none';
-    }
-});
-function LoanInputField() {
+
+export function LoanInputField() {
     let loanInput = document.getElementById('loan-input').value;
     let selectOption = document.getElementById('formControlSelect').value;
+    const clienteTestString = sessionStorage.getItem('clienteTest');
+    const clienteValue = JSON.parse(clienteTestString);
+    const incomeCliente = clienteValue.incomeCliente;
     if (isNaN(loanInput) || loanInput === '') {
         Swal.fire({
             icon: 'error',
@@ -97,6 +72,13 @@ function LoanInputField() {
             icon: 'error',
             title: 'You need to request at least $10000',
             text: ''
+        });
+        return;
+    } else if (loanInput >= parseFloat(incomeCliente)) {
+        Swal.fire({
+            icon: 'error',
+            title: 'You can not request a loan greater than your gross income',
+            text: 'Your gross income registered is $' + incomeCliente
         });
         return;
     } else {
@@ -121,9 +103,8 @@ function LoanInputField() {
         });
     }
 }
-
-let form = document.getElementById('form');
-
-loanSubmitBtn.addEventListener('click', function () {
-    LoanInputField()
-})
+$(document).ready(function () {
+    $('#loan-submit-btn').click(function () {
+        LoanInputField();
+    });
+});

@@ -6,7 +6,6 @@ export function moneyToUpdate() {
     sessionStorage.setItem('money', money);
     return money;
 }
-
 let check = parseFloat(sessionStorage.getItem('money'))
 
 export function updatedMoney() {
@@ -18,6 +17,8 @@ export function updatedMoney() {
         return updatedCash;
     }
 }
+const clientLoan = sessionStorage.getItem('loan');
+const clientValue = JSON.parse(clientLoan);
 
 function tbE() {
     try {
@@ -29,8 +30,6 @@ function tbE() {
         welcomeDiv.appendChild(h1Welcome);
         let bodyIndex = document.querySelector('#body-index');
         bodyIndex.appendChild(welcomeDiv);
-        //DNI
-        const dniUsuario = exportedVariables.dniCliente
         const cuentaVisible = exportedVariables.cuentaDeCliente;
         const saldoFrontend = document.getElementById('saldo-frontend');
         saldoFrontend.className = 'row form-control'
