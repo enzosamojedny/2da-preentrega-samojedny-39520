@@ -97,7 +97,7 @@ export function LoanInputField() {
                     '',
                     'success'
                 );
-                sessionStorage.setItem('loan', loanInput);
+                sessionStorage.setItem('loan', parseFloat(loanInput));
             }
             return;
         });

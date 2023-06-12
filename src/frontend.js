@@ -17,8 +17,17 @@ export function updatedMoney() {
         return updatedCash;
     }
 }
-const clientLoan = sessionStorage.getItem('loan');
-const clientValue = JSON.parse(clientLoan);
+let clientLoan = sessionStorage.getItem('loan');
+console.log(typeof clientLoan)
+
+function moneyLoan() {
+    if (clientLoan === null) {
+        return 0;
+    } else {
+        let valueLoan = isNaN(clientLoan) ? 0 : parseFloat(clientLoan).toFixed(2);
+        return valueLoan;
+    }
+}
 
 function tbE() {
     try {
@@ -37,17 +46,20 @@ function tbE() {
         pCuenta.textContent = cuentaVisible.numeroCuenta
         saldoFrontend.appendChild(pCuenta)
         let psaldo = document.createElement('p')
-        let updatedMoneyValue = parseFloat(updatedMoney());
-        if (updatedMoneyValue === null || isNaN(updatedMoneyValue) || updatedMoneyValue === undefined) {
-            psaldo.textContent = "$ " + check
+        let updatedMoneyValue = isNaN(updatedMoney()) ? 0 : parseFloat(updatedMoney()).toFixed(2);
+        let suma = parseFloat(check) + parseFloat(moneyLoan());
+        if (updatedMoneyValue === null || updatedMoneyValue === undefined) {
+            psaldo.textContent = "$ " + suma
         } else {
-            psaldo.textContent = "$ " + updatedMoneyValue
+            let sum = parseFloat(updatedMoneyValue) + parseFloat(moneyLoan());
+            psaldo.textContent = "$ " + sum
         }
         saldoFrontend.appendChild(psaldo)
     } catch (error) {
     }
 }
 tbE()
+
 
 //NAVBAR ANIMATION
 $(window).scroll(function () {
