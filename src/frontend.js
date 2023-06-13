@@ -1,34 +1,44 @@
 import { userData } from './transfer2.js';
-const exportedVariables = userData()
+const exportedVariables = userData();
+
+export function moneyLoan() {
+    let clientLoan = sessionStorage.getItem('loan');
+    if (clientLoan === null) {
+        return 0;
+    } else {
+        let valueLoan = isNaN(clientLoan) ? 0 : parseFloat(clientLoan).toFixed(2);
+        let sum = exportedVariables.cuentaDeCliente.depositoEnCuenta(parseFloat(valueLoan));
+        sessionStorage.removeItem('loan')
+        return sum;
+    }
+}
 
 export function moneyToUpdate() {
     let money = exportedVariables.cuentaDeCliente.verSaldo();
     sessionStorage.setItem('money', money);
     return money;
 }
-let check = parseFloat(sessionStorage.getItem('money'))
+
+let check = parseFloat(sessionStorage.getItem('money'));
 
 export function updatedMoney() {
     let updatedCash = parseFloat(sessionStorage.getItem('updatedAmount'));
+    let loanValue = sessionStorage.getItem('loan');
+    let parsedLoanValue = parseFloat(loanValue);
     if (isNaN(updatedCash)) {
         let moneySession = moneyToUpdate();
         return moneySession;
     } else {
-        return updatedCash;
+        if (!isNaN(parsedLoanValue) && !isNaN(updatedCash)) {
+            let newAmount = updatedCash + parsedLoanValue;
+            sessionStorage.setItem('updatedAmount', newAmount);
+            sessionStorage.removeItem('loan')
+            return newAmount;
+        } else {
+            return updatedCash
+        }
     }
 }
-let clientLoan = sessionStorage.getItem('loan');
-console.log(typeof clientLoan)
-
-function moneyLoan() {
-    if (clientLoan === null) {
-        return 0;
-    } else {
-        let valueLoan = isNaN(clientLoan) ? 0 : parseFloat(clientLoan).toFixed(2);
-        return valueLoan;
-    }
-}
-
 function tbE() {
     try {
         let welcomeDiv = document.createElement('div');
@@ -47,12 +57,10 @@ function tbE() {
         saldoFrontend.appendChild(pCuenta)
         let psaldo = document.createElement('p')
         let updatedMoneyValue = isNaN(updatedMoney()) ? 0 : parseFloat(updatedMoney()).toFixed(2);
-        let suma = parseFloat(check) + parseFloat(moneyLoan());
         if (updatedMoneyValue === null || updatedMoneyValue === undefined) {
-            psaldo.textContent = "$ " + suma
+            psaldo.textContent = "$ " + check
         } else {
-            let sum = parseFloat(updatedMoneyValue) + parseFloat(moneyLoan());
-            psaldo.textContent = "$ " + sum
+            psaldo.textContent = "$ " + updatedMoneyValue
         }
         saldoFrontend.appendChild(psaldo)
     } catch (error) {

@@ -5,6 +5,8 @@ const urlGOOGL = 'https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY_
 const urlNVDA = 'https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY_ADJUSTED&symbol=NVDA&apikey=0Y9J544VII9BYP7K';
 const urlWMT = 'https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY_ADJUSTED&symbol=WMT&apikey=0Y9J544VII9BYP7K';
 import { moneyToUpdate, updatedMoney } from './frontend.js';
+
+
 let saldoInversionActualizado = updatedMoney()
 let saldoInicial = moneyToUpdate()
 

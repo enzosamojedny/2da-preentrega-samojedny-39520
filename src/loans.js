@@ -39,10 +39,6 @@ function handleButton36(form) {
 function handleButton48(form) {
     form.show();
 }
-
-let loanSubmitBtn = document.getElementById('loan-submit-btn')
-
-
 $(document).ready(function () {
     $('#12, #24, #36, #48').click(function () {
         const form = document.getElementById('form');
@@ -54,27 +50,38 @@ $(document).ready(function () {
     });
 });
 
+
+
+//NOW LOANS NEED TO BE SAVED IN A DIFFERENT KEY EVERY TIME THEY ARE CLICKED,             
+//BECAUSE RIGHT NOW LOANS GET OVERWRITTEN WHEN YOU TAKE A NEW ONE                        
+//AND THEY NEED TO CONSIDER WHICH BUTTON WAS CLICKED, SUM THEM ALL AND UPDATE THE VALUE  
+//RIGHT NOW MONEY IS ONLY DISPLAYD IN FRONTEND.JS
+//BUT LOAN MONEY SHOULD BE ADDED TO ALL PAGES
+//one way to do this is to sum loan + updatedAmount
+
+
 export function LoanInputField() {
     let loanInput = document.getElementById('loan-input').value;
+    var loanAmount = parseFloat(loanInput);
     let selectOption = document.getElementById('formControlSelect').value;
     const clienteTestString = sessionStorage.getItem('clienteTest');
     const clienteValue = JSON.parse(clienteTestString);
     const incomeCliente = clienteValue.incomeCliente;
-    if (isNaN(loanInput) || loanInput === '') {
+    if (isNaN(loanAmount) || loanAmount === '') {
         Swal.fire({
             icon: 'error',
             title: 'Please insert a valid number',
             text: ''
         });
         return;
-    } else if (loanInput < 10000) {
+    } else if (loanAmount < 10000) {
         Swal.fire({
             icon: 'error',
             title: 'You need to request at least $10000',
             text: ''
         });
         return;
-    } else if (loanInput >= parseFloat(incomeCliente)) {
+    } else if (loanAmount >= parseFloat(incomeCliente)) {
         Swal.fire({
             icon: 'error',
             title: 'You can not request a loan greater than your gross income',
@@ -83,7 +90,7 @@ export function LoanInputField() {
         return;
     } else {
         Swal.fire({
-            title: 'You are about to ask a loan for $ ' + loanInput + ' for ' + selectOption.toLowerCase(),
+            title: 'You are about to ask a loan for $ ' + loanAmount + ' for ' + selectOption.toLowerCase(),
             text: "You won't be able to revert this!",
             icon: 'warning',
             showCancelButton: true,
@@ -97,7 +104,7 @@ export function LoanInputField() {
                     '',
                     'success'
                 );
-                sessionStorage.setItem('loan', parseFloat(loanInput));
+                sessionStorage.setItem('loan', parseFloat(loanAmount));
             }
             return;
         });

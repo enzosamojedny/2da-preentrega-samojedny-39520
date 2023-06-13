@@ -1,7 +1,10 @@
 import { CuentaCorriente, Cliente } from './classes.js';
 import { userData } from './transfer2.js';
 import { updatedMoney } from './frontend.js';
+
 const exportedVariables = userData()
+let saldoImportado = updatedMoney()
+
 const date = moment().format('LLL');
 const cliente1 = new Cliente("Pablo Lescano", "38.112.194");
 const cliente2 = new Cliente("Laura Gomez", "23.456.321");
@@ -11,13 +14,12 @@ const h6DisplayData = document.querySelector('.cuenta-cliente')
 let mainSelect = document.querySelector('select');
 const transferButton = document.querySelector('.transfer-button')
 const saldoClienteBtn = document.getElementById('saldo-cliente-btn')
-let saldoImportado = updatedMoney()
 
 h6DisplayData.textContent = "Cuenta Cliente " + exportedVariables.nombreCliente
 
 saldoClienteBtn.addEventListener('click', function () {
     let saldoClienteP = document.getElementById('saldo-cliente-p')
-    let saldoActualizado = updatedMoney()
+    let saldoActualizado = parseFloat(updatedMoney());
     saldoClienteP.textContent = "Saldo: " + saldoActualizado;
     return;
 })
@@ -73,7 +75,7 @@ transferButton.addEventListener('click', function () {
                         'Transfer sent to recipient',
                         '',
                         'success'
-                    )///////////////THE PROBLEM IS HERE!
+                    )
                     sessionStorage.setItem('updatedAmount', saldoImportado - transferirCant);
                     saldoImportado = parseFloat(sessionStorage.getItem('updatedAmount'));
 
