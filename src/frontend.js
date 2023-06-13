@@ -18,7 +18,6 @@ export function moneyToUpdate() {
     sessionStorage.setItem('money', money);
     return money;
 }
-
 let check = parseFloat(sessionStorage.getItem('money'));
 
 export function updatedMoney() {

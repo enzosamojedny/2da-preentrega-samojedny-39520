@@ -5,13 +5,13 @@ $(document).ready(function () {
         menu.siblings('.slider-menu').removeClass('show');
         let form = menu.find('.loan-form');
         let buttonId = $(this).attr('id');
-        if (buttonId === '12') {
+        if (buttonId === 'twelve') {
             handleButton12(form);
-        } else if (buttonId === '24') {
+        } else if (buttonId === 'twenty-four') {
             handleButton24(form);
-        } else if (buttonId === '36') {
+        } else if (buttonId === 'thirty-six') {
             handleButton36(form);
-        } else if (buttonId === '48') {
+        } else if (buttonId === 'forty-eight') {
             handleButton48(form);
         } else {
             form.hide();
@@ -40,7 +40,7 @@ function handleButton48(form) {
     form.show();
 }
 $(document).ready(function () {
-    $('#12, #24, #36, #48').click(function () {
+    $('#twelve, #twenty-four, #thirty-six, #forty-eight').click(function () {
         const form = document.getElementById('form');
         if (form.style.display === 'none') {
             form.style.display = 'block';
@@ -100,6 +100,34 @@ export function LoanInputField() {
         });
     }
 }
+const loan1 = document.getElementById('loan-1')
+const loan2 = document.getElementById('loan-2')
+const loan3 = document.getElementById('loan-3')
+function Twelve() {
+    const button = document.getElementById('twelve')
+    button.addEventListener('click', function () {
+    })
+}
+function TwentyFour() {
+    const button2 = document.getElementById('twenty-four')
+    button2.addEventListener('click', function () {
+    })
+}
+function ThirtySix() {
+    const button3 = document.getElementById('thirty-six')
+    button3.addEventListener('click', function () {
+    })
+}
+function FortyEight() {
+    const button4 = document.getElementById('forty-eight')
+    button4.addEventListener('click', function () {
+    })
+}
+Twelve();
+TwentyFour();
+ThirtySix();
+FortyEight();
+
 $(document).ready(function () {
     $('#loan-submit-btn').click(function () {
         LoanInputField();

@@ -132,8 +132,6 @@ const googl_sell_button = document.getElementById('sell-googl')
 const nvda_sell_button = document.getElementById('sell-nvda')
 const wmt_sell_button = document.getElementById('sell-wmt')
 
-//i should make an async function with a timeout to wait for the function call which might take
-//2 or 3 seconds, in order to avoid getItem() to be null
 
 function ibmBuy() {
     const ibmData = sessionStorage.getItem('ibm-data');
@@ -172,6 +170,14 @@ function ibmBuy() {
                     title: ibmQuantity + ' IBM class "A" shares bought in $' + ibmData + ' for a total of $' + ibmValue,
                     text: 'Your balance is $ ' + (saldoInversionActualizado - ibmValue),
                 });
+                let isIbmInSessionStorage = sessionStorage.getItem('ibmBought')
+                if (isIbmInSessionStorage === null || isIbmInSessionStorage === undefined) {
+                    sessionStorage.setItem('ibmBought', ibmQuantity)
+                } else {
+                    let existingQuantity = parseFloat(isIbmInSessionStorage);
+                    let newQuantity = existingQuantity + ibmQuantity;
+                    sessionStorage.setItem('ibmBought', newQuantity);
+                }
                 sessionStorage.setItem('updatedAmount', saldoInversionActualizado - ibmValue);
                 saldoInversionActualizado = parseInt(sessionStorage.getItem('updatedAmount'));
             } else {
@@ -229,6 +235,14 @@ function msftBuy() {
                     title: msftQuantity + ' MSFT class "A" shares bought in $' + msftData + ' for a total of $' + msftValue,
                     text: 'Your balance is $ ' + (saldoInversionActualizado - msftValue),
                 });
+                let isMsftInSessionStorage = sessionStorage.getItem('msftBought')
+                if (isMsftInSessionStorage === null || isMsftInSessionStorage === undefined) {
+                    sessionStorage.setItem('msftBought', msftQuantity)
+                } else {
+                    let existingQuantity = parseFloat(isMsftInSessionStorage);
+                    let newQuantity = existingQuantity + msftQuantity;
+                    sessionStorage.setItem('msftBought', newQuantity);
+                }
                 sessionStorage.setItem('updatedAmount', saldoInversionActualizado - msftValue);
                 saldoInversionActualizado = parseInt(sessionStorage.getItem('updatedAmount'));
             } else {
@@ -282,6 +296,15 @@ function googlBuy() {
                     title: googlQuantity + ' GOOGL class "A" shares bought in $' + googlData + ' for a total of $' + googlValue,
                     text: 'Your balance is $ ' + (saldoInversionActualizado - googlValue),
                 });
+
+                let isGooglInSessionStorage = sessionStorage.getItem('googlBought')
+                if (isGooglInSessionStorage === null || isGooglInSessionStorage === undefined) {
+                    sessionStorage.setItem('googlBought', googlQuantity)
+                } else {
+                    let existingQuantity = parseFloat(isGooglInSessionStorage);
+                    let newQuantity = existingQuantity + googlQuantity;
+                    sessionStorage.setItem('googlBought', newQuantity);
+                }
                 sessionStorage.setItem('updatedAmount', saldoInversionActualizado - googlValue);
                 saldoInversionActualizado = parseInt(sessionStorage.getItem('updatedAmount'));
             } else {
@@ -335,6 +358,14 @@ function wmtBuy() {
                     title: wmtQuantity + ' WMT class "A" shares bought in $' + wmtData + ' for a total of $' + wmtValue,
                     text: 'Your balance is $ ' + (saldoInversionActualizado - wmtValue),
                 });
+                let isWmtInSessionStorage = sessionStorage.getItem('wmtBought')
+                if (isWmtInSessionStorage === null || isWmtInSessionStorage === undefined) {
+                    sessionStorage.setItem('wmtBought', wmtQuantity)
+                } else {
+                    let existingQuantity = parseFloat(isWmtInSessionStorage);
+                    let newQuantity = existingQuantity + wmtQuantity;
+                    sessionStorage.setItem('wmtBought', newQuantity);
+                }
                 sessionStorage.setItem('updatedAmount', saldoInversionActualizado - wmtValue);
                 saldoInversionActualizado = parseInt(sessionStorage.getItem('updatedAmount'));
             } else {
@@ -388,6 +419,16 @@ function nvdaBuy() {
                     title: nvdaQuantity + ' NVDA class "A" shares bought in $' + nvdaData + ' for a total of $' + nvdaValue,
                     text: 'Your balance is $ ' + (saldoInversionActualizado - nvdaValue),
                 });
+                let isNvdaInSessionStorage = sessionStorage.getItem('nvdaBought')
+                if (isNvdaInSessionStorage === null || isNvdaInSessionStorage === undefined) {
+                    sessionStorage.setItem('nvdaBought', nvdaQuantity)
+                } else {
+                    let existingQuantity = parseFloat(isNvdaInSessionStorage);
+                    let newQuantity = existingQuantity + nvdaQuantity;
+                    sessionStorage.setItem('nvdaBought', newQuantity);
+                }
+                sessionStorage.setItem('updatedAmount', saldoInversionActualizado - nvdaValue);
+                saldoInversionActualizado = parseInt(sessionStorage.getItem('updatedAmount'));
             } else {
                 Swal.fire({
                     icon: 'error',

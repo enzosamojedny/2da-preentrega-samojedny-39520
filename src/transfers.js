@@ -19,7 +19,7 @@ h6DisplayData.textContent = "Cuenta Cliente " + exportedVariables.nombreCliente
 
 saldoClienteBtn.addEventListener('click', function () {
     let saldoClienteP = document.getElementById('saldo-cliente-p')
-    let saldoActualizado = parseFloat(updatedMoney());
+    let saldoActualizado = parseFloat(updatedMoney()).toFixed(2);
     saldoClienteP.textContent = "Saldo: " + saldoActualizado;
     return;
 })
