@@ -50,16 +50,6 @@ $(document).ready(function () {
     });
 });
 
-
-
-//NOW LOANS NEED TO BE SAVED IN A DIFFERENT KEY EVERY TIME THEY ARE CLICKED,             
-//BECAUSE RIGHT NOW LOANS GET OVERWRITTEN WHEN YOU TAKE A NEW ONE                        
-//AND THEY NEED TO CONSIDER WHICH BUTTON WAS CLICKED, SUM THEM ALL AND UPDATE THE VALUE  
-//RIGHT NOW MONEY IS ONLY DISPLAYD IN FRONTEND.JS
-//BUT LOAN MONEY SHOULD BE ADDED TO ALL PAGES
-//one way to do this is to sum loan + updatedAmount
-
-
 export function LoanInputField() {
     let loanInput = document.getElementById('loan-input').value;
     var loanAmount = parseFloat(loanInput);
