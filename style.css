@@ -78,6 +78,8 @@ h6 {
 .body-wrapper {
   display: flex;
   justify-content: center;
+  flex-direction: row;
+  align-items: center;
 }
 /*FRONTEND*/
 .saldo-container {
@@ -367,4 +369,7 @@ button[data-bs-toggle="tooltip"] {
 }.form-form{
   margin-top: 150px;
   
+}.stock-container{
+  margin-top: 100px;
+  margin-right: 10px;
 }

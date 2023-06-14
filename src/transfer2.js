@@ -9,7 +9,7 @@ export function userData() {
     const nombreCliente = clienteTest.nombreCliente;
     const dniUsuario = clienteTest.dniCliente
     const clienteUsuario = new Cliente(nombreCliente, dniUsuario)
-    const cuentaDeCliente = new CuentaCorriente(clienteUsuario, "Starlight Financial", "Cuenta Única 212-23232/9", 10000)
+    const cuentaDeCliente = new CuentaCorriente(clienteUsuario, "Starlight Financial", "Savings Account 212-23232/9", 10000)
     cuentaCliente.textContent = cuentaDeCliente.saldo + "  " + "Cliente" + " " + nombreCliente
     return { nombreCliente, dniUsuario, clienteUsuario, cuentaDeCliente };
 }
