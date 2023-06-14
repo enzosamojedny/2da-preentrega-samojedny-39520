@@ -111,6 +111,22 @@ function tbE() {
         let finalStock = document.createElement('h6');
         finalStock.textContent = "Total: $" + totalValue.toFixed(2);
         stockDiv.appendChild(finalStock);
+
+        if (parseFloat(ibmTotal) === 0) {
+            stockDiv.removeChild(ibmStock);
+        }
+        if (parseFloat(msftTotal) === 0) {
+            stockDiv.removeChild(msftStock);
+        }
+        if (parseFloat(googlTotal) === 0) {
+            stockDiv.removeChild(googlStock);
+        }
+        if (parseFloat(nvdaTotal) === 0) {
+            stockDiv.removeChild(nvdaStock);
+        }
+        if (parseFloat(wmtTotal) === 0) {
+            stockDiv.removeChild(wmtStock);
+        }
     } catch (error) { }
 
 }
