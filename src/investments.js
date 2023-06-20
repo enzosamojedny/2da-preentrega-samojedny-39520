@@ -167,7 +167,7 @@ function ibmBuy() {
             if (saldoInversionActualizado >= ibmValue ?? saldoInicial >= ibmValue) {
                 Swal.fire({
                     icon: 'success',
-                    title: ibmQuantity + ' IBM class "A" shares bought in $' + ibmData + ' for a total of $' + ibmValue,
+                    title: ibmQuantity + ' IBM class "A" shares bought in $' + parseFloat(ibmData).toFixed(2) + ' for a total of $' + parseFloat(ibmValue).toFixed(2),
                     text: 'Your balance is $ ' + (saldoInversionActualizado - ibmValue),
                 });
                 let isIbmInSessionStorage = sessionStorage.getItem('ibmBought')
@@ -464,7 +464,6 @@ function ibmSell() {
                 })
                 return;
             }
-            ibmQuantity = parseInt(ibmQuantity);
             if (ibmQuantity < 1) {
                 Swal.fire({
                     icon: 'error',
@@ -477,15 +476,31 @@ function ibmSell() {
             if (saldoInversionActualizado >= ibmValue ?? saldoInicial >= ibmValue) {
                 Swal.fire({
                     icon: 'success',
-                    title: ibmQuantity + ' IBM class "A" shares sold in $' + ibmData + ' for a total of $' + ibmValue,
+                    title: ibmQuantity + ' IBM class "A" shares sold in $' + parseFloat(ibmData).toFixed(2) + ' for a total of $' + parseFloat(ibmValue).toFixed(2),
                     text: 'Your balance is $ ' + (saldoInversionActualizado + ibmValue),
                 });
                 sessionStorage.setItem('updatedAmount', saldoInversionActualizado + ibmValue);
                 saldoInversionActualizado = parseInt(sessionStorage.getItem('updatedAmount'));
+                let isIbmInSessionStorage = sessionStorage.getItem('ibmBought')
+                if (isIbmInSessionStorage === null || isIbmInSessionStorage === undefined) {
+                    sessionStorage.setItem('ibmBought', ibmQuantity)
+                } else {
+                    if (isIbmInSessionStorage >= ibmQuantity) {
+                        let existingQuantity = parseFloat(isIbmInSessionStorage);
+                        let newQuantity = existingQuantity - ibmQuantity;
+                        sessionStorage.setItem('ibmBought', newQuantity);
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Your available stock is insufficient to meet the quantity of stock intended for sale',
+                            text: '',
+                        });
+                    }
+                }
             } else {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Insufficient funds in your savings account',//stock quantity to be added
+                    title: 'Insufficient funds in your savings account',
                     text: '',
                 });
             }
@@ -521,7 +536,7 @@ function msftSell() {
             if (msftQuantity < 1) {
                 Swal.fire({
                     icon: 'error',
-                    title: 'You need to sell at least 1 unit of stock',
+                    title: 'You need to buy at least 1 unit of stock',
                     text: '',
                 })
                 return;
@@ -530,11 +545,28 @@ function msftSell() {
             if (saldoInversionActualizado >= msftValue ?? saldoInicial >= msftValue) {
                 Swal.fire({
                     icon: 'success',
-                    title: msftQuantity + ' MSFT class "A" shares soldt in $' + msftData + ' for a total of $' + msftValue,
+                    title: msftQuantity + ' MSFT class "A" shares sold in $' + parseFloat(msftData).toFixed(2) + ' for a total of $' + parseFloat(msftValue).toFixed(2),
                     text: 'Your balance is $ ' + (saldoInversionActualizado + msftValue),
                 });
                 sessionStorage.setItem('updatedAmount', saldoInversionActualizado + msftValue);
-                saldoInversionActualizado = parseInt(sessionStorage.getItem('updatedAmount'));
+                saldoInversionActualizado = sessionStorage.getItem('updatedAmount');
+
+                let isMsftInSessionStorage = sessionStorage.getItem('msftBought')
+                if (isMsftInSessionStorage === null || isMsftInSessionStorage === undefined) {
+                    sessionStorage.setItem('msftBought', msftQuantity)
+                } else {
+                    if (isMsftInSessionStorage >= msftQuantity) {
+                        let existingQuantity = isMsftInSessionStorage;
+                        let newQuantity = existingQuantity - msftQuantity;
+                        sessionStorage.setItem('msftBought', newQuantity);
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Your available stock is insufficient to meet the quantity of stock intended for sale',
+                            text: '',
+                        });
+                    }
+                }
             } else {
                 Swal.fire({
                     icon: 'error',

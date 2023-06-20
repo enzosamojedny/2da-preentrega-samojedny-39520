@@ -103,33 +103,37 @@ export function LoanInputField() {
 const loan1 = document.getElementById('loan-1')
 const loan2 = document.getElementById('loan-2')
 const loan3 = document.getElementById('loan-3')
-function Twelve() {
-    const button = document.getElementById('twelve')
-    button.addEventListener('click', function () {
-    })
-}
-function TwentyFour() {
-    const button2 = document.getElementById('twenty-four')
-    button2.addEventListener('click', function () {
-    })
-}
-function ThirtySix() {
-    const button3 = document.getElementById('thirty-six')
-    button3.addEventListener('click', function () {
-    })
-}
-function FortyEight() {
-    const button4 = document.getElementById('forty-eight')
-    button4.addEventListener('click', function () {
-    })
-}
-Twelve();
-TwentyFour();
-ThirtySix();
-FortyEight();
+
 
 $(document).ready(function () {
     $('#loan-submit-btn').click(function () {
+
+        function Twelve() {
+            const button = document.getElementById('twelve')
+            button.addEventListener('click', function () {
+                sessionStorage.setItem('loans', 12)
+                loan1.textContent = "test"
+            })
+        }
+        function TwentyFour() {
+            const button2 = document.getElementById('twenty-four')
+            button2.addEventListener('click', function () {
+            })
+        }
+        function ThirtySix() {
+            const button3 = document.getElementById('thirty-six')
+            button3.addEventListener('click', function () {
+            })
+        }
+        function FortyEight() {
+            const button4 = document.getElementById('forty-eight')
+            button4.addEventListener('click', function () {
+            })
+        }
+        Twelve();
+        TwentyFour();
+        ThirtySix();
+        FortyEight();
         LoanInputField();
     });
 });
