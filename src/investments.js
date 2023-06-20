@@ -232,7 +232,7 @@ function msftBuy() {
             if (saldoInversionActualizado >= msftValue ?? saldoInicial >= msftValue) {
                 Swal.fire({
                     icon: 'success',
-                    title: msftQuantity + ' MSFT class "A" shares bought in $' + msftData + ' for a total of $' + msftValue,
+                    title: msftQuantity + ' MSFT class "A" shares bought in $' + parseFloat(msftData).toFixed(2) + ' for a total of $' + parseFloat(msftValue).toFixed(2),
                     text: 'Your balance is $ ' + (saldoInversionActualizado - msftValue),
                 });
                 let isMsftInSessionStorage = sessionStorage.getItem('msftBought')
@@ -293,7 +293,7 @@ function googlBuy() {
             if (saldoInversionActualizado >= googlValue ?? saldoInicial >= googlValue) {
                 Swal.fire({
                     icon: 'success',
-                    title: googlQuantity + ' GOOGL class "A" shares bought in $' + googlData + ' for a total of $' + googlValue,
+                    title: googlQuantity + ' GOOGL class "A" shares bought in $' + parseFloat(googlData).toFixed(2) + ' for a total of $' + parseFloat(googlValue).toFixed(2),
                     text: 'Your balance is $ ' + (saldoInversionActualizado - googlValue),
                 });
 
@@ -355,7 +355,7 @@ function wmtBuy() {
             if (saldoInversionActualizado >= wmtValue ?? saldoInicial >= wmtValue) {
                 Swal.fire({
                     icon: 'success',
-                    title: wmtQuantity + ' WMT class "A" shares bought in $' + wmtData + ' for a total of $' + wmtValue,
+                    title: wmtQuantity + ' WMT class "A" shares bought in $' + parseFloat(wmtData).toFixed(2) + ' for a total of $' + parseFloat(wmtValue).toFixed(2),
                     text: 'Your balance is $ ' + (saldoInversionActualizado - wmtValue),
                 });
                 let isWmtInSessionStorage = sessionStorage.getItem('wmtBought')
@@ -416,7 +416,7 @@ function nvdaBuy() {
             if (saldoInversionActualizado >= nvdaValue ?? saldoInicial >= nvdaValue) {
                 Swal.fire({
                     icon: 'success',
-                    title: nvdaQuantity + ' NVDA class "A" shares bought in $' + nvdaData + ' for a total of $' + nvdaValue,
+                    title: nvdaQuantity + ' NVDA class "A" shares bought in $' + parseFloat(nvdaData).toFixed(2) + ' for a total of $' + parseFloat(nvdaValue).toFixed(2),
                     text: 'Your balance is $ ' + (saldoInversionActualizado - nvdaValue),
                 });
                 let isNvdaInSessionStorage = sessionStorage.getItem('nvdaBought')
