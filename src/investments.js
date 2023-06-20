@@ -179,7 +179,7 @@ function ibmBuy() {
                     sessionStorage.setItem('ibmBought', newQuantity);
                 }
                 sessionStorage.setItem('updatedAmount', saldoInversionActualizado - ibmValue);
-                saldoInversionActualizado = parseInt(sessionStorage.getItem('updatedAmount'));
+                saldoInversionActualizado = parseFloat(sessionStorage.getItem('updatedAmount'));
             } else {
                 Swal.fire({
                     icon: 'error',
@@ -244,7 +244,7 @@ function msftBuy() {
                     sessionStorage.setItem('msftBought', newQuantity);
                 }
                 sessionStorage.setItem('updatedAmount', saldoInversionActualizado - msftValue);
-                saldoInversionActualizado = parseInt(sessionStorage.getItem('updatedAmount'));
+                saldoInversionActualizado = parseFloat(sessionStorage.getItem('updatedAmount'));
             } else {
                 Swal.fire({
                     icon: 'error',
@@ -306,7 +306,7 @@ function googlBuy() {
                     sessionStorage.setItem('googlBought', newQuantity);
                 }
                 sessionStorage.setItem('updatedAmount', saldoInversionActualizado - googlValue);
-                saldoInversionActualizado = parseInt(sessionStorage.getItem('updatedAmount'));
+                saldoInversionActualizado = parseFloat(sessionStorage.getItem('updatedAmount'));
             } else {
                 Swal.fire({
                     icon: 'error',
@@ -367,7 +367,7 @@ function wmtBuy() {
                     sessionStorage.setItem('wmtBought', newQuantity);
                 }
                 sessionStorage.setItem('updatedAmount', saldoInversionActualizado - wmtValue);
-                saldoInversionActualizado = parseInt(sessionStorage.getItem('updatedAmount'));
+                saldoInversionActualizado = parseFloat(sessionStorage.getItem('updatedAmount'));
             } else {
                 Swal.fire({
                     icon: 'error',
@@ -428,7 +428,7 @@ function nvdaBuy() {
                     sessionStorage.setItem('nvdaBought', newQuantity);
                 }
                 sessionStorage.setItem('updatedAmount', saldoInversionActualizado - nvdaValue);
-                saldoInversionActualizado = parseInt(sessionStorage.getItem('updatedAmount'));
+                saldoInversionActualizado = parseFloat(sessionStorage.getItem('updatedAmount'));
             } else {
                 Swal.fire({
                     icon: 'error',
@@ -464,10 +464,11 @@ function ibmSell() {
                 })
                 return;
             }
+            ibmQuantity = parseInt(ibmQuantity);
             if (ibmQuantity < 1) {
                 Swal.fire({
                     icon: 'error',
-                    title: 'You need to buy at least 1 unit of stock',
+                    title: 'You need to sell at least 1 unit of stock',
                     text: '',
                 })
                 return;
@@ -480,7 +481,7 @@ function ibmSell() {
                     text: 'Your balance is $ ' + (saldoInversionActualizado + ibmValue),
                 });
                 sessionStorage.setItem('updatedAmount', saldoInversionActualizado + ibmValue);
-                saldoInversionActualizado = parseInt(sessionStorage.getItem('updatedAmount'));
+                saldoInversionActualizado = parseFloat(sessionStorage.getItem('updatedAmount'));
                 let isIbmInSessionStorage = sessionStorage.getItem('ibmBought')
                 if (isIbmInSessionStorage === null || isIbmInSessionStorage === undefined) {
                     sessionStorage.setItem('ibmBought', ibmQuantity)
@@ -536,7 +537,7 @@ function msftSell() {
             if (msftQuantity < 1) {
                 Swal.fire({
                     icon: 'error',
-                    title: 'You need to buy at least 1 unit of stock',
+                    title: 'You need to sell at least 1 unit of stock',
                     text: '',
                 })
                 return;
@@ -549,7 +550,7 @@ function msftSell() {
                     text: 'Your balance is $ ' + (saldoInversionActualizado + msftValue),
                 });
                 sessionStorage.setItem('updatedAmount', saldoInversionActualizado + msftValue);
-                saldoInversionActualizado = sessionStorage.getItem('updatedAmount');
+                saldoInversionActualizado = parseFloat(sessionStorage.getItem('updatedAmount'));
 
                 let isMsftInSessionStorage = sessionStorage.getItem('msftBought')
                 if (isMsftInSessionStorage === null || isMsftInSessionStorage === undefined) {
@@ -615,11 +616,28 @@ function googlSell() {
             if (saldoInversionActualizado >= googlValue ?? saldoInicial >= googlValue) {
                 Swal.fire({
                     icon: 'success',
-                    title: googlQuantity + ' GOOGL class "A" shares sold in $' + googlData + ' for a total of $' + googlValue,
+                    title: googlQuantity + ' GOOGL class "A" shares sold in $' + parseFloat(googlData).toFixed(2) + ' for a total of $' + parseFloat(googlValue).toFixed(2),
                     text: 'Your balance is $ ' + (saldoInversionActualizado + googlValue),
                 });
                 sessionStorage.setItem('updatedAmount', saldoInversionActualizado + googlValue);
-                saldoInversionActualizado = parseInt(sessionStorage.getItem('updatedAmount'));
+                saldoInversionActualizado = parseFloat(sessionStorage.getItem('updatedAmount'));
+
+                let isGooglInSessionStorage = sessionStorage.getItem('googlBought')
+                if (isGooglInSessionStorage === null || isGooglInSessionStorage === undefined) {
+                    sessionStorage.setItem('googlBought', googlQuantity)
+                } else {
+                    if (isGooglInSessionStorage >= googlQuantity) {
+                        let existingQuantity = isGooglInSessionStorage;
+                        let newQuantity = existingQuantity - googlQuantity;
+                        sessionStorage.setItem('googlBought', newQuantity);
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Your available stock is insufficient to meet the quantity of stock intended for sale',
+                            text: '',
+                        });
+                    }
+                }
             } else {
                 Swal.fire({
                     icon: 'error',
@@ -668,11 +686,28 @@ function wmtSell() {
             if (saldoInversionActualizado >= wmtValue ?? saldoInicial >= wmtValue) {
                 Swal.fire({
                     icon: 'success',
-                    title: wmtQuantity + ' WMT class "A" shares sold in $' + wmtData + ' for a total of $' + wmtValue,
+                    title: wmtQuantity + ' WMT class "A" shares sold in $' + parseFloat(wmtData).toFixed(2) + ' for a total of $' + parseFloat(wmtValue).toFixed(2),
                     text: 'Your balance is $ ' + (saldoInversionActualizado + wmtValue),
                 });
                 sessionStorage.setItem('updatedAmount', saldoInversionActualizado + wmtValue);
-                saldoInversionActualizado = parseInt(sessionStorage.getItem('updatedAmount'));
+                saldoInversionActualizado = parseFloat(sessionStorage.getItem('updatedAmount'));
+
+                let isWmtInSessionStorage = sessionStorage.getItem('wmtBought')
+                if (isWmtInSessionStorage === null || isWmtInSessionStorage === undefined) {
+                    sessionStorage.setItem('wmtBought', wmtQuantity)
+                } else {
+                    if (isWmtInSessionStorage >= wmtQuantity) {
+                        let existingQuantity = parseFloat(isWmtInSessionStorage);
+                        let newQuantity = existingQuantity - wmtQuantity;
+                        sessionStorage.setItem('wmtBought', newQuantity);
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Your available stock is insufficient to meet the quantity of stock intended for sale',
+                            text: '',
+                        });
+                    }
+                }
             } else {
                 Swal.fire({
                     icon: 'error',
@@ -721,11 +756,28 @@ function nvdaSell() {
             if (saldoInversionActualizado >= nvdaValue ?? saldoInicial >= nvdaValue) {
                 Swal.fire({
                     icon: 'success',
-                    title: nvdaQuantity + ' NVDA class "A" shares sold in $' + nvdaData + ' for a total of $' + nvdaValue,
+                    title: nvdaQuantity + ' NVDA class "A" shares sold in $' + parseFloat(nvdaData).toFixed(2) + ' for a total of $' + parseFloat(nvdaValue).toFixed(2),
                     text: 'Your balance is $ ' + (saldoInversionActualizado + nvdaValue),
                 });
                 sessionStorage.setItem('updatedAmount', saldoInversionActualizado + nvdaValue);
-                saldoInversionActualizado = parseInt(sessionStorage.getItem('updatedAmount'));
+                saldoInversionActualizado = parseFloat(sessionStorage.getItem('updatedAmount'));
+
+                let isNvdaInSessionStorage = sessionStorage.getItem('nvdaBought')
+                if (isNvdaInSessionStorage === null || isNvdaInSessionStorage === undefined) {
+                    sessionStorage.setItem('nvdaBought', nvdaQuantity)
+                } else {
+                    if (isNvdaInSessionStorage >= nvdaQuantity) {
+                        let existingQuantity = parseFloat(isNvdaInSessionStorage);
+                        let newQuantity = existingQuantity - nvdaQuantity;
+                        sessionStorage.setItem('nvdaBought', newQuantity);
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Your available stock is insufficient to meet the quantity of stock intended for sale',
+                            text: '',
+                        });
+                    }
+                }
             } else {
                 Swal.fire({
                     icon: 'error',
