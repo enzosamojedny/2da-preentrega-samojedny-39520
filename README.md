@@ -2,7 +2,7 @@
 
 This is a bank simulator, you can perform several fun tasks with it: 
 
-1-You have to register (it's mandatory in order to access the program, else you won't be able to access the content)
+1-You have to register (it's mandatory in order to access the program, else you won't be able to play with the content)
 The website will use your inputs to register you as a new client (make sure you input a high gross salary)
 2- You can transfer money to two hard-coded real clients, and you will get a receipt for each transaction.
 3- Ask for loans
