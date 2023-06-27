@@ -17,3 +17,6 @@ number of transaction, as well as the current time and more useful data.
 This program mostly uses sessionStorage to save all the data, as it's sole purpose is to be a demonstration of JS.
 It cointains a lot of error-handling code, to make sure every input and output is correct.
 
+There are a couple of known issues i have to work on, when i have enough time, these are:
+*There is a bug in loans.js, where the loan amount is not correctly updated in sessionStorage ( loan key should be transformed in updatedAmount, right now the bug can only be by-passed if you buy 1 stock, and the value of frontend.js will be updated correctly)
+*There is a bug in investments.js, where it won't let you sell stocks if you don't have enough cash (It is because of some error-handling mistakes in sell functions)
